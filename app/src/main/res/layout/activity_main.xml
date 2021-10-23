@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/motionLayout"
+    app:layoutDescription="@xml/swipe_game"
+    app:motionDebug="SHOW_ALL"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/bottomCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/topCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/card_front"
+            android:layout_width="324dp"
+            android:layout_height="502dp"
+            android:layout_gravity="center"
+            android:background="@drawable/dragon_org"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/card_back"
+            android:layout_width="324dp"
+            android:layout_height="502dp"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:background="@drawable/kapcio"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
