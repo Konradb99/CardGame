@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.animation.doOnEnd
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,9 +24,9 @@ class MainActivity : AppCompatActivity() {
 
 
         //Card swipe animations
-        val viewModel = ViewModelProvider(this).get(SwipeRightViewModel::class.java)
+        val SwipeVM = ViewModelProvider(this).get(SwipeRightViewModel::class.java)
 
-        viewModel.modelStream.observe(this, Observer { bindCard(it) })
+        SwipeVM.modelStream.observe(this, { bindCard(it) })
 
         motionLayout.setTransitionListener(object: TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
@@ -36,7 +35,18 @@ class MainActivity : AppCompatActivity() {
                     R.id.offScreenLike -> {
                         motionLayout.progress = 0f
                         motionLayout.setTransition(R.id.rest, R.id.like)
-                        viewModel.swipe()
+                        SwipeVM.swipe()
+                        //W tym miejscu wykrywa swipe
+                        //Jak wykryc ktory swipe? xD
+
+                        //Zmiana tla karty
+
+                        //Zamienic na resource file?
+                        var backgrounds = arrayOf(R.drawable.dragon, R.drawable.kapcio, R.drawable.losos, R.drawable.karta_morska, R.drawable.labirynt, R.drawable.mrowisko, R.drawable.narnia, R.drawable.witua)
+                        var rand = Random   //Generowanie pseudolosowosci wyboru
+                        var index:Int = rand.nextInt((backgrounds.size-1) - 0 + 1) + 0;
+                        //Zmiana tla
+                        card_front.setBackgroundResource(backgrounds.get(index))
                     }
                 }
             }
@@ -44,10 +54,10 @@ class MainActivity : AppCompatActivity() {
 
 
         //Card flip animation
-        var scale = applicationContext.resources.displayMetrics.density
+        val scale = applicationContext.resources.displayMetrics.density
 
         val front = findViewById<TextView>(R.id.card_front) as TextView
-        val back =findViewById<TextView>(R.id.card_back) as TextView
+        val back = findViewById<TextView>(R.id.card_back) as TextView
 
         front.cameraDistance = 8000 * scale
         back.cameraDistance = 8000 * scale
@@ -55,43 +65,12 @@ class MainActivity : AppCompatActivity() {
         front_anim = AnimatorInflater.loadAnimator(applicationContext, R.animator.front_card_flip) as AnimatorSet
         back_anim = AnimatorInflater.loadAnimator(applicationContext, R.animator.back_card_flip) as AnimatorSet
 
-        front.setOnClickListener{
-            if(isFront)
-            {
-                front_anim.setTarget(front);
-                back_anim.setTarget(back);
-                back.isEnabled = false
-                front.isEnabled = false
-                front_anim.start()
-                back_anim.start()
-                back_anim.doOnEnd {
-                    back.isEnabled = true
-                    front.isEnabled = true
-                }
-                isFront = false
-            }
-            else
-            {
-                front_anim.setTarget(back)
-                back_anim.setTarget(front)
-                back.isEnabled = false
-                front.isEnabled = false
-                back_anim.start()
-                front_anim.start()
-                back_anim.doOnEnd {
-                    back.isEnabled = true
-                    front.isEnabled = true
-                }
-                isFront =true
-
-            }
-        }
-
+        //Back click -> jezeli klikniete w back card
         back.setOnClickListener{
             if(isFront)
             {
-                front_anim.setTarget(front);
-                back_anim.setTarget(back);
+                front_anim.setTarget(front)
+                back_anim.setTarget(back)
                 front.isEnabled = false
                 back.isEnabled = false
                 front_anim.start()
@@ -100,11 +79,12 @@ class MainActivity : AppCompatActivity() {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
+                println("backclick")
                 card_back.text="To jest opis Kapcia."
                 isFront = false
 
             }
-            else
+            else        // Akcja klikniecia dla backclick
             {
                 front_anim.setTarget(back)
                 back_anim.setTarget(front)
@@ -116,6 +96,7 @@ class MainActivity : AppCompatActivity() {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
+                println("backclick else")
                 isFront =true
 
             }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="backgrounds">
+        <item>@drawable/kapcio</item>
+        <item>@drawable/dragon</item>
+        <item>@drawable/losos</item>
+    </array>
+</resources>

@@ -1,12 +1,15 @@
 package com.example.karcianka
 
 import android.graphics.Color
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 
 class SwipeRightViewModel:ViewModel() {
 
+
+    //Card swipe
     private val stream = MutableLiveData<SwipeRightModel>()
 
     val modelStream: LiveData<SwipeRightModel>
