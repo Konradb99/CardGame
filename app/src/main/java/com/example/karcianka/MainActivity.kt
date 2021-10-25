@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
+                card_back.text="To jest opis Kapcia."
                 isFront = false
 
             }

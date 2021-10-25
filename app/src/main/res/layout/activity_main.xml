@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:id="@+id/motionLayout"
     app:layoutDescription="@xml/swipe_game"
-    app:motionDebug="SHOW_ALL"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -26,7 +25,7 @@
             android:layout_width="324dp"
             android:layout_height="502dp"
             android:layout_gravity="center"
-            android:background="@drawable/dragon_org"
+            android:background="@drawable/kapcio"
             android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -35,12 +34,15 @@
 
         <TextView
             android:id="@+id/card_back"
-            android:layout_width="324dp"
+            android:layout_width="360dp"
             android:layout_height="502dp"
             android:layout_gravity="center"
             android:alpha="0"
-            android:background="@drawable/kapcio"
+            android:background="@drawable/blank"
             android:padding="5dp"
+            android:text="TO JEST JAKIS TEKST"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
