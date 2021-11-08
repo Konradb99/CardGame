@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                         //Zmiana tla karty
 
                         //Zamienic na resource file?
-                        var backgrounds = arrayOf(R.drawable.dragon, R.drawable.kapcio, R.drawable.losos, R.drawable.karta_morska, R.drawable.labirynt, R.drawable.mrowisko, R.drawable.narnia, R.drawable.witua)
+                        var backgrounds = arrayOf(R.drawable.dragon, R.drawable.kapcio, R.drawable.losos, R.drawable.karta_morska, R.drawable.labirynt, R.drawable.mrowisko, R.drawable.narnia, R.drawable.witua, R.drawable.firewall, R.drawable.kapciomag, R.drawable.kapciomagrozmazany, R.drawable.utm)
                         var rand = Random   //Generowanie pseudolosowosci wyboru
                         var index:Int = rand.nextInt((backgrounds.size-1) - 0 + 1) + 0;
                         //Zmiana tla
