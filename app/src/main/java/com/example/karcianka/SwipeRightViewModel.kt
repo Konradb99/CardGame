@@ -43,4 +43,6 @@ class SwipeRightViewModel:ViewModel() {
             bottom = bottomCard
         )
     }
+
+
 }
