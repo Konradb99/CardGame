@@ -16,10 +16,10 @@ class SwipeRightViewModel:ViewModel() {
         get() = stream
 
     private val data = listOf(
-        SwipeRightCardModel(backgroundColor = Color.parseColor("#FFFFFF")),
-        SwipeRightCardModel(backgroundColor = Color.parseColor("#FFFFFF")),
-        SwipeRightCardModel(backgroundColor = Color.parseColor("#FFFFFF")),
-        SwipeRightCardModel(backgroundColor = Color.parseColor("#FFFFFF"))
+        SwipeRightCardModel(backgroundColor = Color.parseColor("#0000FFFF")),
+        SwipeRightCardModel(backgroundColor = Color.parseColor("#0000FFFF")),
+        SwipeRightCardModel(backgroundColor = Color.parseColor("#0000FFFF")),
+        SwipeRightCardModel(backgroundColor = Color.parseColor("#0000FFFF"))
     )
     private var currentIndex = 0
 

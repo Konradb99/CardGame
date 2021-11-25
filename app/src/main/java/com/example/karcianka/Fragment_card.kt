@@ -131,7 +131,6 @@ class Fragment_card : Fragment() {
                     front.isEnabled = true
                 }
                 println("backclick")
-                card_back.text="To jest opis Kapcia."
                 isFront = false
 
             }
