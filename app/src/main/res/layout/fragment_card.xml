@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/card_back"
-            android:layout_width="360dp"
+            android:layout_width="322dp"
             android:layout_height="502dp"
             android:layout_gravity="center"
             android:alpha="0"

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.animation.doOnEnd
 import kotlin.random.Random
@@ -20,12 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().add(R.id.main_fragment, Fragment_card(), "").commit()
-        //Card swipe animations
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment, fragment_menu(), "").commit()
 
-
-
-        //Card flip animation
 
 
     }
