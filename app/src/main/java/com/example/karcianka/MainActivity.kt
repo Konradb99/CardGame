@@ -11,6 +11,7 @@ import android.animation.AnimatorSet
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.animation.doOnEnd
+import com.example.karcianka.database.NPC
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -23,8 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().add(R.id.main_fragment, fragment_menu(), "").commit()
 
-
-
+        LocNav.ConnectLocGrapf()
     }
-
 }

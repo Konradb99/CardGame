@@ -40,8 +40,9 @@ class All
         var wieza = Location("wieza", "Wieza Magow")
 
 
-        var wszystkielokacje = mutableListOf<Location>(biblioteka, cek, chemia, elektryk, firewall,gig,hala,
-            karta_morska,klodnica,labirynt,ms,mt,mrowisko, narnia, park, wieza)
+        var wszystkielokacje = mutableListOf<Location>(biblioteka, cek, chemia, elektryk,
+            firewall,gig,hala, karta_morska,klodnica,labirynt,ms,mt,mrowisko, narnia, park, wieza)
+
 
             //npce
             var smok = NPC(

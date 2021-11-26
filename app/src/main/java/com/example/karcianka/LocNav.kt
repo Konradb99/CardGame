@@ -1,7 +1,12 @@
 package com.example.karcianka
 
+import android.app.PendingIntent.getActivity
 import android.graphics.drawable.Drawable
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.example.karcianka.database.All
 import com.example.karcianka.database.All.Companion.wszystkielokacje
 import com.example.karcianka.database.Location
@@ -51,12 +56,22 @@ class LocNav
         }
 
         //znajdz lokacje po drawable
-        fun FindLocByDraw(const: Drawable.ConstantState): Location
+        fun FindLocByDraw(current_loc: View): Location
         {
-            for(loc in All.wszystkielokacje)
+            println("")
+            println("============Possible locations: ================")
+            for(loc in wszystkielokacje)
             {
-                println(loc)
+                if(loc.draw == current_loc.getTag()){
+                    println("Current loc: " + loc.draw)
+                    for(possible_loc in loc.locs){
+                        println("Possible locs: " + possible_loc.draw)
+                    }
+                    break
+                }
             }
+            println("===============================================")
+            println("")
             return Location()
         }
 

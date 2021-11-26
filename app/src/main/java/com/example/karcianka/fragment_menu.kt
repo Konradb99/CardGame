@@ -46,7 +46,9 @@ class fragment_menu : Fragment() {
         start_btn.setOnClickListener{
             var fr = fragmentManager?.beginTransaction()
             fr?.replace(R.id.main_fragment, Fragment_card())
-            fr?.commit()}
+            fr?.commit()
+            LocNav.ConnectLocGrapf()
+        }
     }
     companion object {
         /**

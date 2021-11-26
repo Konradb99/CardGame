@@ -1,6 +1,6 @@
 package com.example.karcianka
 import com.example.karcianka.database.All
-
+import com.example.karcianka.database.Location
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
@@ -15,6 +15,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.ViewModelProvider
+import com.example.karcianka.LocNav.Companion.FindLocByDraw
 import kotlinx.android.synthetic.main.fragment_card.*
 import kotlin.random.Random
 
@@ -101,25 +102,28 @@ class Fragment_card : Fragment() {
                         //Zmiana tla
 
 
-                        println("Pierwsze: "+card_front.background.getConstantState())
-                        println("Drugie: "+getResources().getDrawable(R.drawable.labirynt).getConstantState())
+                        //println("Pierwsze: "+card_front.background.getConstantState())
+                        //println("Drugie: "+getResources().getDrawable(R.drawable.labirynt).getConstantState())
 
-                                        if (card_front.background.constantState ==getResources().getDrawable(R.drawable.labirynt).getConstantState())
-                    {
-                        //witua
-                        Toast.makeText(activity,"Witula!", Toast.LENGTH_SHORT).show();
-                        card_front.setBackgroundResource(All.witula.draw)
-
-                    }
-                    else
-                    {
-                        Toast.makeText(activity,"Nie-Witula!",Toast.LENGTH_SHORT).show();
-                        card_front.setBackgroundResource(backgrounds.get(index))
-                    }
+                        var current_loc: Location = FindLocByDraw(card_front)
 
 
 
-                        print(card_front.getBackground().getConstantState())
+                        if (card_front.background.constantState == getResources().getDrawable(R.drawable.labirynt).getConstantState())
+                        {
+                            //witua
+
+                            card_front.setTag(All.witula.draw)
+                            card_front.setBackgroundResource(All.witula.draw)
+
+                        }
+                        else
+                        {
+                            Toast.makeText(activity,"Nie-Witula!",Toast.LENGTH_SHORT).show();
+                            card_front.setTag(backgrounds.get(index))
+                            card_front.setBackgroundResource(backgrounds.get(index))
+                        }
+
                     }
                 }
             }
