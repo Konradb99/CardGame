@@ -1,4 +1,6 @@
 package com.example.karcianka
+import com.example.karcianka.database.All
+
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
@@ -8,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.animation.doOnEnd
@@ -96,7 +99,27 @@ class Fragment_card : Fragment() {
                         var rand = Random   //Generowanie pseudolosowosci wyboru
                         var index: Int = rand.nextInt((backgrounds.size - 1) - 0 + 1) + 0;
                         //Zmiana tla
+
+
+                        println("Pierwsze: "+card_front.background.getConstantState())
+                        println("Drugie: "+getResources().getDrawable(R.drawable.labirynt).getConstantState())
+
+                                        if (card_front.background.constantState ==getResources().getDrawable(R.drawable.labirynt).getConstantState())
+                    {
+                        //witua
+                        Toast.makeText(activity,"Witula!", Toast.LENGTH_SHORT).show();
+                        card_front.setBackgroundResource(All.witula.draw)
+
+                    }
+                    else
+                    {
+                        Toast.makeText(activity,"Nie-Witula!",Toast.LENGTH_SHORT).show();
                         card_front.setBackgroundResource(backgrounds.get(index))
+                    }
+
+
+
+                        print(card_front.getBackground().getConstantState())
                     }
                 }
             }
