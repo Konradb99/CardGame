@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.animation.doOnEnd
 import com.example.karcianka.database.NPC
+import kotlinx.android.synthetic.main.fragment_card.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction().add(R.id.main_fragment, fragment_menu(), "").commit()
-
         LocNav.ConnectLocGrapf()
     }
 }

@@ -15,7 +15,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.ViewModelProvider
-import com.example.karcianka.LocNav.Companion.FindLocByDraw
+import com.example.karcianka.LocNav.Companion.GetNextLoc
 import kotlinx.android.synthetic.main.fragment_card.*
 import kotlin.random.Random
 
@@ -64,10 +64,10 @@ class Fragment_card : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         val SwipeVM = ViewModelProvider(this).get(SwipeRightViewModel::class.java)
-
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
+        card_front.setTag(R.drawable.biblioteka)
+
 
         motionLayout.setTransitionListener(object: TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
@@ -84,18 +84,28 @@ class Fragment_card : Fragment() {
 
                         //Zamienic na resource file?
                         var backgrounds = arrayOf(
-                            R.drawable.dragon,
-                            R.drawable.kapcio,
-                            R.drawable.losos,
-                            R.drawable.karta_morska,
+                            //R.drawable.dragon,
+                            //R.drawable.kapcio,
+                            //R.drawable.losos,
+                            R.drawable.klodnica,
                             R.drawable.labirynt,
                             R.drawable.mrowisko,
                             R.drawable.narnia,
-                            R.drawable.witua,
-                            R.drawable.firewall,
-                            R.drawable.kapciomag,
-                            R.drawable.kapciomagrozmazany,
-                            R.drawable.utm
+                            //R.drawable.witua,
+                            //R.drawable.firewall,
+                            //R.drawable.kapciomag,
+                            //R.drawable.kapciomagrozmazany,
+                            //R.drawable.utm,
+                            R.drawable.biblioteka,
+                            R.drawable.cek,
+                            R.drawable.chemia,
+                            R.drawable.elektryk,
+                            R.drawable.gig,
+                            R.drawable.hala,
+                            R.drawable.ms,
+                            R.drawable.mt,
+                            R.drawable.park,
+                            R.drawable.wieza
                         )
                         var rand = Random   //Generowanie pseudolosowosci wyboru
                         var index: Int = rand.nextInt((backgrounds.size - 1) - 0 + 1) + 0;
@@ -105,25 +115,19 @@ class Fragment_card : Fragment() {
                         //println("Pierwsze: "+card_front.background.getConstantState())
                         //println("Drugie: "+getResources().getDrawable(R.drawable.labirynt).getConstantState())
 
-                        var current_loc: Location = FindLocByDraw(card_front)
+                        var next_loc: Location = GetNextLoc(card_front)
+
+                        card_front.setTag(next_loc.draw)
+                        card_front.setBackgroundResource(next_loc.draw)
 
 
-
-                        if (card_front.background.constantState == getResources().getDrawable(R.drawable.labirynt).getConstantState())
-                        {
-                            //witua
-
-                            card_front.setTag(All.witula.draw)
-                            card_front.setBackgroundResource(All.witula.draw)
-
-                        }
-                        else
-                        {
-                            Toast.makeText(activity,"Nie-Witula!",Toast.LENGTH_SHORT).show();
-                            card_front.setTag(backgrounds.get(index))
-                            card_front.setBackgroundResource(backgrounds.get(index))
-                        }
-
+                        //labirynt to wyjatek -> prowadzi do wituly
+                        //if (card_front.background.constantState == getResources().getDrawable(R.drawable.labirynt).getConstantState())
+                        //{
+                        //    //witua
+                        //    card_front.setTag(All.witula.draw)
+                        //    card_front.setBackgroundResource(All.witula.draw)
+                        //}
                     }
                 }
             }

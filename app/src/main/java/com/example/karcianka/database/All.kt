@@ -6,38 +6,38 @@ class All
 {
     companion object{
         //lokacje
-        var biblioteka = Location("biblioteka", "")
+        var biblioteka = Location("biblioteka", "", draw=R.drawable.biblioteka)
 
-        var cek = Location("cek","Centrum Energetyczno Kaloryczne")
-        var chemia = Location("chemia", "Wydzial Chemiczny")
+        var cek = Location("cek","Centrum Energetyczno Kaloryczne", draw=R.drawable.cek)
+        var chemia = Location("chemia", "Wydzial Chemiczny", draw=R.drawable.chemia)
 
-        var elektryk = Location("eletryk", "Wydzial Elektryczny")
+        var elektryk = Location("eletryk", "Wydzial Elektryczny", draw=R.drawable.elektryk)
 
         var firewall = Location("firewall", "Ściana ognia",
                                 "Ufff... ależ tu jest gorąco...", draw = R.drawable.firewall)
 
-        var gig = Location("gig", "Wydzial Gorniczy")
+        var gig = Location("gig", "Wydzial Gorniczy", draw=R.drawable.gig)
 
-        var hala = Location("hala", "Hala sportowa")
+        var hala = Location("hala", "Hala sportowa", draw=R.drawable.hala)
 
         var karta_morska = Location("statek", "Statek na Kłodnicy",
-                                    "Strasznie tu sie chwieje. I śmierdzi.", draw = R.drawable.karta_morska)
-        var klodnica = Location("klodnica", "Klodnica.", "Fuuuuj....")
+                                    "Strasznie tu sie chwieje. I śmierdzi.", draw = R.drawable.klodnica)
+        var klodnica = Location("klodnica", "Klodnica.", "Fuuuuj....", draw=R.drawable.klodnica)
 
         var labirynt = Location("labirynt", "Labirynt",
                                 "Milion korytarzy i milion zaułków... czy tam są schody?!", draw = R.drawable.labirynt)
-        var ms = Location("ms", "Krag Rytualu", "Yyyyy... to twoj wydzial?")
+        var ms = Location("ms", "Krag Rytualu", "Yyyyy... to twoj wydzial?", draw=R.drawable.ms)
 
-        var mt = Location("mt", "Wydzial Muzyki i Tanca")
+        var mt = Location("mt", "Wydzial Muzyki i Tanca", draw=R.drawable.mt)
 
         var mrowisko = Location("mrowisko", "Mrowisko",
                                 "Opis mrowiska.", draw = R.drawable.mrowisko)
         var narnia = Location("narnia", "Narnia",
                                 "", draw = R.drawable.narnia)
 
-        var park = Location("park", "Park")
+        var park = Location("park", "Park", draw=R.drawable.park)
 
-        var wieza = Location("wieza", "Wieza Magow")
+        var wieza = Location("wieza", "Wieza Magow", draw=R.drawable.wieza)
 
 
         var wszystkielokacje = mutableListOf<Location>(biblioteka, cek, chemia, elektryk,

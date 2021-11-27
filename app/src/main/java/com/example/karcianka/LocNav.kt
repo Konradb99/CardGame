@@ -12,6 +12,7 @@ import com.example.karcianka.database.All.Companion.wszystkielokacje
 import com.example.karcianka.database.Location
 import kotlinx.android.synthetic.main.fragment_card.*
 import kotlin.random.Random
+import kotlin.reflect.typeOf
 
 class LocNav
 {
@@ -56,23 +57,32 @@ class LocNav
         }
 
         //znajdz lokacje po drawable
-        fun FindLocByDraw(current_loc: View): Location
+        fun GetNextLoc(current_loc: View): Location
         {
+            var next_loc = Location()
             println("")
             println("============Possible locations: ================")
             for(loc in wszystkielokacje)
             {
                 if(loc.draw == current_loc.getTag()){
                     println("Current loc: " + loc.draw)
+
                     for(possible_loc in loc.locs){
                         println("Possible locs: " + possible_loc.draw)
                     }
+
+                    var rand = Random   //Generowanie pseudolosowosci wyboru
+                    var index: Int = rand.nextInt((loc.locs.size - 1) - 0 + 1) + 0;
+
+                    next_loc = loc.locs.elementAt(index)
+                    println(next_loc::class.qualifiedName)
+                    println("Generated next loc: " + loc.locs.elementAt(index).draw)
                     break
                 }
             }
             println("===============================================")
             println("")
-            return Location()
+            return next_loc
         }
 
     }
