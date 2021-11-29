@@ -11,7 +11,6 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.karcianka.database.All
 import com.example.karcianka.database.All.Companion.wszystkielokacje
 import com.example.karcianka.database.Location
-import kotlinx.android.synthetic.main.fragment_card.*
 import kotlin.random.Random
 import kotlin.reflect.typeOf
 

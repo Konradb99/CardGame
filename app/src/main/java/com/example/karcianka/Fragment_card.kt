@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -19,7 +20,7 @@ import com.example.karcianka.LocNav.Companion.GetCurrentLoc
 import com.example.karcianka.LocNav.Companion.GetNextLoc
 import com.example.karcianka.LocNav.Companion.SetLoc
 import com.example.karcianka.database.All.Companion.blankloc
-import kotlinx.android.synthetic.main.fragment_card.*
+import org.w3c.dom.Text
 import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
@@ -62,6 +63,8 @@ class Fragment_card : Fragment() {
     private lateinit var front_anim: AnimatorSet
     private lateinit var back_anim: AnimatorSet
     private lateinit var game: Game
+    private lateinit var topCard: FrameLayout
+    private lateinit var bottomCard: FrameLayout
     private var isFront = true
     private var checkpoint = 0
     private var numberOfSwipes = 0
@@ -70,6 +73,11 @@ class Fragment_card : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var card_front = view.findViewById<TextView>(R.id.card_front)
+        var card_back = view.findViewById<TextView>(R.id.card_back)
+        var motionLayout = view.findViewById<MotionLayout>(R.id.motionLayout)
+        bottomCard = view.findViewById(R.id.bottomCard)
+        topCard = view.findViewById(R.id.topCard)
 
         val SwipeVM = ViewModelProvider(this).get(SwipeRightViewModel::class.java)
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
