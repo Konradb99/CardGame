@@ -15,6 +15,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.ViewModelProvider
+import com.example.karcianka.LocNav.Companion.GetCurrentLoc
 import com.example.karcianka.LocNav.Companion.GetNextLoc
 import kotlinx.android.synthetic.main.fragment_card.*
 import kotlin.random.Random
@@ -58,7 +59,11 @@ class Fragment_card : Fragment() {
 
     private lateinit var front_anim: AnimatorSet
     private lateinit var back_anim: AnimatorSet
+    private lateinit var game: Game
     private var isFront = true
+    private var checkpoint = 0
+    private var numberOfSwipes = 0
+    private var current_location = Location()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +72,8 @@ class Fragment_card : Fragment() {
         val SwipeVM = ViewModelProvider(this).get(SwipeRightViewModel::class.java)
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
         card_front.setTag(R.drawable.biblioteka)
-
+        game = Game()
+        checkpoint = game.checkpoints
 
         motionLayout.setTransitionListener(object: TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
@@ -82,43 +88,40 @@ class Fragment_card : Fragment() {
 
                         //Zmiana tla karty
 
-                        //Zamienic na resource file?
-                        var backgrounds = arrayOf(
-                            //R.drawable.dragon,
-                            //R.drawable.kapcio,
-                            //R.drawable.losos,
-                            R.drawable.klodnica,
-                            R.drawable.labirynt,
-                            R.drawable.mrowisko,
-                            R.drawable.narnia,
-                            //R.drawable.witua,
-                            //R.drawable.firewall,
-                            //R.drawable.kapciomag,
-                            //R.drawable.kapciomagrozmazany,
-                            //R.drawable.utm,
-                            R.drawable.biblioteka,
-                            R.drawable.cek,
-                            R.drawable.chemia,
-                            R.drawable.elektryk,
-                            R.drawable.gig,
-                            R.drawable.hala,
-                            R.drawable.ms,
-                            R.drawable.mt,
-                            R.drawable.park,
-                            R.drawable.wieza
-                        )
-                        var rand = Random   //Generowanie pseudolosowosci wyboru
-                        var index: Int = rand.nextInt((backgrounds.size - 1) - 0 + 1) + 0;
-                        //Zmiana tla
+                        when(checkpoint)
+                        {
+                            -1 ->
+                            {
+                                var next_loc: Location = GetNextLoc(card_front)
 
+                                card_front.setTag(next_loc.draw)
+                                card_front.setBackgroundResource(next_loc.draw)
+                                numberOfSwipes+=1
+                                card_front.setBackgroundResource(All.blankloc.draw)
+                            }
 
-                        //println("Pierwsze: "+card_front.background.getConstantState())
-                        //println("Drugie: "+getResources().getDrawable(R.drawable.labirynt).getConstantState())
+                            0-> {
+                                var next_loc: Location = GetNextLoc(card_front)
 
-                        var next_loc: Location = GetNextLoc(card_front)
+                                card_front.setTag(next_loc.draw)
+                                card_front.setBackgroundResource(next_loc.draw)
+                                numberOfSwipes+=1
+                                if(numberOfSwipes%10==0) checkpoint=1
+                            }
+                            1 ->{
+                                var next_loc: Location = GetNextLoc(card_front)
 
-                        card_front.setTag(next_loc.draw)
-                        card_front.setBackgroundResource(next_loc.draw)
+                                card_front.setTag(next_loc.draw)
+                                card_front.setBackgroundResource(next_loc.draw)
+                                checkpoint=0
+                                Toast.makeText(getActivity(),"To juz dziesiaty swipe!",Toast.LENGTH_SHORT).show(); }
+                        }
+
+                        //var next_loc: Location = GetNextLoc(card_front)
+
+                        //card_front.setTag(next_loc.draw)
+                        //card_front.setBackgroundResource(next_loc.draw)
+
 
 
                         //labirynt to wyjatek -> prowadzi do wituly
@@ -161,6 +164,8 @@ class Fragment_card : Fragment() {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
+                current_location = GetCurrentLoc(card_front)
+                card_back.text = current_location.description
                 println("backclick")
                 isFront = false
 

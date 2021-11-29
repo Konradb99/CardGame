@@ -6,6 +6,8 @@ class All
 {
     companion object{
         //lokacje
+        var blankloc = Location("bkankloc", "Pusta lokacja",
+            "Ciemno wszędzie, głucho wszędzie.", draw = R.drawable.blank)
         var biblioteka = Location("biblioteka", "", draw=R.drawable.biblioteka)
 
         var cek = Location("cek","Centrum Energetyczno Kaloryczne", draw=R.drawable.cek)
@@ -20,8 +22,7 @@ class All
 
         var hala = Location("hala", "Hala sportowa", draw=R.drawable.hala)
 
-        var karta_morska = Location("statek", "Statek na Kłodnicy",
-                                    "Strasznie tu sie chwieje. I śmierdzi.", draw = R.drawable.klodnica)
+        //var karta_morska = Location("statek", "Statek na Kłodnicy",  "Strasznie tu sie chwieje. I śmierdzi.", draw = R.drawable.klodnica)
         var klodnica = Location("klodnica", "Klodnica.", "Fuuuuj....", draw=R.drawable.klodnica)
 
         var labirynt = Location("labirynt", "Labirynt",
@@ -39,9 +40,11 @@ class All
 
         var wieza = Location("wieza", "Wieza Magow", draw=R.drawable.wieza)
 
+        var solaris = Location("solaris", "Solaris", "Stowarzyszenie osób lubiących alkohol, rozrywki i seks", draw=R.drawable.solaris)
+
 
         var wszystkielokacje = mutableListOf<Location>(biblioteka, cek, chemia, elektryk,
-            firewall,gig,hala, karta_morska,klodnica,labirynt,ms,mt,mrowisko, narnia, park, wieza)
+            firewall,gig,hala,klodnica,labirynt,ms,mt,mrowisko, narnia, park, wieza, solaris)
 
 
             //npce

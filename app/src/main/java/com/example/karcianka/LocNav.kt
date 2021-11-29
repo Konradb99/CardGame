@@ -38,7 +38,7 @@ class LocNav
         {
             All.gig.locs = mutableListOf(All.elektryk, All.chemia, All.biblioteka)
             All.elektryk.locs = mutableListOf(All.gig, All.wieza, All.labirynt)
-            All.wieza.locs = mutableListOf(All.elektryk, All.hala, All.labirynt)
+            All.wieza.locs = mutableListOf(All.elektryk, All.hala, All.labirynt, All.solaris)
             All.chemia.locs = mutableListOf(All.gig, All.labirynt, All.klodnica)
             All.labirynt.locs = mutableListOf(
                 All.wieza,
@@ -47,13 +47,14 @@ class LocNav
                 All.hala,
                 All.biblioteka
             )
-            All.hala.locs = mutableListOf(All.wieza, All.labirynt, All.biblioteka)
-            All.biblioteka.locs = mutableListOf(All.ms, All.gig, All.chemia, All.hala, All.klodnica)
+            All.hala.locs = mutableListOf(All.wieza, All.labirynt, All.biblioteka, All.solaris)
+            All.biblioteka.locs = mutableListOf(All.ms, All.gig, All.hala, All.klodnica)
             All.ms.locs = mutableListOf(All.biblioteka)
             All.klodnica.locs = mutableListOf(All.chemia, All.biblioteka, All.park, All.mt)
             All.mt.locs = mutableListOf(All.chemia, All.cek)
             All.cek.locs = mutableListOf(All.mt)
             All.park.locs = mutableListOf(All.klodnica)
+            All.solaris.locs = mutableListOf(All.wieza, All.hala)
         }
 
         //znajdz lokacje po drawable
@@ -85,5 +86,15 @@ class LocNav
             return next_loc
         }
 
+        fun GetCurrentLoc(current_loc: View): Location
+        {
+            var location = Location()
+            for(loc in wszystkielokacje){
+                if(loc.draw == current_loc.getTag()){
+                    location = loc
+                }
+            }
+            return location
+        }
     }
 }
