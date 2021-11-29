@@ -102,10 +102,11 @@ class LocNav
             return emptyloc
         }
 
-        fun SetLoc(card_front : TextView, card_back : TextView, loc :Location)
+        fun SetLoc(card_front : TextView, card_back_text : TextView, card_back_title: TextView, loc :Location)
         {
             card_front.setTag(loc.draw)
-            card_back.text = loc.description
+            card_back_text.text = loc.description
+            card_back_title.text = loc.name
             card_front.setBackgroundResource(loc.draw)
         }
 

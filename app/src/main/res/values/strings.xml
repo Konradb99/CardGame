@@ -6,4 +6,8 @@
     <string name="menu_map">Map</string>
     <string name="menu_menu">Ingame menu</string>
     <string name="enterLocation">Enter</string>
+    <string name="continueBtn">Kontynuuj</string>
+    <string name="saveBtn">Zapisz</string>
+    <string name="loadBtn">Wczytaj</string>
+    <string name="exitbtn">Wyjdź</string>
 </resources>

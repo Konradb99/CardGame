@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.animation.doOnEnd
@@ -62,6 +60,8 @@ class Fragment_card : Fragment() {
 
     private lateinit var front_anim: AnimatorSet
     private lateinit var back_anim: AnimatorSet
+    private lateinit var front_anim_instant: AnimatorSet
+    private lateinit var back_anim_instant: AnimatorSet
     private lateinit var game: Game
     private lateinit var topCard: FrameLayout
     private lateinit var bottomCard: FrameLayout
@@ -74,10 +74,15 @@ class Fragment_card : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var card_front = view.findViewById<TextView>(R.id.card_front)
-        var card_back = view.findViewById<TextView>(R.id.card_back)
         var motionLayout = view.findViewById<MotionLayout>(R.id.motionLayout)
         bottomCard = view.findViewById(R.id.bottomCard)
         topCard = view.findViewById(R.id.topCard)
+
+        //Instant animation
+
+        front_anim_instant = AnimatorInflater.loadAnimator(getActivity()?.getApplicationContext(), R.animator.front_card_flip_instant) as AnimatorSet
+        back_anim_instant = AnimatorInflater.loadAnimator(getActivity()?.getApplicationContext(), R.animator.back_card_flip_instant) as AnimatorSet
+
 
         val SwipeVM = ViewModelProvider(this).get(SwipeRightViewModel::class.java)
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
@@ -99,25 +104,27 @@ class Fragment_card : Fragment() {
                         //Zmiana tla karty
 
                         val front = view.findViewById<TextView>(R.id.card_front) as TextView
-                        val back = view.findViewById<TextView>(R.id.card_back) as TextView
+                        val back = view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout
+                        val card_back_text = view.findViewById<TextView>(R.id.card_back_text) as TextView
+                        val card_back_title = view.findViewById<TextView>(R.id.card_back_title) as TextView
 
                         when(checkpoint)
                         {
                             -1 ->
                             {
                                 var next_loc: Location = GetNextLoc(card_front)
-                                SetLoc(card_front, card_back, next_loc)
+                                SetLoc(card_front, card_back_text, card_back_title, next_loc)
                                 numberOfSwipes+=1
                                 card_front.setBackgroundResource(blankloc.draw)
                                 if(!isFront)
                                 {
-                                    front_anim.setTarget(back)
-                                    back_anim.setTarget(front)
+                                    front_anim_instant.setTarget(back)
+                                    back_anim_instant.setTarget(front)
                                     front.isEnabled = false
                                     back.isEnabled = false
-                                    back_anim.start()
-                                    front_anim.start()
-                                    back_anim.doOnEnd {
+                                    back_anim_instant.start()
+                                    front_anim_instant.start()
+                                    back_anim_instant.doOnEnd {
                                         back.isEnabled = true
                                         front.isEnabled = true
                                     }
@@ -130,16 +137,17 @@ class Fragment_card : Fragment() {
 
                             0-> {
                                 var next_loc: Location = GetNextLoc(card_front)
-                                SetLoc(card_front, card_back, next_loc)
+
+                                SetLoc(card_front, card_back_text, card_back_title, next_loc)
                                 if(!isFront)
                                 {
-                                    front_anim.setTarget(back)
-                                    back_anim.setTarget(front)
+                                    front_anim_instant.setTarget(back)
+                                    back_anim_instant.setTarget(front)
                                     front.isEnabled = false
                                     back.isEnabled = false
-                                    back_anim.start()
-                                    front_anim.start()
-                                    back_anim.doOnEnd {
+                                    back_anim_instant.start()
+                                    front_anim_instant.start()
+                                    back_anim_instant.doOnEnd {
                                         back.isEnabled = true
                                         front.isEnabled = true
                                     }
@@ -153,16 +161,16 @@ class Fragment_card : Fragment() {
                             }
                             1 ->{
                                 var next_loc: Location = GetNextLoc(card_front)
-                                SetLoc(card_front, card_back, next_loc)
+                                SetLoc(card_front, card_back_text, card_back_title, next_loc)
                                 if(!isFront)
                                 {
-                                    front_anim.setTarget(back)
-                                    back_anim.setTarget(front)
+                                    front_anim_instant.setTarget(back)
+                                    back_anim_instant.setTarget(front)
                                     front.isEnabled = false
                                     back.isEnabled = false
-                                    back_anim.start()
-                                    front_anim.start()
-                                    back_anim.doOnEnd {
+                                    back_anim_instant.start()
+                                    front_anim_instant.start()
+                                    back_anim_instant.doOnEnd {
                                         back.isEnabled = true
                                         front.isEnabled = true
                                     }
@@ -199,7 +207,8 @@ class Fragment_card : Fragment() {
         val scale = getActivity()?.getApplicationContext()?.resources?.displayMetrics?.density
 
         val front = view.findViewById<TextView>(R.id.card_front) as TextView
-        val back = view.findViewById<TextView>(R.id.card_back) as TextView
+        val back = view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout
+        val card_back_text = view.findViewById<TextView>(R.id.card_back_text) as TextView
 
         front.cameraDistance = 8000 * scale!!
         back.cameraDistance = 8000 * scale
@@ -222,7 +231,7 @@ class Fragment_card : Fragment() {
                     front.isEnabled = true
                 }
                 current_location = GetCurrentLoc(card_front)
-                card_back.text = current_location.description
+                card_back_text.text = current_location.description
                 println("backclick")
                 isFront = false
 
@@ -244,6 +253,8 @@ class Fragment_card : Fragment() {
 
             }
         }
+
+
     }
 
     companion object {

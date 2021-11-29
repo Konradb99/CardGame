@@ -33,21 +33,47 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <LinearLayout
             android:id="@+id/card_back"
             android:layout_width="322dp"
             android:layout_height="502dp"
             android:layout_gravity="center"
             android:alpha="0"
             android:background="@drawable/blank"
-            android:padding="5dp"
-            android:text="TO JEST JAKIS TEKST"
-            android:textAlignment="center"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/card_back_title"
+                android:layout_width="322dp"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:text="TYTUL KARTY"
+                android:textSize="25sp"
+                android:background="@null"
+                android:paddingTop="30dp"
+                android:layout_weight="4"
+                android:fontFamily="@font/fffforwa"
+                />
+
+            <TextView
+                android:id="@+id/card_back_text"
+                android:layout_width="322dp"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:text="TO JEST JAKIS TEKST"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:paddingTop="30dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/fffforwa"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 
