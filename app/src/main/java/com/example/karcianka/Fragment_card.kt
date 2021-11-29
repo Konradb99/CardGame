@@ -17,6 +17,8 @@ import androidx.core.animation.doOnEnd
 import androidx.lifecycle.ViewModelProvider
 import com.example.karcianka.LocNav.Companion.GetCurrentLoc
 import com.example.karcianka.LocNav.Companion.GetNextLoc
+import com.example.karcianka.LocNav.Companion.SetLoc
+import com.example.karcianka.database.All.Companion.blankloc
 import kotlinx.android.synthetic.main.fragment_card.*
 import kotlin.random.Random
 
@@ -88,31 +90,78 @@ class Fragment_card : Fragment() {
 
                         //Zmiana tla karty
 
+                        val front = view.findViewById<TextView>(R.id.card_front) as TextView
+                        val back = view.findViewById<TextView>(R.id.card_back) as TextView
+
                         when(checkpoint)
                         {
                             -1 ->
                             {
                                 var next_loc: Location = GetNextLoc(card_front)
-
-                                card_front.setTag(next_loc.draw)
-                                card_front.setBackgroundResource(next_loc.draw)
+                                SetLoc(card_front, card_back, next_loc)
                                 numberOfSwipes+=1
-                                card_front.setBackgroundResource(All.blankloc.draw)
+                                card_front.setBackgroundResource(blankloc.draw)
+                                if(!isFront)
+                                {
+                                    front_anim.setTarget(back)
+                                    back_anim.setTarget(front)
+                                    front.isEnabled = false
+                                    back.isEnabled = false
+                                    back_anim.start()
+                                    front_anim.start()
+                                    back_anim.doOnEnd {
+                                        back.isEnabled = true
+                                        front.isEnabled = true
+                                    }
+                                    println("backclick else")
+                                    isFront =true
+
+                                }
+
                             }
 
                             0-> {
                                 var next_loc: Location = GetNextLoc(card_front)
+                                SetLoc(card_front, card_back, next_loc)
+                                if(!isFront)
+                                {
+                                    front_anim.setTarget(back)
+                                    back_anim.setTarget(front)
+                                    front.isEnabled = false
+                                    back.isEnabled = false
+                                    back_anim.start()
+                                    front_anim.start()
+                                    back_anim.doOnEnd {
+                                        back.isEnabled = true
+                                        front.isEnabled = true
+                                    }
+                                    println("backclick else")
+                                    isFront =true
 
-                                card_front.setTag(next_loc.draw)
-                                card_front.setBackgroundResource(next_loc.draw)
+                                }
                                 numberOfSwipes+=1
                                 if(numberOfSwipes%10==0) checkpoint=1
+
                             }
                             1 ->{
                                 var next_loc: Location = GetNextLoc(card_front)
+                                SetLoc(card_front, card_back, next_loc)
+                                if(!isFront)
+                                {
+                                    front_anim.setTarget(back)
+                                    back_anim.setTarget(front)
+                                    front.isEnabled = false
+                                    back.isEnabled = false
+                                    back_anim.start()
+                                    front_anim.start()
+                                    back_anim.doOnEnd {
+                                        back.isEnabled = true
+                                        front.isEnabled = true
+                                    }
+                                    println("backclick else")
+                                    isFront =true
 
-                                card_front.setTag(next_loc.draw)
-                                card_front.setBackgroundResource(next_loc.draw)
+                                }
                                 checkpoint=0
                                 Toast.makeText(getActivity(),"To juz dziesiaty swipe!",Toast.LENGTH_SHORT).show(); }
                         }

@@ -6,21 +6,21 @@
     android:layout_height="match_parent"
     android:id="@+id/motionLayout"
     app:layoutDescription="@xml/swipe_game"
-    android:background="@drawable/backgroundmenu_"
+    android:background="@null"
     tools:context=".MainActivity">
 
     <FrameLayout
         android:id="@+id/bottomCard"
         android:layout_width="324dp"
         android:layout_height="502dp"
-        android:background="@drawable/backgroundmenu_">
+        android:background="@null">
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/topCard"
         android:layout_width="324dp"
         android:layout_height="502dp"
-        android:background="@drawable/backgroundmenu_">
+        android:background="@null">
         <TextView
             android:id="@+id/card_front"
             android:layout_width="324dp"

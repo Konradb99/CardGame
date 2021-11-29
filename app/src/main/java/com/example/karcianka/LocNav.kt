@@ -3,6 +3,7 @@ package com.example.karcianka
 import android.app.PendingIntent.getActivity
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
@@ -86,15 +87,29 @@ class LocNav
             return next_loc
         }
 
-        fun GetCurrentLoc(current_loc: View): Location
+        fun GetCurrentLoc(current_loc: View) :Location
         {
-            var location = Location()
-            for(loc in wszystkielokacje){
+            var emptyloc = Location()
+            println("")
+            println("============Possible locations: ================")
+            for(loc in wszystkielokacje)
+            {
                 if(loc.draw == current_loc.getTag()){
-                    location = loc
+                    return loc;
                 }
             }
-            return location
+            println("===============================================")
+            println("")
+            return emptyloc
         }
+
+        fun SetLoc(card_front : TextView, card_back : TextView, loc :Location)
+        {
+            card_front.setTag(loc.draw)
+            card_back.text = loc.description
+            card_front.setBackgroundResource(loc.draw)
+        }
+
+
     }
 }
