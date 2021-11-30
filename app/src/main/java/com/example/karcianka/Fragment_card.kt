@@ -18,6 +18,7 @@ import com.example.karcianka.LocNav.Companion.GetCurrentLoc
 import com.example.karcianka.LocNav.Companion.GetNextLoc
 import com.example.karcianka.LocNav.Companion.SetLoc
 import com.example.karcianka.database.All.Companion.blankloc
+import com.example.karcianka.database.Flip
 import org.w3c.dom.Text
 import kotlin.random.Random
 
@@ -58,35 +59,27 @@ class Fragment_card : Fragment() {
         return inflater.inflate(R.layout.fragment_card, container, false)
     }
 
-    private lateinit var front_anim: AnimatorSet
-    private lateinit var back_anim: AnimatorSet
-    private lateinit var front_anim_instant: AnimatorSet
-    private lateinit var back_anim_instant: AnimatorSet
     private lateinit var game: Game
     private lateinit var topCard: FrameLayout
     private lateinit var bottomCard: FrameLayout
     private var isFront = true
     private var checkpoint = 0
     private var numberOfSwipes = 0
-    private var current_location = Location()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var card_front = view.findViewById<TextView>(R.id.card_front)
+
+        val front = view.findViewById<TextView>(R.id.card_front) as TextView
+        val back = view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout
         var motionLayout = view.findViewById<MotionLayout>(R.id.motionLayout)
         bottomCard = view.findViewById(R.id.bottomCard)
         topCard = view.findViewById(R.id.topCard)
 
-        //Instant animation
-
-        front_anim_instant = AnimatorInflater.loadAnimator(getActivity()?.getApplicationContext(), R.animator.front_card_flip_instant) as AnimatorSet
-        back_anim_instant = AnimatorInflater.loadAnimator(getActivity()?.getApplicationContext(), R.animator.back_card_flip_instant) as AnimatorSet
-
 
         val SwipeVM = ViewModelProvider(this).get(SwipeRightViewModel::class.java)
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
-        card_front.setTag(R.drawable.biblioteka)
+        front.setTag(R.drawable.biblioteka)
         game = Game()
         checkpoint = game.checkpoints
 
@@ -101,10 +94,6 @@ class Fragment_card : Fragment() {
                         //W tym miejscu wykrywa swipe
                         //Jak wykryc ktory swipe? xD
 
-                        //Zmiana tla karty
-
-                        val front = view.findViewById<TextView>(R.id.card_front) as TextView
-                        val back = view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout
                         val card_back_text = view.findViewById<TextView>(R.id.card_back_text) as TextView
                         val card_back_title = view.findViewById<TextView>(R.id.card_back_title) as TextView
 
@@ -112,83 +101,29 @@ class Fragment_card : Fragment() {
                         {
                             -1 ->
                             {
-                                var next_loc: Location = GetNextLoc(card_front)
-                                SetLoc(card_front, card_back_text, card_back_title, next_loc)
+                                var next_loc: Location = GetNextLoc(front)
+                                SetLoc(front, card_back_text, card_back_title, next_loc)
                                 numberOfSwipes+=1
-                                card_front.setBackgroundResource(blankloc.draw)
-                                if(!isFront)
-                                {
-                                    front_anim_instant.setTarget(back)
-                                    back_anim_instant.setTarget(front)
-                                    front.isEnabled = false
-                                    back.isEnabled = false
-                                    back_anim_instant.start()
-                                    front_anim_instant.start()
-                                    back_anim_instant.doOnEnd {
-                                        back.isEnabled = true
-                                        front.isEnabled = true
-                                    }
-                                    println("backclick else")
-                                    isFront =true
-
-                                }
-
+                                front.setBackgroundResource(blankloc.draw)
+                                Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
                             }
 
                             0-> {
-                                var next_loc: Location = GetNextLoc(card_front)
+                                var next_loc: Location = GetNextLoc(front)
 
-                                SetLoc(card_front, card_back_text, card_back_title, next_loc)
-                                if(!isFront)
-                                {
-                                    front_anim_instant.setTarget(back)
-                                    back_anim_instant.setTarget(front)
-                                    front.isEnabled = false
-                                    back.isEnabled = false
-                                    back_anim_instant.start()
-                                    front_anim_instant.start()
-                                    back_anim_instant.doOnEnd {
-                                        back.isEnabled = true
-                                        front.isEnabled = true
-                                    }
-                                    println("backclick else")
-                                    isFront =true
-
-                                }
+                                SetLoc(front, card_back_text, card_back_title, next_loc)
+                                Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
                                 numberOfSwipes+=1
                                 if(numberOfSwipes%10==0) checkpoint=1
 
                             }
                             1 ->{
-                                var next_loc: Location = GetNextLoc(card_front)
-                                SetLoc(card_front, card_back_text, card_back_title, next_loc)
-                                if(!isFront)
-                                {
-                                    front_anim_instant.setTarget(back)
-                                    back_anim_instant.setTarget(front)
-                                    front.isEnabled = false
-                                    back.isEnabled = false
-                                    back_anim_instant.start()
-                                    front_anim_instant.start()
-                                    back_anim_instant.doOnEnd {
-                                        back.isEnabled = true
-                                        front.isEnabled = true
-                                    }
-                                    println("backclick else")
-                                    isFront =true
-
-                                }
+                                var next_loc: Location = GetNextLoc(front)
+                                SetLoc(front, card_back_text, card_back_title, next_loc)
+                                Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
                                 checkpoint=0
                                 Toast.makeText(getActivity(),"To juz dziesiaty swipe!",Toast.LENGTH_SHORT).show(); }
                         }
-
-                        //var next_loc: Location = GetNextLoc(card_front)
-
-                        //card_front.setTag(next_loc.draw)
-                        //card_front.setBackgroundResource(next_loc.draw)
-
-
-
                         //labirynt to wyjatek -> prowadzi do wituly
                         //if (card_front.background.constantState == getResources().getDrawable(R.drawable.labirynt).getConstantState())
                         //{
@@ -200,61 +135,10 @@ class Fragment_card : Fragment() {
                 }
             }
         } )
-
-
-
-        //Flip card
-        val scale = getActivity()?.getApplicationContext()?.resources?.displayMetrics?.density
-
-        val front = view.findViewById<TextView>(R.id.card_front) as TextView
-        val back = view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout
-        val card_back_text = view.findViewById<TextView>(R.id.card_back_text) as TextView
-
-        front.cameraDistance = 8000 * scale!!
-        back.cameraDistance = 8000 * scale
-
-        front_anim = AnimatorInflater.loadAnimator(getActivity()?.getApplicationContext(), R.animator.front_card_flip) as AnimatorSet
-        back_anim = AnimatorInflater.loadAnimator(getActivity()?.getApplicationContext(), R.animator.back_card_flip) as AnimatorSet
-
         //Back click -> jezeli klikniete w back card
         back.setOnClickListener{
-            if(isFront)
-            {
-                front_anim.setTarget(front)
-                back_anim.setTarget(back)
-                front.isEnabled = false
-                back.isEnabled = false
-                front_anim.start()
-                back_anim.start()
-                back_anim.doOnEnd {
-                    back.isEnabled = true
-                    front.isEnabled = true
-                }
-                current_location = GetCurrentLoc(card_front)
-                card_back_text.text = current_location.description
-                println("backclick")
-                isFront = false
-
-            }
-            else        // Akcja klikniecia dla backclick
-            {
-                front_anim.setTarget(back)
-                back_anim.setTarget(front)
-                front.isEnabled = false
-                back.isEnabled = false
-                back_anim.start()
-                front_anim.start()
-                back_anim.doOnEnd {
-                    back.isEnabled = true
-                    front.isEnabled = true
-                }
-                println("backclick else")
-                isFront =true
-
-            }
+            Flip.Animate(getActivity()?.getApplicationContext(), front, back)
         }
-
-
     }
 
     companion object {
@@ -276,7 +160,6 @@ class Fragment_card : Fragment() {
                 }
             }
     }
-
 
     fun bindCard(model: SwipeRightModel) {
         topCard.setBackgroundColor(model.top.backgroundColor)

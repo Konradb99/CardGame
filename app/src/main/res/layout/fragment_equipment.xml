@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@null">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="8dp">
+                <TextView
+                    android:id="@+id/eq_card_1_front"
+                    android:layout_width="161dp"
+                    android:layout_height="251dp"
+                    android:background="@drawable/losos"/>
+                <TextView
+                    android:id="@+id/eq_card_1_back"
+                    android:alpha="0"
+                    android:layout_width="161dp"
+                    android:layout_height="251dp"
+                    android:background="@drawable/eq_back"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="8dp">
+                <TextView
+                    android:id="@+id/eq_card_2_front"
+                    android:layout_width="161dp"
+                    android:layout_height="251dp"
+                    android:background="@drawable/utm"/>
+
+                <TextView
+                    android:id="@+id/eq_card_2_back"
+                    android:alpha="0"
+                    android:layout_width="161dp"
+                    android:layout_height="251dp"
+                    android:background="@drawable/eq_back"/>
+            </FrameLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="8dp">
+                <TextView
+                    android:id="@+id/eq_card_3_front"
+                    android:layout_width="161dp"
+                    android:layout_height="251dp"
+                    android:background="@drawable/mrowka"/>
+                <TextView
+                    android:id="@+id/eq_card_3_back"
+                    android:alpha="0"
+                    android:layout_width="161dp"
+                    android:layout_height="251dp"
+                    android:background="@drawable/eq_back"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="8dp">
+                <TextView
+                    android:id="@+id/eq_card_4_front"
+                    android:layout_width="161dp"
+                    android:layout_height="251dp"
+                    android:background="@drawable/losos"/>
+                <TextView
+                    android:id="@+id/eq_card_4_back"
+                    android:alpha="0"
+                    android:layout_width="161dp"
+                    android:layout_height="251dp"
+                    android:background="@drawable/eq_back"/>
+            </FrameLayout>
+        </TableRow>
+
+    </TableLayout>
+</FrameLayout>

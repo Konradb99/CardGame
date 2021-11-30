@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +22,8 @@ class Fragment_game_menu : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var opened: Boolean = false
+    private var opened_menu: Boolean = false
+    private var opened_eq: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,17 +47,34 @@ class Fragment_game_menu : Fragment() {
         var menuButton = view.findViewById<ImageButton>(R.id.menuButton)
 
         menuButton.setOnClickListener(){
-            if(!opened){
+            if(!opened_menu){
                 var fr = fragmentManager?.beginTransaction()
                 fr?.replace(R.id.main_view_game, fragment_ingame_menu())
                 fr?.commit()
-                opened = true
+                opened_menu = true
             }
-            else if(opened) {
+            else if(opened_menu) {
                 var fr = fragmentManager?.beginTransaction()
                 fr?.replace(R.id.main_view_game, Fragment_card())
                 fr?.commit()
-                opened = false
+                opened_menu = false
+            }
+        }
+
+        var eqButton = view.findViewById<ImageButton>(R.id.eqButton)
+
+        eqButton.setOnClickListener(){
+            if(!opened_eq){
+                var fr = fragmentManager?.beginTransaction()
+                fr?.replace(R.id.main_view_game, Fragment_equipment())
+                fr?.commit()
+                opened_eq = true
+            }
+            else if(opened_eq){
+                var fr = fragmentManager?.beginTransaction()
+                fr?.replace(R.id.main_view_game, Fragment_card())
+                fr?.commit()
+                opened_eq = false
             }
         }
     }
