@@ -8,7 +8,7 @@ class All
         //lokacje
         var blankloc = Location("bkankloc", "Pusta lokacja",
             "Ciemno wszędzie, głucho wszędzie.", draw = R.drawable.blank)
-        var biblioteka = Location("biblioteka", "", draw=R.drawable.biblioteka)
+        var biblioteka = Location("biblioteka", "Biblioteka", description="Legenda głosi ze ktoś przyszedł tu z własnej woli", draw=R.drawable.biblioteka)
 
         var cek = Location("cek","Centrum Energetyczno Kaloryczne", draw=R.drawable.cek)
         var chemia = Location("chemia", "Wydzial Chemiczny", draw=R.drawable.chemia)

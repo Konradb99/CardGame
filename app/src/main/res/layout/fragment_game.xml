@@ -16,8 +16,9 @@
             android:id="@+id/menu_game"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="50"
-            android:layout_marginTop="15dp"/>
+            android:layout_weight="44"
+            android:layout_marginTop="15dp"
+            />
 
         <FrameLayout
             android:id="@+id/main_view_game"
@@ -27,7 +28,8 @@
 
         <ImageButton
             android:id="@+id/enter_btn"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="140dp"
             android:layout_height="80dp"
             android:layout_weight="0"
             android:src="@drawable/enterbutton"

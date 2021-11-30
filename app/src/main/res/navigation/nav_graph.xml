@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_menu2">
+
+    <fragment
+        android:id="@+id/fragment_menu2"
+        android:name="com.example.karcianka.fragment_menu"
+        android:label="fragment_menu" >
+        <action
+            android:id="@+id/action_fragment_menu2_to_fragment_game"
+            app:destination="@id/fragment_game" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_game"
+        android:name="com.example.karcianka.Fragment_game"
+        android:label="Fragment_game" />
+</navigation>

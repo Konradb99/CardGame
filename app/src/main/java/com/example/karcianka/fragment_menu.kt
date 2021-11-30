@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.navigation.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,12 +42,8 @@ class fragment_menu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val start_btn = view.findViewById<ImageButton>(R.id.startbutton)
-
-        start_btn.setOnClickListener{
-            var fr = fragmentManager?.beginTransaction()
-            fr?.replace(R.id.main_fragment, Fragment_game())
-            fr?.commit()
+        (view.findViewById<ImageButton>(R.id.startbutton)).setOnClickListener(){
+            it.findNavController().navigate(R.id.action_fragment_menu2_to_fragment_game)
             LocNav.ConnectLocGrapf()
         }
     }
