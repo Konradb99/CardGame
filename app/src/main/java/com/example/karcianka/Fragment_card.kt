@@ -91,9 +91,10 @@ class Fragment_card : Fragment() {
                         motionLayout.progress = 0f
                         motionLayout.setTransition(R.id.rest, R.id.like)
                         SwipeVM.swipe()
-                        //W tym miejscu wykrywa swipe
-                        //Jak wykryc ktory swipe? xD
-
+                        when(motionLayout.getCurrentState()){
+                            R.id.pass -> Toast.makeText(getActivity(),"W Lewo!",Toast.LENGTH_SHORT).show();
+                            R.id.like -> Toast.makeText(getActivity(),"W Prawo!",Toast.LENGTH_SHORT).show();
+                        }
                         val card_back_text = view.findViewById<TextView>(R.id.card_back_text) as TextView
                         val card_back_title = view.findViewById<TextView>(R.id.card_back_title) as TextView
 
