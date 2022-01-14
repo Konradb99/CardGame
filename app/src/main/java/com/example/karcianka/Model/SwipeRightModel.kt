@@ -1,6 +1,4 @@
-package com.example.karcianka
-
-import androidx.annotation.ColorInt
+package com.example.karcianka.Model
 
 data class SwipeRightModel(
     val top: SwipeRightCardModel,

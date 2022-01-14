@@ -1,9 +1,6 @@
-package com.example.karcianka.database
+package com.example.karcianka.GameEntity
 
-import android.graphics.drawable.Drawable
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import com.example.karcianka.R
-import android.view.View
 
 
 class Location(override var id: String = "",

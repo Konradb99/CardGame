@@ -5,9 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.karcianka.database.Flip
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.karcianka.Database.Entity.EquipmentItems
+import com.example.karcianka.GameEntity.Flip
+import com.example.karcianka.ViewModel.Adapter.EquipmentAdapter
+import com.example.karcianka.ViewModel.EquipmentViewModel
+import com.example.karcianka.ViewModel.ViewModeLFactory.EquipmentViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,37 +47,23 @@ class Fragment_equipment : Fragment() {
         return inflater.inflate(R.layout.fragment_equipment, container, false)
     }
 
+    private lateinit var eqVM: EquipmentViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Specify cards of equipment
-        var card1 = mutableListOf<TextView>()
-        card1.add(view.findViewById<TextView>(R.id.eq_card_1_front) as TextView)
-        card1.add(view.findViewById<TextView>(R.id.eq_card_1_back) as TextView)
-        var card2 = mutableListOf<TextView>()
-        card2.add(view.findViewById<TextView>(R.id.eq_card_2_front) as TextView)
-        card2.add(view.findViewById<TextView>(R.id.eq_card_2_back) as TextView)
-        var card3 = mutableListOf<TextView>()
-        card3.add(view.findViewById<TextView>(R.id.eq_card_3_front) as TextView)
-        card3.add(view.findViewById<TextView>(R.id.eq_card_3_back) as TextView)
-        var card4 = mutableListOf<TextView>()
-        card4.add(view.findViewById<TextView>(R.id.eq_card_4_front) as TextView)
-        card4.add(view.findViewById<TextView>(R.id.eq_card_4_back) as TextView)
 
-        //getActivity()?.getApplicationContext()
+        //Create adapter for eq
+        val factoryEquipmentViewModel = EquipmentViewModelFactory((requireNotNull(this.activity).application))
+        eqVM = ViewModelProvider(requireActivity(), factoryEquipmentViewModel).get(EquipmentViewModel::class.java)
 
-        //Handle onClick for all cards from eq
+        val eqAdapter = EquipmentAdapter(eqVM.allItems, eqVM, this.requireContext())
+        eqVM.allItems.observe(viewLifecycleOwner, {eqAdapter.notifyDataSetChanged()})
 
-        view.findViewById<TextView>(R.id.eq_card_1_back).setOnClickListener(){
-            Flip.Animate(getActivity()?.getApplicationContext(), card1.elementAt(0), card1.elementAt(1))
-        }
-        view.findViewById<TextView>(R.id.eq_card_2_back).setOnClickListener(){
-            Flip.Animate(getActivity()?.getApplicationContext(), card2.elementAt(0), card2.elementAt(1))
-        }
-        view.findViewById<TextView>(R.id.eq_card_3_back).setOnClickListener(){
-            Flip.Animate(getActivity()?.getApplicationContext(), card3.elementAt(0), card3.elementAt(1))
-        }
-        view.findViewById<TextView>(R.id.eq_card_4_back).setOnClickListener(){
-            Flip.Animate(getActivity()?.getApplicationContext(), card4.elementAt(0), card4.elementAt(1))
+        var layoutManager = LinearLayoutManager(view.context)
+
+        view.findViewById<RecyclerView>(R.id.equipmentView).let{
+            it.adapter =eqAdapter
+            it.layoutManager = layoutManager
         }
     }
 

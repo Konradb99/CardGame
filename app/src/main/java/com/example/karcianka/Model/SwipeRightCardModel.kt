@@ -1,4 +1,4 @@
-package com.example.karcianka
+package com.example.karcianka.Model
 
 import androidx.annotation.ColorInt
 

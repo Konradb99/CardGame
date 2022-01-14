@@ -1,4 +1,4 @@
-package com.example.karcianka.database
+package com.example.karcianka.GameEntity
 
 interface ICard
 {

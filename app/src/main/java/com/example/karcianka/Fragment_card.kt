@@ -1,9 +1,6 @@
 package com.example.karcianka
-import com.example.karcianka.database.All
-import com.example.karcianka.database.Location
+import com.example.karcianka.GameEntity.Location
 
-import android.animation.AnimatorInflater
-import android.animation.AnimatorSet
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,15 +9,15 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
-import androidx.core.animation.doOnEnd
 import androidx.lifecycle.ViewModelProvider
-import com.example.karcianka.LocNav.Companion.GetCurrentLoc
-import com.example.karcianka.LocNav.Companion.GetNextLoc
-import com.example.karcianka.LocNav.Companion.SetLoc
-import com.example.karcianka.database.All.Companion.blankloc
-import com.example.karcianka.database.Flip
-import org.w3c.dom.Text
-import kotlin.random.Random
+import com.example.karcianka.Model.LocNav.Companion.GetNextLoc
+import com.example.karcianka.Model.LocNav.Companion.SetLoc
+import com.example.karcianka.GameEntity.All.Companion.blankloc
+import com.example.karcianka.GameEntity.Flip
+import com.example.karcianka.Model.Game
+import com.example.karcianka.Model.SwipeRightModel
+import com.example.karcianka.ViewModel.SwipeViewModel
+import com.example.karcianka.ViewModel.ViewModeLFactory.SwipeViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,14 +40,7 @@ class Fragment_card : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
-        //Swipe card
-
-
-
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,7 +59,6 @@ class Fragment_card : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val front = view.findViewById<TextView>(R.id.card_front) as TextView
         val back = view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout
         var motionLayout = view.findViewById<MotionLayout>(R.id.motionLayout)
@@ -77,7 +66,8 @@ class Fragment_card : Fragment() {
         topCard = view.findViewById(R.id.topCard)
 
 
-        val SwipeVM = ViewModelProvider(this).get(SwipeRightViewModel::class.java)
+        val factorySwipeVM =SwipeViewModelFactory((requireNotNull(this.activity).application))
+        val SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
         front.setTag(R.drawable.biblioteka)
         game = Game()
@@ -102,6 +92,7 @@ class Fragment_card : Fragment() {
                         {
                             -1 ->
                             {
+                                //Move to model?
                                 var next_loc: Location = GetNextLoc(front)
                                 SetLoc(front, card_back_text, card_back_title, next_loc)
                                 numberOfSwipes+=1
@@ -111,7 +102,6 @@ class Fragment_card : Fragment() {
 
                             0-> {
                                 var next_loc: Location = GetNextLoc(front)
-
                                 SetLoc(front, card_back_text, card_back_title, next_loc)
                                 Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
                                 numberOfSwipes+=1
@@ -132,11 +122,15 @@ class Fragment_card : Fragment() {
                         //    card_front.setTag(All.witula.draw)
                         //    card_front.setBackgroundResource(All.witula.draw)
                         //}
+
+                        //Save current card state
+
+
+
                     }
                 }
             }
         } )
-        //Back click -> jezeli klikniete w back card
         back.setOnClickListener{
             Flip.Animate(getActivity()?.getApplicationContext(), front, back)
         }

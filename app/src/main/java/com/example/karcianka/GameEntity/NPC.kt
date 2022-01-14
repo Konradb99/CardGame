@@ -1,6 +1,5 @@
-package com.example.karcianka.database
+package com.example.karcianka.GameEntity
 
-import android.graphics.drawable.Drawable
 import com.example.karcianka.R
 
 class NPC(override var id: String = "", override var name: String="", override var description: String="",

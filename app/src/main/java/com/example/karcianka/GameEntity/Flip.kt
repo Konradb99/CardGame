@@ -1,4 +1,4 @@
-package com.example.karcianka.database
+package com.example.karcianka.GameEntity
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
@@ -6,7 +6,6 @@ import android.content.Context
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.animation.*
-import com.example.karcianka.LocNav
 import com.example.karcianka.R
 
 class Flip {

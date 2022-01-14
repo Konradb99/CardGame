@@ -1,18 +1,11 @@
-package com.example.karcianka
+package com.example.karcianka.Model
 
-import android.app.PendingIntent.getActivity
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import com.example.karcianka.database.All
-import com.example.karcianka.database.All.Companion.wszystkielokacje
-import com.example.karcianka.database.Location
+import com.example.karcianka.GameEntity.All
+import com.example.karcianka.GameEntity.All.Companion.wszystkielokacje
+import com.example.karcianka.GameEntity.Location
 import kotlin.random.Random
-import kotlin.reflect.typeOf
 
 class LocNav
 {

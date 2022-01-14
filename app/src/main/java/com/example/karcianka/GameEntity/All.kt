@@ -1,4 +1,4 @@
-package com.example.karcianka.database
+package com.example.karcianka.GameEntity
 
 import com.example.karcianka.R
 
@@ -43,7 +43,7 @@ class All
         var solaris = Location("solaris", "Solaris", "Stowarzyszenie osób lubiących alkohol, rozrywki i seks", draw=R.drawable.solaris)
 
         var wszystkielokacje = mutableListOf<Location>(biblioteka, cek, chemia, elektryk,
-            firewall,gig,hala,klodnica,labirynt,ms,mt,mrowisko, narnia, park, wieza, solaris)   
+            firewall,gig,hala,klodnica,labirynt,ms,mt,mrowisko, narnia, park, wieza, solaris)
 
 
             //npce

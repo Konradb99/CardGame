@@ -16,5 +16,9 @@
     <fragment
         android:id="@+id/fragment_game"
         android:name="com.example.karcianka.Fragment_game"
-        android:label="Fragment_game" />
+        android:label="Fragment_game" >
+        <action
+            android:id="@+id/action_fragment_game_to_fragment_menu2"
+            app:destination="@id/fragment_menu2" />
+    </fragment>
 </navigation>
