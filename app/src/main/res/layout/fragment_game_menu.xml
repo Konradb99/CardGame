@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:contentDescription="@string/menu_map"
             android:scaleType="fitCenter"
-            android:src="@drawable/map_btn"
+            android:src="@drawable/mapa"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/eqButton"
@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:contentDescription="@string/menu_eq"
             android:scaleType="fitCenter"
-            android:src="@drawable/eq_btn"
+            android:src="@drawable/ikonka_plecak"
             android:background="@null"/>
         <ImageButton
             android:id="@+id/menuButton"
@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:contentDescription="@string/menu_menu"
             android:scaleType="fitCenter"
-            android:src="@drawable/menu_btn"
+            android:src="@drawable/ikonka_menu"
             android:background="@null"/>
     </LinearLayout>
 </FrameLayout>

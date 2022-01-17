@@ -15,7 +15,7 @@
             android:id="@+id/eq_card_1_front"
             android:layout_width="161dp"
             android:layout_height="251dp"
-            android:background="@drawable/losos"/>
+            android:background="@drawable/eq_back"/>
         <TextView
             android:id="@+id/eq_card_1_back"
             android:alpha="0"
