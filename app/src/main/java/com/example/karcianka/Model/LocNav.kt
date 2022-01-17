@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.TextView
 import com.example.karcianka.GameEntity.All
 import com.example.karcianka.GameEntity.All.Companion.wszystkielokacje
+import com.example.karcianka.GameEntity.ICard
 import com.example.karcianka.GameEntity.Location
 import kotlin.random.Random
 
@@ -103,6 +104,13 @@ class LocNav
             card_front.setBackgroundResource(loc.draw)
         }
 
+        fun SetCard(card_front : TextView, card_back_text : TextView, card_back_title: TextView, icard: ICard)
+        {
+            card_front.setTag(icard.draw)
+            card_back_text.text = icard.description
+            card_back_title.text = icard.name
+            card_front.setBackgroundResource(icard.draw)
+        }
 
     }
 }

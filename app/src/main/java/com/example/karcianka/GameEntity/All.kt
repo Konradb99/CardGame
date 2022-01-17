@@ -9,7 +9,7 @@ class All
         var blankloc = Location("bkankloc", "Pusta lokacja",
             "Ciemno wszędzie, głucho wszędzie.", draw = R.drawable.blank)
         var biblioteka = Location("biblioteka", "Biblioteka", description="Legenda głosi że ktoś przyszedł tu z własnej woli", draw=R.drawable.biblioteka)
-
+        var samouczek = Location("samouczek", "Samouczek", "", draw =R.drawable.opis)
         var cek = Location("cek","Centrum Energetyczno Kaloryczne", description="Opis CEK", draw=R.drawable.cek)
         var chemia = Location("chemia", "Pracownia Alchemiczna", description="Opis Chemii", draw=R.drawable.chemia)
 
@@ -66,6 +66,10 @@ class All
             var witula = NPC(
                 "witua", "Witula",
                 "Chyba znasz tego czlowieka!", draw = R.drawable.witua
+            )
+            var kolega = NPC(
+                "kolega", "Kolega",
+                "Znam go z widzenia.", draw = R.drawable.kolega
             )
 
         //itemy

@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.animation.doOnEnd
+import com.example.karcianka.GameEntity.Flip
+import com.example.karcianka.Model.Tutorial
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,6 +53,20 @@ class Fragment_game : Fragment() {
         fr?.add(R.id.menu_game, Fragment_game_menu())
         fr?.add(R.id.main_view_game, Fragment_card())
         fr?.commit()
+
+        view.findViewById<ImageButton>(R.id.enter_btn).setOnClickListener{
+
+
+            Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById<TextView>(R.id.card_front),
+                view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title))
+
+            val front = view.findViewById<TextView>(R.id.card_front) as TextView
+            val back = view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout
+
+            Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
+
+
+        }
 
     }
 

@@ -93,19 +93,19 @@ class Fragment_card : Fragment() {
                             -1 ->
                             {
                                 //Move to model?
-                                var next_loc: Location = GetNextLoc(front)
-                                SetLoc(front, card_back_text, card_back_title, next_loc)
-                                numberOfSwipes+=1
-                                front.setBackgroundResource(blankloc.draw)
-                                Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
+                                //var next_loc: Location = GetNextLoc(front)
+                                //SetLoc(front, card_back_text, card_back_title, next_loc)
+                                //numberOfSwipes+=1
+                                //front.setBackgroundResource(blankloc.draw)
+                                //Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
                             }
 
                             0-> {
                                 var next_loc: Location = GetNextLoc(front)
                                 SetLoc(front, card_back_text, card_back_title, next_loc)
                                 Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
-                                numberOfSwipes+=1
-                                if(numberOfSwipes%10==0) checkpoint=1
+                                //numberOfSwipes+=1
+                                //if(numberOfSwipes%10==0) checkpoint=1
 
                             }
                             1 ->{
