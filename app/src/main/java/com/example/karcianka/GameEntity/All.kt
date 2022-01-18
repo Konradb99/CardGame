@@ -6,8 +6,8 @@ class All
 {
     companion object{
         //lokacje
-        var blankloc = Location("bkankloc", "Pusta lokacja",
-            "Ciemno wszędzie, głucho wszędzie.", draw = R.drawable.blank)
+        var blankloc = Location("blankloc", "Pusta lokacja",
+            "Ciemno wszędzie, głucho wszędzie.", draw = R.drawable.opis)
         var biblioteka = Location("biblioteka", "Biblioteka", description="Legenda głosi że ktoś przyszedł tu z własnej woli", draw=R.drawable.biblioteka)
         var samouczek = Location("samouczek", "Samouczek", "", draw =R.drawable.opis)
         var cek = Location("cek","Centrum Energetyczno Kaloryczne", description="Opis CEK", draw=R.drawable.cek)
@@ -46,35 +46,35 @@ class All
             firewall,gig,hala,klodnica,labirynt,ms,mt,mrowisko, narnia, park, wieza, solaris)
 
 
-            //npce
-            var smok = NPC(
-                "smok", "Ognisty smok",
-                "To chyba.... prawdziwy smok. I zieje ogniem!!!", draw = R.drawable.dragon
-            )
-            var kapciomag = NPC(
-                "kapciomag", "Wielki Mag",
-                "Wyglada jak mlody Gandalf ubrany na fioletowo.", draw = R.drawable.kapciomag
-            )
-            var kapcio = NPC(
-                "kapcio", "???",
-                "Jakiś obszarpany gość???", draw = R.drawable.kapcio
-            )
-            var kapciomagrozmazany = NPC(
-                "kapcio", "???",
-                "Coś mi się rozmazuje przed oczami...", draw = R.drawable.kapciomagrozmazany
-            )
-            var witula = NPC(
-                "witua", "Witula",
-                "Chyba znasz tego czlowieka!", draw = R.drawable.witua
-            )
-            var kolega = NPC(
-                "kolega", "Kolega",
-                "Znam go z widzenia.", draw = R.drawable.kolega
-            )
+        //npce
+        var smok = NPC(
+            "smok", "Ognisty smok",
+            "To chyba.... prawdziwy smok. I zieje ogniem!!!", draw = R.drawable.dragon
+        )
+        var kapciomag = NPC(
+            "kapciomag", "Wielki Mag",
+            "Wyglada jak mlody Gandalf ubrany na fioletowo.", draw = R.drawable.kapciomag
+        )
+        var kapcio = NPC(
+            "kapcio", "???",
+            "Jakiś obszarpany gość???", draw = R.drawable.kapcio
+        )
+        var kapciomagrozmazany = NPC(
+            "kapcio", "???",
+            "Coś mi się rozmazuje przed oczami...", draw = R.drawable.kapciomagrozmazany
+        )
+        var witula = NPC(
+            "witua", "Witula",
+            "Chyba znasz tego czlowieka!", draw = R.drawable.witua
+        )
+        var kolega = NPC(
+            "kolega", "Kolega",
+            "Znam go z widzenia.", draw = R.drawable.kolega
+        )
 
         //itemy
         var losos = Item("losos", "Łosoś kłodnicki",
-                        "Wygląda jak zwykły łosoś, ale czy kłodnicki na pewno jest bezpieczny?", draw = R.drawable.losos)
+            "Wygląda jak zwykły łosoś, ale czy kłodnicki na pewno jest bezpieczny?", draw = R.drawable.losos)
         var utm = Item("utm", "UTM", "", draw = R.drawable.utm)
 
 
