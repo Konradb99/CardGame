@@ -36,7 +36,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="0111"// 0111 to start from ministerstwo
+        checkpoint="115"
 
     }
 
@@ -270,7 +270,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                                     All.shot5)
                             }
                         }
-                        cardVM.FlipFront_instant()
+
                         LocNav.AddChoice(cardVM.card_back_text, "Pijesz go?", "Nie, dawaj inny,",
                             "Oczywiście, że tak. A potem inny.")
                     }
@@ -289,15 +289,71 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                 "115" ->
                 {
+                    cardVM.FlipFront();
                     println(";D ;D ;D ;D Shoty wypite.")
                     Toast.makeText(context, "Jestes dość pijany!", Toast.LENGTH_SHORT).show();
 
-                    cardVM.FlipFront();
+
                     LocNav.SetCard(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, All.kolega)
                     LocNav.AddChoice(cardVM.card_back_text, "Co? Juz masz dosc? Odprowadzić cię?",
                         "MoŻe Mi SiĘ PoMoC PrZyDać...",
                         "Nieeee, dam radę. Bawcie sie dobrze.")
+                    when (motionLayout.getCurrentState()) {
 
+                        R.id.right -> {
+                            checkpoint+="1"
+                        }
+                        R.id.left -> {
+                            checkpoint+="0"
+
+                        }
+                    }
+                }
+
+                "1151"->{
+                    println("--------------;;;"+checkpoint);
+                    LocNav.SetCard(
+                        cardVM.card_front,
+                        cardVM.card_back_text,
+                        cardVM.card_back_title,
+                        All.blankloc
+                    )
+                    cardVM.card_back_title.text = "KONIEC GRY"
+
+                    LocNav.AddChoice(cardVM.card_back_text,"Cóż, pięć szotów to za mało. Prawie na trzeźwo przywitałeś łóżko i miałeś całkowicie spokojny sen. Może jutro powtórka?",
+                        "Powtórka?", "Mam dość...")
+
+                    when (motionLayout.getCurrentState()) {
+
+                        R.id.right -> {
+                            checkpoint="GameOver"
+                        }
+                        R.id.left -> {
+                            checkpoint="GameOver"
+                        }
+
+                    }
+                }
+                "1150"->
+                {
+                    println("--------------//////"+checkpoint);
+                }
+                "GameOver"-> {
+                    cardVM.card_back_title.text="KONIEC GRY";
+                    LocNav.AddChoice(
+                        cardVM.card_back_text,
+                        left = "Powtórka?", right = "Mam dość...")
+
+                    when (motionLayout.getCurrentState()) {
+
+                        R.id.right -> {
+                            System.exit(0);
+                        }
+                        R.id.left -> {
+                            StartAgain()
+                        }
+
+                    }
                 }
 
             }
@@ -307,5 +363,17 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
     fun rand(start: Int, end: Int): Int {
         require(!(start > end || end - start + 1 > Int.MAX_VALUE)) { "Illegal Argument" }
         return Random(System.nanoTime()).nextInt(end - start + 1) + start
+    }
+
+    fun StartAgain()
+    {
+        checkpoint="0"
+        cardVM.FlipFront()
+        LocNav.SetLoc(
+            cardVM.card_front,
+            cardVM.card_back_text,
+            cardVM.card_back_title,
+            All.solaris
+        )
     }
 }
