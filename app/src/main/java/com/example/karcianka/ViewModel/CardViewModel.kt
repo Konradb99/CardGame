@@ -41,6 +41,15 @@ class CardViewModel(
     {
         FlipModel.AnimateFront(context, card_front, card_back)
     }
+
+    fun FlipFront_instant()
+    {
+        FlipModel.AnimateFront_instant(context,card_front,card_back)
+    }
+    fun FlipBack_instant()
+    {
+        FlipModel.AnimateBack_instant(context,card_front,card_back)
+    }
     fun updateCard(front: TextView, back: LinearLayout, backText: TextView, backTitle: TextView){
         card_front = front
         card_back = back

@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.example.karcianka.GameEntity.All
+import com.example.karcianka.Model.LocNav.Companion.AddChoice
 import com.example.karcianka.Model.LocNav.Companion.SetCard
 import com.example.karcianka.R
 import com.example.karcianka.ViewModel.CardViewModel
@@ -30,7 +31,10 @@ class Tutorial() {
         {
             //wlaczenie Kolegi
             SetCard(front,card_back_text, card_back_title, All.kolega)
-            cardVM.card_back_text.text=All.kolega.description+"\n\n"+"(by zaczac rozmowę, przeciągnij kartę w prawo.)\n"+gameVM.checkpoint
+
+            AddChoice(card_back_text,left="O, hej!",right= "Dawno sie nie widzielismy!",
+                afteradd =  "(by zaczac rozmowę, przeciągnij kartę w którąś stronę.)")
+
             cardVM.updateCard(front, back, card_back_text, card_back_title)
 
 
@@ -46,15 +50,13 @@ class Tutorial() {
             gameVM: GameViewModel
         )
         {
-
-            println("----> EnterMinisterstwo")
             //wlaczenie Kolegi
-            SetCard(front,card_back_text, card_back_title, All.kolega)
-            cardVM.card_back_text.text=All.kolega.description+"\n\n" +
-                    "No dobra! Jaki kolorek tym razem?\n\n" +
-                    "Wiesz co,      A jakie sa"+
-                    "jednak nie     dzisiaj" +
-                    "dzis...        opcje?\n\n"+gameVM.checkpoint
+            LocNav.SetCard(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, All.kolega)
+            cardVM.FlipBack()
+            AddChoice(card_back_text,"No dobra! Co tym razem do picia?",
+                "Wiesz co, jednak nie dzisiaj...", "A jakie dzis opcje?")
+
+            card_back_text.text= card_back_text.text.toString()+"\n\n"+gameVM.checkpoint
             cardVM.updateCard(front, back, card_back_text, card_back_title)
         }
     }

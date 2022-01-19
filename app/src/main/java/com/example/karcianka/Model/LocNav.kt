@@ -114,6 +114,26 @@ class LocNav
             card_front.setBackgroundResource(icard.draw)
         }
 
+        fun AddChoice(card_back_text : TextView, beforeadd:String="",
+                      left:String, right: String, afteradd :String ="")
+        {
+            var text ="";
+            if(beforeadd!="")
+                text+="\n\n"+beforeadd;
+
+
+            text += "\n\n"+
+                    "<-------\n"+
+                    left+"\n\n"+
+                    "------->\n"+
+                    right+"\n"
+            if(afteradd!="")
+                text+="\n\n"+afteradd;
+
+
+
+            card_back_text.text = card_back_text.text.toString() + text;
+        }
 
 
     }

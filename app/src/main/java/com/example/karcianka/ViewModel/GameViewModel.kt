@@ -40,24 +40,45 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
         when (this.checkpoint) {
 
-            "0" -> {
+            "01" -> {
 
                 //dopoki nie przesunie w prawo
                 when (motionLayout.getCurrentState()) {
                     R.id.left -> {
+                        checkpoint+="1"
+                        cardVM.FlipBack()
+                        LocNav.SetCard(
+                            cardVM.card_front,
+                            cardVM.card_back_text,
+                            cardVM.card_back_title,
+                            All.kolega
+                        )
+                        LocNav.AddChoice(cardVM.card_back_text, "A daj spokój z przywitaniem. Idziemy sie napić?",
+                            "Nie dzisiaj.","Pewnie!" )
+
+                        cardVM.card_back_text.text =cardVM.card_back_text.text.toString()+ "\n\n"+checkpoint;
 
                     }
                     R.id.right -> {
-                        checkpoint+="0"
+                        checkpoint+="1"
                         cardVM.FlipBack()
-                        cardVM.card_back_text.text = "Idziemy sie napić?\n\n\n\n\n NIE                  TAK\n"+checkpoint;
+                        LocNav.SetCard(
+                            cardVM.card_front,
+                            cardVM.card_back_text,
+                            cardVM.card_back_title,
+                            All.kolega
+                        )
+                        LocNav.AddChoice(cardVM.card_back_text, "A daj spokój z przywitaniem. Idziemy sie napić?",
+                            "Nie dzisiaj.","Pewnie!" )
+
+                        cardVM.card_back_text.text =cardVM.card_back_text.text.toString()+ "\n\n"+checkpoint;
 
                     }
                 }
 
 
             }
-            "00" -> {
+            "011" -> {
                 when (motionLayout.getCurrentState()) {
                     R.id.left -> {
                         checkpoint+="0"
@@ -82,16 +103,36 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                         LocNav.SetCard(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, All.ministerstwo)
                         cardVM.card_back_text.text =All.ministerstwo.description+ "\n\n(musimy wejsc do ministerstwa. Pamiętasz jeszcze, jak?)" +
                                 "\n"+checkpoint
+                        //0111
+
+
 
                     }
                 }
             }
-            "001"  -> {
+            "01111"  -> {
                 //idziemy pic
-                //tu wywołało się Tutorial.EnterMinisterstwo()
-                println("idziemy pic.")
-            }
+                when (motionLayout.getCurrentState()) {
 
+                    R.id.right -> {
+                        println("idziemy pic.")
+                    }
+                    R.id.left -> {
+                        checkpoint+="0"
+                        println("\nnie jestes studentem.\n"+ checkpoint)
+
+                        LocNav.SetCard(
+                            cardVM.card_front,
+                            cardVM.card_back_text,
+                            cardVM.card_back_title,
+                            All.blankloc
+                        )
+                        cardVM.card_back_text.text = "I ty smiesz się nazywać studentem?\n"+checkpoint;
+                        cardVM.card_back_title.text = "KONIEC GRY"
+                    }
+                }
+
+            }
         }
     }
 }

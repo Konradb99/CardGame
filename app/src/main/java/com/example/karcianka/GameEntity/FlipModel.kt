@@ -18,25 +18,7 @@ class FlipModel {
         var isFront_text: Boolean = true
         var isFront_linear: Boolean = true
         //Instant flip
-        fun  Animate_instant(appContext: Context?, front: TextView, back: LinearLayout){
 
-            front_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip_instant) as AnimatorSet
-            back_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip_instant) as AnimatorSet
-            if(!isFront_instant)
-            {
-                front_anim_instant.setTarget(back)
-                back_anim_instant.setTarget(front)
-                front.isEnabled = false
-                back.isEnabled = false
-                back_anim_instant.start()
-                front_anim_instant.start()
-                back_anim_instant.doOnEnd {
-                    back.isEnabled = true
-                    front.isEnabled = true
-                }
-                isFront_instant =true
-            }
-        }
 
 
         //Normal flip
@@ -128,7 +110,45 @@ class FlipModel {
             }
         }
 
+        fun  AnimateFront_instant(appContext: Context?, front: TextView, back: LinearLayout){
 
+            front_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip_instant) as AnimatorSet
+            back_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip_instant) as AnimatorSet
+            if(!isFront_instant)
+            {
+                front_anim_instant.setTarget(back)
+                back_anim_instant.setTarget(front)
+                front.isEnabled = false
+                back.isEnabled = false
+                back_anim_instant.start()
+                front_anim_instant.start()
+                back_anim_instant.doOnEnd {
+                    back.isEnabled = true
+                    front.isEnabled = true
+                }
+                isFront_instant =true
+            }
+        }
+
+        fun AnimateBack_instant(appContext: Context?, front: TextView, back: LinearLayout)
+        {
+            front_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip_instant) as AnimatorSet
+            back_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip_instant) as AnimatorSet
+            if(isFront_instant)
+            {
+                front_anim_instant.setTarget(back)
+                back_anim_instant.setTarget(front)
+                front.isEnabled = false
+                back.isEnabled = false
+                back_anim_instant.start()
+                front_anim_instant.start()
+                back_anim_instant.doOnEnd {
+                    back.isEnabled = true
+                    front.isEnabled = true
+                }
+                isFront_instant = false;
+            }
+        }
 
         fun  Animate(appContext: Context?, front: TextView, back: TextView){
             val scale = appContext?.resources?.displayMetrics?.density

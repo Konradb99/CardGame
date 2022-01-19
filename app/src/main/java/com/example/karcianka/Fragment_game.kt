@@ -67,15 +67,19 @@ class Fragment_game : Fragment() {
             {
                 Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
 
-                CardVM.FlipFront()
-                //view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
+                CardVM.FlipFront_instant()
+                GameVM.checkpoint+="1"
+                view.findViewById<TextView>(R.id.card_back_text).text=
+                    view.findViewById<TextView>(R.id.card_back_text).text.toString()+"\n\n"+GameVM.checkpoint;
+                //   view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
             }
-            if(GameVM.checkpoint=="001") {
-
+            if(GameVM.checkpoint=="0111") {
+                println("=====================================")
+                println("Wejscie do ministerstwa")
                 Tutorial.EnterMinisterstwoSamouczek(view, view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
-
-                CardVM.FlipFront()
-                //view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
+                GameVM.checkpoint+="1"
+                CardVM.FlipFront_instant()
+                //   view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
             }
 
 
