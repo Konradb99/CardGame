@@ -2,6 +2,7 @@ package com.example.karcianka.ViewModel
 
 import android.app.Application
 import android.content.Context
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel

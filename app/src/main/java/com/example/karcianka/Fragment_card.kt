@@ -9,7 +9,6 @@ import android.widget.*
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.lifecycle.ViewModelProvider
-import com.example.karcianka.Model.Game
 import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.SwipeRightModel
 import com.example.karcianka.ViewModel.CardViewModel
@@ -54,7 +53,6 @@ class Fragment_card : Fragment() {
 
     private lateinit var topCard: FrameLayout
     private lateinit var bottomCard: FrameLayout
-    private var enabled = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,7 +66,7 @@ class Fragment_card : Fragment() {
         var CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
 
         var currentLoc = LocNav.GetCurrentLoc(CardVM.card_front)
-        LocNav.SetCard(CardVM.card_front, CardVM.card_back_text, CardVM.card_back_title, currentLoc)
+        LocNav.SetCard( CardVM.card_front, CardVM.card_back_text, CardVM.card_back_title, currentLoc)
 
         if(CardVM.gameNotStarted == 1){
             println("First time adding card to game")
@@ -91,11 +89,11 @@ class Fragment_card : Fragment() {
                     R.id.offScreenLike -> {
                         //Motion
                         motionLayout.progress = 0f
-                        motionLayout.setTransition(R.id.rest, R.id.like)
+                        motionLayout.setTransition(R.id.rest, R.id.right)
                         SwipeVM.swipe()
                         //Detect swipe
 
-                        GameVM.checkpoints(motionLayout, R.id.pass, R.id.like)
+                        GameVM.checkpoints(motionLayout, R.id.left, R.id.right)
                     }
                 }
             }
@@ -123,14 +121,12 @@ class Fragment_card : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-        var enabled = true
-        private val ENABLE_AGAIN =
-            Runnable { enabled = true }
     }
 
     fun bindCard(model: SwipeRightModel) {
         topCard.setBackgroundColor(model.top.backgroundColor)
         bottomCard.setBackgroundColor(model.bottom.backgroundColor)
     }
-    //Swipe card
+
+
 }

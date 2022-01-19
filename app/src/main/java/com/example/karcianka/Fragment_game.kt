@@ -63,10 +63,22 @@ class Fragment_game : Fragment() {
 
         view.findViewById<ImageButton>(R.id.enter_btn).setOnClickListener{
 
-            Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
+            if(GameVM.checkpoint=="0")
+            {
+                Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
 
-            CardVM.FlipFront()
-            view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
+                CardVM.FlipFront()
+                //view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
+            }
+            if(GameVM.checkpoint=="001") {
+
+                Tutorial.EnterMinisterstwoSamouczek(view, view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
+
+                CardVM.FlipFront()
+                //view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
+            }
+
+
         }
     }
 

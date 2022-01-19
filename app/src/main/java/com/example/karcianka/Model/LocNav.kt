@@ -1,11 +1,13 @@
 package com.example.karcianka.Model
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import com.example.karcianka.GameEntity.All
 import com.example.karcianka.GameEntity.All.Companion.wszystkielokacje
 import com.example.karcianka.GameEntity.ICard
 import com.example.karcianka.GameEntity.Location
+import com.example.karcianka.R
 import kotlin.random.Random
 
 class LocNav
@@ -111,6 +113,8 @@ class LocNav
             card_back_title.text = icard.name
             card_front.setBackgroundResource(icard.draw)
         }
+
+
 
     }
 }
