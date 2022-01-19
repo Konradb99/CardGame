@@ -1,5 +1,4 @@
 package com.example.karcianka
-import com.example.karcianka.GameEntity.Location
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,13 +9,14 @@ import android.widget.*
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.lifecycle.ViewModelProvider
-import com.example.karcianka.Model.LocNav.Companion.GetNextLoc
-import com.example.karcianka.Model.LocNav.Companion.SetLoc
-import com.example.karcianka.GameEntity.All.Companion.blankloc
-import com.example.karcianka.GameEntity.Flip
-import com.example.karcianka.Model.Game
+import com.example.karcianka.GameEntity.All
+import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.SwipeRightModel
+import com.example.karcianka.ViewModel.CardViewModel
+import com.example.karcianka.ViewModel.GameViewModel
 import com.example.karcianka.ViewModel.SwipeViewModel
+import com.example.karcianka.ViewModel.ViewModeLFactory.CardViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.GameViewModelFactory
 import com.example.karcianka.ViewModel.ViewModeLFactory.SwipeViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,12 +34,15 @@ class Fragment_card : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,90 +52,56 @@ class Fragment_card : Fragment() {
         return inflater.inflate(R.layout.fragment_card, container, false)
     }
 
-    private lateinit var game: Game
     private lateinit var topCard: FrameLayout
     private lateinit var bottomCard: FrameLayout
-    private var isFront = true
-    private var checkpoint = 0
-    private var numberOfSwipes = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val front = view.findViewById<TextView>(R.id.card_front) as TextView
-        val back = view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout
         var motionLayout = view.findViewById<MotionLayout>(R.id.motionLayout)
         bottomCard = view.findViewById(R.id.bottomCard)
         topCard = view.findViewById(R.id.topCard)
-
-
         val factorySwipeVM =SwipeViewModelFactory((requireNotNull(this.activity).application))
-        val SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
+        var SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
+        val factoryCardVM =CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
+        var CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+
+        var currentLoc = LocNav.GetCurrentLoc(CardVM.card_front)
+        LocNav.SetCard( CardVM.card_front, CardVM.card_back_text, CardVM.card_back_title, currentLoc)
+
+
+        if(CardVM.gameNotStarted == 1){
+            println("First time adding card to game")
+            CardVM.updateCard(view.findViewById<TextView>(R.id.card_front) as TextView, view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout, view.findViewById<TextView>(R.id.card_back_text) as TextView, view.findViewById<TextView>(R.id.card_back_title) as TextView)
+            CardVM.gameNotStarted = 0
+        }
+        else{
+            println("Not updating view")
+        }
+        val factoryGameVM =GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
+        val GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
+
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
-        front.setTag(R.drawable.biblioteka)
-        game = Game()
-        checkpoint = game.checkpoints
+        CardVM.card_front.setTag(R.drawable.biblioteka)
 
         motionLayout.setTransitionListener(object: TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 when (currentId) {
                     R.id.offScreenPass,
                     R.id.offScreenLike -> {
+                        //Motion
                         motionLayout.progress = 0f
-                        motionLayout.setTransition(R.id.rest, R.id.like)
+                        motionLayout.setTransition(R.id.rest, R.id.right)
                         SwipeVM.swipe()
-                        when(motionLayout.getCurrentState()){
-                            R.id.pass -> Toast.makeText(getActivity(),"W Lewo!",Toast.LENGTH_SHORT).show();
-                            R.id.like -> Toast.makeText(getActivity(),"W Prawo!",Toast.LENGTH_SHORT).show();
-                        }
-                        val card_back_text = view.findViewById<TextView>(R.id.card_back_text) as TextView
-                        val card_back_title = view.findViewById<TextView>(R.id.card_back_title) as TextView
+                        //Detect swipe
 
-                        when(checkpoint)
-                        {
-                            -1 ->
-                            {
-                                //Move to model?
-                                //var next_loc: Location = GetNextLoc(front)
-                                //SetLoc(front, card_back_text, card_back_title, next_loc)
-                                //numberOfSwipes+=1
-                                //front.setBackgroundResource(blankloc.draw)
-                                //Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
-                            }
-
-                            0-> {
-                                var next_loc: Location = GetNextLoc(front)
-                                SetLoc(front, card_back_text, card_back_title, next_loc)
-                                Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
-                                //numberOfSwipes+=1
-                                //if(numberOfSwipes%10==0) checkpoint=1
-
-                            }
-                            1 ->{
-                                var next_loc: Location = GetNextLoc(front)
-                                SetLoc(front, card_back_text, card_back_title, next_loc)
-                                Flip.Animate_instant(getActivity()?.getApplicationContext(), front, back)
-                                checkpoint=0
-                                Toast.makeText(getActivity(),"To juz dziesiaty swipe!",Toast.LENGTH_SHORT).show(); }
-                        }
-                        //labirynt to wyjatek -> prowadzi do wituly
-                        //if (card_front.background.constantState == getResources().getDrawable(R.drawable.labirynt).getConstantState())
-                        //{
-                        //    //witua
-                        //    card_front.setTag(All.witula.draw)
-                        //    card_front.setBackgroundResource(All.witula.draw)
-                        //}
-
-                        //Save current card state
-
-
-
+                        GameVM.checkpoints(motionLayout, R.id.left, R.id.right)
                     }
                 }
             }
         } )
-        back.setOnClickListener{
-            Flip.Animate(getActivity()?.getApplicationContext(), front, back)
+        view.findViewById<LinearLayout>(R.id.card_back).setOnClickListener{
+            CardVM.Flip()
         }
     }
 
@@ -160,5 +129,6 @@ class Fragment_card : Fragment() {
         topCard.setBackgroundColor(model.top.backgroundColor)
         bottomCard.setBackgroundColor(model.bottom.backgroundColor)
     }
-    //Swipe card
+
+
 }

@@ -21,4 +21,20 @@
             android:id="@+id/action_fragment_game_to_fragment_menu2"
             app:destination="@id/fragment_menu2" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_card"
+        android:name="com.example.karcianka.Fragment_card"
+        android:label="Fragment_card" >
+        <action
+            android:id="@+id/action_fragment_card_to_fragment_equipment"
+            app:destination="@id/fragment_equipment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_equipment"
+        android:name="com.example.karcianka.Fragment_equipment"
+        android:label="Fragment_equipment" >
+        <action
+            android:id="@+id/action_fragment_equipment_to_fragment_card"
+            app:destination="@id/fragment_card" />
+    </fragment>
 </navigation>

@@ -1,6 +1,6 @@
 package com.example.karcianka.Model
 
 class Game() {
-    var checkpoints: Int = -1
+    var checkpoints: String = "0"
 
 }

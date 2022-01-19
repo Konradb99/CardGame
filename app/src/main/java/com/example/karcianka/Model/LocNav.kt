@@ -1,11 +1,13 @@
 package com.example.karcianka.Model
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import com.example.karcianka.GameEntity.All
 import com.example.karcianka.GameEntity.All.Companion.wszystkielokacje
 import com.example.karcianka.GameEntity.ICard
 import com.example.karcianka.GameEntity.Location
+import com.example.karcianka.R
 import kotlin.random.Random
 
 class LocNav
@@ -30,7 +32,8 @@ class LocNav
         //zainicjuj graf
         fun ConnectLocGrapf()
         {
-            All.gig.locs = mutableListOf(All.elektryk, All.chemia, All.biblioteka)
+            All.gig.locs = mutableListOf(All.elektryk, All.chemia,
+                All.biblioteka, All.ministerstwo)
             All.elektryk.locs = mutableListOf(All.gig, All.wieza, All.labirynt)
             All.wieza.locs = mutableListOf(All.elektryk, All.hala, All.labirynt, All.solaris)
             All.chemia.locs = mutableListOf(All.gig, All.labirynt, All.klodnica)
@@ -49,6 +52,7 @@ class LocNav
             All.cek.locs = mutableListOf(All.mt)
             All.park.locs = mutableListOf(All.klodnica)
             All.solaris.locs = mutableListOf(All.wieza, All.hala)
+            All.ministerstwo.locs = mutableListOf(All.gig)
         }
 
         //znajdz lokacje po drawable
@@ -111,6 +115,28 @@ class LocNav
             card_back_title.text = icard.name
             card_front.setBackgroundResource(icard.draw)
         }
+
+        fun AddChoice(card_back_text : TextView, beforeadd:String="",
+                      left:String, right: String, afteradd :String ="")
+        {
+            var text ="";
+            if(beforeadd!="")
+                text+="\n\n"+beforeadd;
+
+
+            text += "\n\n\n\n"+
+                    "<-------\n"+
+                    left+"\n\n"+
+                    "------->\n"+
+                    right+"\n"
+            if(afteradd!="")
+                text+="\n\n"+afteradd;
+
+
+
+            card_back_text.text = card_back_text.text.toString() + text;
+        }
+
 
     }
 }
