@@ -86,7 +86,16 @@ class All
         var losos = Item("losos", "Łosoś kłodnicki",
             "Wygląda jak zwykły łosoś, ale czy kłodnicki na pewno jest bezpieczny?", draw = R.drawable.losos)
         var utm = Item("utm", "UTM", "", draw = R.drawable.utm)
+        var shot1 = Item("shot1", "Niebieski szocik", "To chyba sie nazywało kamikadze.", draw = R.drawable.szot1)
 
+        var shot2 = Item("shot2", "Pomarańczowy szocik", "Pomarańcza jak nic", draw = R.drawable.szot2)
+
+        var shot3 = Item("shot3", "Żółty szocik",
+            "To pewnie będzie... kwaśne. Jak cytryna. A może to słodki banan?", draw = R.drawable.szot3)
+
+        var shot4 = Item("shot4", "Różowy szocik", "Nie mam pojęcia...", draw = R.drawable.szot4)
+
+        var shot5 = Item("shot5", "Zielony szocik", "Kaktus???", draw = R.drawable.szot5)
 
     }
 

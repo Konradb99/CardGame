@@ -50,11 +50,16 @@ class Tutorial() {
             gameVM: GameViewModel
         )
         {
-            //wlaczenie Kolegi
-            LocNav.SetCard(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, All.kolega)
-            cardVM.FlipBack()
+            gameVM.walking=false;
+
+
+            LocNav.SetCard(cardVM.card_front, cardVM.card_back_text,
+                cardVM.card_back_title, All.blankloc)
+            cardVM.FlipFront_instant()
+            card_back_text.text= All.ministerstwo.description;
+
             AddChoice(card_back_text,"No dobra! Co tym razem do picia?",
-                "Wiesz co, jednak nie dzisiaj...", "A jakie dzis opcje?")
+                "Jednak nie dzisiaj...", "Dobra, gdzie on jest?")
 
             card_back_text.text= card_back_text.text.toString()+"\n\n"+gameVM.checkpoint
             cardVM.updateCard(front, back, card_back_text, card_back_title)

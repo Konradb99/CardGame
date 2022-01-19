@@ -32,7 +32,8 @@ class LocNav
         //zainicjuj graf
         fun ConnectLocGrapf()
         {
-            All.gig.locs = mutableListOf(All.elektryk, All.chemia, All.biblioteka)
+            All.gig.locs = mutableListOf(All.elektryk, All.chemia,
+                All.biblioteka, All.ministerstwo)
             All.elektryk.locs = mutableListOf(All.gig, All.wieza, All.labirynt)
             All.wieza.locs = mutableListOf(All.elektryk, All.hala, All.labirynt, All.solaris)
             All.chemia.locs = mutableListOf(All.gig, All.labirynt, All.klodnica)
@@ -51,6 +52,7 @@ class LocNav
             All.cek.locs = mutableListOf(All.mt)
             All.park.locs = mutableListOf(All.klodnica)
             All.solaris.locs = mutableListOf(All.wieza, All.hala)
+            All.ministerstwo.locs = mutableListOf(All.gig)
         }
 
         //znajdz lokacje po drawable

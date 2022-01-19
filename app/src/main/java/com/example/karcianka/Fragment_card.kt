@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.lifecycle.ViewModelProvider
+import com.example.karcianka.GameEntity.All
 import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.SwipeRightModel
 import com.example.karcianka.ViewModel.CardViewModel
@@ -67,6 +68,7 @@ class Fragment_card : Fragment() {
 
         var currentLoc = LocNav.GetCurrentLoc(CardVM.card_front)
         LocNav.SetCard( CardVM.card_front, CardVM.card_back_text, CardVM.card_back_title, currentLoc)
+
 
         if(CardVM.gameNotStarted == 1){
             println("First time adding card to game")

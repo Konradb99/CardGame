@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import com.example.karcianka.GameEntity.All
 import com.example.karcianka.GameEntity.FlipModel
+import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.Tutorial
 import com.example.karcianka.ViewModel.CardViewModel
 import com.example.karcianka.ViewModel.GameViewModel
@@ -61,6 +63,7 @@ class Fragment_game : Fragment() {
             GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
         val GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
 
+
         view.findViewById<ImageButton>(R.id.enter_btn).setOnClickListener{
 
             if(GameVM.checkpoint=="0")
@@ -74,11 +77,12 @@ class Fragment_game : Fragment() {
                 //   view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
             }
             if(GameVM.checkpoint=="0111") {
-                println("=====================================")
-                println("Wejscie do ministerstwa")
+
                 Tutorial.EnterMinisterstwoSamouczek(view, view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
-                GameVM.checkpoint+="1"
+                GameVM.checkpoint="1"
                 CardVM.FlipFront_instant()
+                //view.findViewById<TextView>(R.id.card_back_text).text=
+                //    view.findViewById<TextView>(R.id.card_back_text).text.toString()+"\n\n"+GameVM.checkpoint;
                 //   view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
             }
 
