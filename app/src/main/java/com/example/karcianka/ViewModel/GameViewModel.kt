@@ -118,8 +118,8 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                             cardVM.card_back_text.text =cardVM.card_back_text.text.toString()+ "\n\n"+checkpoint;
 
-                            walking=true;
-                            thisloc = All.solaris;
+                            //walking=true;
+                            //thisloc = All.solaris;
 
 
                         }
