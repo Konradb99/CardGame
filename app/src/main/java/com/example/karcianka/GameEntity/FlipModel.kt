@@ -17,19 +17,20 @@ class FlipModel {
         var isFront_instant: Boolean = true
         var isFront_text: Boolean = true
         var isFront_linear: Boolean = true
+        var isFront : Boolean = true;
         //Instant flip
 
 
 
         //Normal flip
         fun Animate(appContext: Context?, front: TextView, back: LinearLayout){
-            println(isFront_text)
+            println(isFront)
             val scale = appContext?.resources?.displayMetrics?.density
             front_anim = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip) as AnimatorSet
             back_anim = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip) as AnimatorSet
             front.cameraDistance = 8000 * scale!!
             back.cameraDistance = 8000 * scale
-            if(isFront_text)
+            if(isFront)
             {
                 front_anim.setTarget(front)
                 back_anim.setTarget(back)
@@ -41,7 +42,7 @@ class FlipModel {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
-                isFront_text = false
+                isFront = false
             }
             else        // Akcja klikniecia dla backclick
             {
@@ -55,7 +56,7 @@ class FlipModel {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
-                isFront_text =true
+                isFront =true
             }
         }
 
@@ -63,13 +64,13 @@ class FlipModel {
 
 
         fun AnimateFront(appContext: Context?, front: TextView, back: LinearLayout){
-            println(isFront_text)
+            println(isFront)
             val scale = appContext?.resources?.displayMetrics?.density
             front_anim = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip) as AnimatorSet
             back_anim = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip) as AnimatorSet
             front.cameraDistance = 8000 * scale!!
             back.cameraDistance = 8000 * scale
-            if(!isFront_text)
+            if(!isFront)
             {
                 front_anim.setTarget(back)
                 back_anim.setTarget(front)
@@ -81,20 +82,20 @@ class FlipModel {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
-                isFront_text =true
+                isFront =true
             }
         }
 
 
 
         fun AnimateBack(appContext: Context?, front: TextView, back: LinearLayout){
-            println(isFront_text)
+            println(isFront)
             val scale = appContext?.resources?.displayMetrics?.density
             front_anim = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip) as AnimatorSet
             back_anim = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip) as AnimatorSet
             front.cameraDistance = 8000 * scale!!
             back.cameraDistance = 8000 * scale
-            if(isFront_text)
+            if(isFront)
             {
                 front_anim.setTarget(front)
                 back_anim.setTarget(back)
@@ -106,7 +107,7 @@ class FlipModel {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
-                isFront_text = false
+                isFront = false
             }
         }
 
@@ -114,7 +115,7 @@ class FlipModel {
 
             front_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip_instant) as AnimatorSet
             back_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip_instant) as AnimatorSet
-            if(!isFront_instant)
+            if(!isFront)
             {
                 front_anim_instant.setTarget(back)
                 back_anim_instant.setTarget(front)
@@ -126,7 +127,7 @@ class FlipModel {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
-                isFront_instant =true
+                isFront =true
             }
         }
 
@@ -134,7 +135,7 @@ class FlipModel {
         {
             front_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip_instant) as AnimatorSet
             back_anim_instant = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip_instant) as AnimatorSet
-            if(isFront_instant)
+            if(isFront)
             {
                 front_anim_instant.setTarget(back)
                 back_anim_instant.setTarget(front)
@@ -146,7 +147,7 @@ class FlipModel {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
-                isFront_instant = false;
+                isFront = false;
             }
         }
 
@@ -156,7 +157,7 @@ class FlipModel {
             back_anim = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip) as AnimatorSet
             front.cameraDistance = 8000 * scale!!
             back.cameraDistance = 8000 * scale
-            if(isFront_linear)
+            if(isFront)
             {
                 front_anim.setTarget(front)
                 back_anim.setTarget(back)
@@ -168,7 +169,7 @@ class FlipModel {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
-                isFront_linear = false
+                isFront = false
 
             }
             else        // Akcja klikniecia dla backclick
@@ -183,7 +184,7 @@ class FlipModel {
                     back.isEnabled = true
                     front.isEnabled = true
                 }
-                isFront_linear =true
+                isFront =true
             }
         }
     }

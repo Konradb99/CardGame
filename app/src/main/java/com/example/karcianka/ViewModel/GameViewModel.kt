@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.karcianka.Database.CardDatabase
 import com.example.karcianka.Database.DAO
 import com.example.karcianka.GameEntity.All
+import com.example.karcianka.GameEntity.FlipModel
 import com.example.karcianka.GameEntity.Location
 import com.example.karcianka.Model.Game
 import com.example.karcianka.Model.LocNav
@@ -35,7 +36,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="0" //0111 to start from ministerstwo
+        checkpoint="0111"// 0111 to start from ministerstwo
 
     }
 
@@ -45,7 +46,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
             when (motionLayout.getCurrentState()) {
                 R.id.left -> {
-                    Toast.makeText(context, "W Lewo!", Toast.LENGTH_SHORT).show();
+              //      Toast.makeText(context, "W Lewo!", Toast.LENGTH_SHORT).show();
                     thisloc=locleft;
                     LocNav.SetLoc(cardVM.card_front, cardVM.card_back_text,
                         cardVM.card_back_title, thisloc)
@@ -65,7 +66,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                 }
                 R.id.right -> {
-                    Toast.makeText(context, "W Prawo!", Toast.LENGTH_SHORT).show();
+             //       Toast.makeText(context, "W Prawo!", Toast.LENGTH_SHORT).show();
                     thisloc = locright;
                     LocNav.SetLoc(cardVM.card_front, cardVM.card_back_text,
                         cardVM.card_back_title, thisloc)
@@ -290,6 +291,12 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 {
                     println(";D ;D ;D ;D Shoty wypite.")
                     Toast.makeText(context, "Jestes dość pijany!", Toast.LENGTH_SHORT).show();
+
+                    cardVM.FlipFront();
+                    LocNav.SetCard(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, All.kolega)
+                    LocNav.AddChoice(cardVM.card_back_text, "Co? Juz masz dosc? Odprowadzić cię?",
+                        "MoŻe Mi SiĘ PoMoC PrZyDać...",
+                        "Nieeee, dam radę. Bawcie sie dobrze.")
 
                 }
 
