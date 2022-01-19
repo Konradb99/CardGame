@@ -80,7 +80,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                         }
                     }
                     LocNav.AddChoice(cardVM.card_back_text,
-                        left = locleft.name, right = locright.name )
+                        left = locleft.name, right = locright.name)
                 }
 
             }
