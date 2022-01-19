@@ -54,9 +54,9 @@ class Tutorial() {
 
 
             LocNav.SetCard(cardVM.card_front, cardVM.card_back_text,
-                cardVM.card_back_title, All.blankloc)
+                cardVM.card_back_title, All.wnetrzeMinisterstwo)
             cardVM.FlipFront_instant()
-            card_back_text.text= All.ministerstwo.description;
+            card_back_text.text= All.wnetrzeMinisterstwo.description;
 
             AddChoice(card_back_text,"No dobra! Co tym razem do picia?",
                 "Jednak nie dzisiaj...", "Dobra, gdzie on jest?")

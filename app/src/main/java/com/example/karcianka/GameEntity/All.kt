@@ -52,6 +52,9 @@ class All
 
         var solaris = Location("solaris", "Solaris", "Stowarzyszenie osób lubiących alkohol, rozrywki i studia", draw=R.drawable.solaris)
 
+        var wnetrzeMinisterstwo = Location("wnetrze", "Ministerstwo Śledzia i Wódki",
+            "Dawno tu nie byliśmy... (tak naprawdę to ledwo wczoraj)", draw=R.drawable.wnetrzeministerstwa)
+
         var wszystkielokacje = mutableListOf<Location>(biblioteka, cek, chemia, elektryk,
             firewall,gig,hala,klodnica,labirynt,ms,mt,mrowisko, narnia, park, wieza, solaris)
 

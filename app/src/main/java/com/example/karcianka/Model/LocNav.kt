@@ -29,6 +29,29 @@ class LocNav
             return loc.locs.elementAt(index)
         }
 
+        fun GetBothExits(thisloc: Location,
+                         card_front : TextView, card_back_text : TextView, card_back_title: TextView)
+        : Array<Location>
+        {
+
+            LocNav.SetLoc(card_front, card_back_text,
+                card_back_title, thisloc)
+            var locleft= GetRandomExit(thisloc);
+            var locright = GetRandomExit(thisloc);
+
+            if(thisloc.locs.size!=0 && thisloc.locs.size!=1)
+            {
+                while(locright==locleft)
+                {
+                    locright = LocNav.GetRandomExit(thisloc);
+                }
+            }
+            LocNav.AddChoice(card_back_text,
+                left = locleft.name, right = locright.name)
+
+            return arrayOf(locleft,locright)
+        }
+
         //zainicjuj graf
         fun ConnectLocGrapf()
         {

@@ -36,7 +36,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="115"
+        checkpoint="0"
 
     }
 
@@ -46,42 +46,20 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
             when (motionLayout.getCurrentState()) {
                 R.id.left -> {
-              //      Toast.makeText(context, "W Lewo!", Toast.LENGTH_SHORT).show();
                     thisloc=locleft;
-                    LocNav.SetLoc(cardVM.card_front, cardVM.card_back_text,
-                        cardVM.card_back_title, thisloc)
-                    locleft = LocNav.GetRandomExit(thisloc);
-                    locright = LocNav.GetRandomExit(thisloc);
-
-                    if(thisloc.locs.size!=0 && thisloc.locs.size!=1)
-                    {
-                        while(locright==locleft)
-                        {
-                            locright = LocNav.GetRandomExit(thisloc);
-                        }
-                    }
-                    LocNav.AddChoice(cardVM.card_back_text,
-                        left = locleft.name, right = locright.name )
-
+                    var arr = LocNav.GetBothExits(thisloc,
+                        cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title)
+                    locleft = arr[0];
+                    locright=arr[1]
 
                 }
                 R.id.right -> {
              //       Toast.makeText(context, "W Prawo!", Toast.LENGTH_SHORT).show();
                     thisloc = locright;
-                    LocNav.SetLoc(cardVM.card_front, cardVM.card_back_text,
-                        cardVM.card_back_title, thisloc)
-                    locleft = LocNav.GetRandomExit(thisloc);
-                    locright = LocNav.GetRandomExit(thisloc);
-
-                    if(thisloc.locs.size!=0 && thisloc.locs.size!=1)
-                    {
-                        while(locright==locleft)
-                        {
-                            locright = LocNav.GetRandomExit(thisloc);
-                        }
-                    }
-                    LocNav.AddChoice(cardVM.card_back_text,
-                        left = locleft.name, right = locright.name)
+                    var arr = LocNav.GetBothExits(thisloc,
+                        cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title)
+                    locleft = arr[0];
+                    locright=arr[1]
                 }
 
             }
@@ -165,8 +143,6 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                         }
                         R.id.right -> {
-
-                            //   checkpoint+="1"
                             thisloc = All.solaris
                             walking=true;
                             LocNav.SetLoc(cardVM.card_front, cardVM.card_back_text,
@@ -209,7 +185,6 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                         }
                         R.id.left -> {
                             checkpoint+="0"
-                            println("\nnie jestes studentem.\n"+ checkpoint)
 
                             LocNav.SetCard(
                                 cardVM.card_front,
@@ -226,7 +201,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 "11"  -> {
 
                     //kolejne shoty -> numeracja kolejnych shotów jest w Tutorial.shots
-                    if(Tutorial.shots!=5) {
+                    if(Tutorial.shots!=10) {
 
                         var it = rand(1, 5)
                         when (it) {
@@ -290,8 +265,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 "115" ->
                 {
                     cardVM.FlipFront();
-                    println(";D ;D ;D ;D Shoty wypite.")
-                    Toast.makeText(context, "Jestes dość pijany!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Może juz pora wrócić?", Toast.LENGTH_SHORT).show();
 
 
                     LocNav.SetCard(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, All.kolega)
@@ -320,7 +294,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     )
                     cardVM.card_back_title.text = "KONIEC GRY"
 
-                    LocNav.AddChoice(cardVM.card_back_text,"Cóż, pięć szotów to za mało. Prawie na trzeźwo przywitałeś łóżko i miałeś całkowicie spokojny sen. Może jutro powtórka?",
+                    LocNav.AddChoice(cardVM.card_back_text,"Cóż, dziesięć szotów to za mało. Prawie na trzeźwo przywitałeś łóżko i miałeś całkowicie spokojny sen. Może jutro powtórka?",
                         "Powtórka?", "Mam dość...")
 
                     when (motionLayout.getCurrentState()) {
