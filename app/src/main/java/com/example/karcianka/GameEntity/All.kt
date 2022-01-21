@@ -44,7 +44,7 @@ class All
             "Opis mrowiska.", draw = R.drawable.mrowisko)
 
         var narnia = Location("narnia", "Narnia",
-            "Nic nie trzeba mówić", draw = R.drawable.narnia)
+            "Nic nie trzeba mówić, wszyscy to miejsce znają.", draw = R.drawable.narnia)
 
         var park = Location("park", "Park", description="Drzewa wszędzie, dziki wszędzie", draw=R.drawable.park)
 

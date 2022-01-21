@@ -342,6 +342,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
     fun StartAgain()
     {
         checkpoint="0"
+        Tutorial.shots=0;
         cardVM.FlipFront()
         LocNav.SetLoc(
             cardVM.card_front,
