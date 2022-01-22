@@ -13,7 +13,7 @@ class All
 
         var samouczek = Location("samouczek", "Samouczek", "", draw =R.drawable.opis)
 
-        var cek = Location("cek","Centrum Energetyczno Kaloryczne", description="Opis CEK", draw=R.drawable.cek)
+        var cek = Location("cek","Centrum Energetyczno-Kaloryczne", description="Opis CEK", draw=R.drawable.cek)
 
         var chemia = Location("chemia", "Pracownia Alchemiczna", description="Opis Chemii", draw=R.drawable.chemia)
 

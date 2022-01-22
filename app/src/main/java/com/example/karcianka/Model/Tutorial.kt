@@ -51,7 +51,7 @@ class Tutorial() {
         )
         {
             gameVM.walking=false;
-
+            gameVM.checkpoint="1"
 
             LocNav.SetCard(cardVM.card_front, cardVM.card_back_text,
                 cardVM.card_back_title, All.wnetrzeMinisterstwo)

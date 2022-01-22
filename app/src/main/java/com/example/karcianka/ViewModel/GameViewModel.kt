@@ -36,7 +36,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="0111"
+        checkpoint="0"
 
     }
 
@@ -129,7 +129,6 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                             GameOver("I ty smiesz się nazywać studentem?", motionLayout);
 
-
                         }
                         R.id.right -> {
                             thisloc = All.solaris
@@ -173,16 +172,12 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                         }
                         R.id.left -> {
-                            checkpoint+="0"
+                            GameOver("I ty smiesz się nazywać studentem?", motionLayout);
                         }
                     }
 
                 }
-                "10"->
-                {
-                    GameOver("I ty smiesz się nazywać studentem?", motionLayout);
 
-                }
                 "11"  -> {
 
                     //kolejne shoty -> numeracja kolejnych shotów jest w Tutorial.shots
