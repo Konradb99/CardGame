@@ -14,8 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction().add(R.id.main_fragment, fragment_menu(), "").commit()
-       // LocNav.ConnectLocGraph()
-
 
 
         //Temponary items
@@ -24,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         val factoryEquipmentViewModel = EquipmentViewModelFactory((requireNotNull(this).application))
         val eqVM = ViewModelProvider(this, factoryEquipmentViewModel).get(
             EquipmentViewModel::class.java)
+
+        eqVM.deleteAllItems()
+
         //Temponary list of items
         eqVM.addItem(EquipmentItems(0, 0 ,"Losos", R.drawable.eq_back, R.drawable.eq_back))
         eqVM.addItem(EquipmentItems(0, 0 ,"UTM", R.drawable.eq_back, R.drawable.eq_back))

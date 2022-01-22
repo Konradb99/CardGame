@@ -27,4 +27,18 @@ class EquipmentViewModel(application: Application): AndroidViewModel(application
         }
     }
 
+    fun deleteItem(item :EquipmentItems)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            dao.DeleteItem(item)
+        }
+    }
+
+    fun deleteAllItems()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+        dao.DeleteAllItems()
+    }
+    }
+
 }
