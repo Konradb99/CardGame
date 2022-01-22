@@ -12,48 +12,38 @@ import kotlin.random.Random
 
 class LocNav
 {
-    init
-    {
-        ConnectLocGrapf()
-    }
-
     companion object
     {
 
         //wybierz losowo lokacje wyjściową
         fun GetRandomExit(loc: Location):Location
         {
-            var rand = Random   //Generowanie pseudolosowosci wyboru
-            var index: Int = rand.nextInt((loc.locs.size - 1) - 0 + 1) + 0;
-
+            var index: Int = Random.nextInt((loc.locs.size - 1) - 0 + 1) + 0;
             return loc.locs.elementAt(index)
         }
 
-        fun GetBothExits(thisloc: Location,
-                         card_front : TextView, card_back_text : TextView, card_back_title: TextView)
-        : Array<Location>
+        //zwraca dwa losowe przejścia (różne, jeśli jest możliwe więcej niż jedno) jako tablica Location {lewy, prawy}
+        //oraz pokazuje je jako prawo-lewo strzałeczki
+        fun GetBothExits(thisloc: Location, card_front : TextView,
+                         card_back_text : TextView, card_back_title: TextView) : Array<Location>
         {
 
-            LocNav.SetLoc(card_front, card_back_text,
-                card_back_title, thisloc)
+            SetLoc(thisloc, card_front, card_back_text,
+                card_back_title)
             var locleft= GetRandomExit(thisloc);
             var locright = GetRandomExit(thisloc);
 
             if(thisloc.locs.size!=0 && thisloc.locs.size!=1)
-            {
                 while(locright==locleft)
-                {
-                    locright = LocNav.GetRandomExit(thisloc);
-                }
-            }
-            LocNav.AddChoice(card_back_text,
-                left = locleft.name, right = locright.name)
+                    locright = GetRandomExit(thisloc);
+
+            AddChoice(card_back_text, left = locleft.name, right = locright.name)
 
             return arrayOf(locleft,locright)
         }
 
         //zainicjuj graf
-        fun ConnectLocGrapf()
+        fun ConnectLocGraph()
         {
             All.gig.locs = mutableListOf(All.elektryk, All.chemia,
                 All.biblioteka, All.ministerstwo)
@@ -78,52 +68,20 @@ class LocNav
             All.ministerstwo.locs = mutableListOf(All.gig)
         }
 
-        //znajdz lokacje po drawable
-        fun GetNextLoc(current_loc: View): Location
-        {
-            var next_loc = Location()
-            println("")
-            println("============Possible locations: ================")
-            for(loc in wszystkielokacje)
-            {
-                if(loc.draw == current_loc.getTag()){
-                    println("Current loc: " + loc.draw)
-
-                    for(possible_loc in loc.locs){
-                        println("Possible locs: " + possible_loc.draw)
-                    }
-
-                    var rand = Random   //Generowanie pseudolosowosci wyboru
-                    var index: Int = rand.nextInt((loc.locs.size - 1) - 0 + 1) + 0;
-
-                    next_loc = loc.locs.elementAt(index)
-                    println(next_loc::class.qualifiedName)
-                    println("Generated next loc: " + loc.locs.elementAt(index).draw)
-                    break
-                }
-            }
-            println("===============================================")
-            println("")
-            return next_loc
-        }
-
+        //znajduje lokacje po drawable
         fun GetCurrentLoc(current_loc: View) :Location
         {
             var emptyloc = Location()
-            println("")
-            println("============Possible locations: ================")
             for(loc in wszystkielokacje)
-            {
-                if(loc.draw == current_loc.getTag()){
+                if(loc.draw == current_loc.getTag())
                     return loc;
-                }
-            }
-            println("===============================================")
-            println("")
+
             return emptyloc
         }
 
-        fun SetLoc(card_front : TextView, card_back_text : TextView, card_back_title: TextView, loc :Location)
+        //ustawia kartę lokacji na obecny widok (przydaje sie zamiast SetLoc, gdy przechodzimy do grafu
+        //i poruszania się
+        fun SetLoc(loc :Location, card_front : TextView, card_back_text : TextView, card_back_title: TextView)
         {
             card_front.setTag(loc.draw)
             card_back_text.text = loc.description
@@ -131,7 +89,8 @@ class LocNav
             card_front.setBackgroundResource(loc.draw)
         }
 
-        fun SetCard(card_front : TextView, card_back_text : TextView, card_back_title: TextView, icard: ICard)
+        //ustawia konkretną kartę na obecny widok (dowolną, bo korzysta z ICard)
+        fun SetCard(icard: ICard, card_front : TextView, card_back_text : TextView, card_back_title: TextView)
         {
             card_front.setTag(icard.draw)
             card_back_text.text = icard.description
@@ -139,12 +98,13 @@ class LocNav
             card_front.setBackgroundResource(icard.draw)
         }
 
+        //dodaje dopiski i wybór opcji na obecnym "tyle karty"
         fun AddChoice(card_back_text : TextView, beforeadd:String="",
                       left:String, right: String, afteradd :String ="")
         {
             var text ="";
             if(beforeadd!="")
-                text+="\n\n"+beforeadd;
+                text+="\n\n\n"+beforeadd;
 
 
             text += "\n\n"+
@@ -154,8 +114,6 @@ class LocNav
                     right+"\n"
             if(afteradd!="")
                 text+="\n\n"+afteradd;
-
-
 
             card_back_text.text = card_back_text.text.toString() + text;
         }

@@ -30,12 +30,10 @@ class Tutorial() {
         )
         {
             //wlaczenie Kolegi
-            SetCard(front,card_back_text, card_back_title, All.kolega)
+            SetCard(All.kolega, front,card_back_text, card_back_title)
 
             AddChoice(card_back_text,left="O, hej!",right= "Dawno sie nie widzielismy!",
                 afteradd =  "(by zaczac rozmowę, przeciągnij kartę w którąś stronę.)")
-
-            cardVM.updateCard(front, back, card_back_text, card_back_title)
 
 
         }
@@ -53,8 +51,8 @@ class Tutorial() {
             gameVM.walking=false;
             gameVM.checkpoint="1"
 
-            LocNav.SetCard(cardVM.card_front, cardVM.card_back_text,
-                cardVM.card_back_title, All.wnetrzeMinisterstwo)
+            SetCard(All.wnetrzeMinisterstwo, cardVM.card_front, cardVM.card_back_text,
+                cardVM.card_back_title)
             cardVM.FlipFront_instant()
             card_back_text.text= All.wnetrzeMinisterstwo.description;
 
@@ -62,7 +60,7 @@ class Tutorial() {
                 "Jednak nie dzisiaj...", "Dobra, gdzie on jest?")
 
             card_back_text.text= card_back_text.text.toString()+"\n\n"+gameVM.checkpoint
-            cardVM.updateCard(front, back, card_back_text, card_back_title)
+
         }
     }
 }

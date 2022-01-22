@@ -36,7 +36,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="0"
+        checkpoint="11"
 
     }
 
@@ -50,7 +50,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     var arr = LocNav.GetBothExits(thisloc,
                         cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title)
                     locleft = arr[0];
-                    locright=arr[1]
+                    locright= arr[1]
 
                 }
                 R.id.right -> {
@@ -64,8 +64,9 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
             }
 
+            //czyli znalezienie ministerstwa w samouczku
             if(checkpoint=="011" && thisloc == All.ministerstwo) {
-                LocNav.SetLoc(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, thisloc)
+                LocNav.SetLoc(thisloc,cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title)
 
                 LocNav.AddChoice(
                     cardVM.card_back_text, "To tu! W końcu... Wejdźmy tu.",
@@ -81,44 +82,36 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                 "01" -> {
 
-                    //dopoki nie przesunie w prawo
                     when (motionLayout.getCurrentState()) {
                         R.id.left -> {
                             checkpoint+="1"
                             cardVM.FlipBack()
                             LocNav.SetCard(
+                                All.kolega,
                                 cardVM.card_front,
                                 cardVM.card_back_text,
-                                cardVM.card_back_title,
-                                All.kolega
-                            )
+                                cardVM.card_back_title)
+
                             LocNav.AddChoice(cardVM.card_back_text, "A daj spokój z przywitaniem. Idziemy sie napić?",
                                 "Nie dzisiaj.","Pewnie! Spotkajmy sie w Ministerstwie." )
 
                             cardVM.card_back_text.text =cardVM.card_back_text.text.toString()+ "\n\n"+checkpoint;
-
-                            //walking=true;
-                            //thisloc = All.solaris;
-
 
                         }
                         R.id.right -> {
                             checkpoint+="1"
                             cardVM.FlipBack()
                             LocNav.SetCard(
+                                All.kolega,
                                 cardVM.card_front,
                                 cardVM.card_back_text,
-                                cardVM.card_back_title,
-                                All.kolega
-                            )
+                                cardVM.card_back_title)
                             LocNav.AddChoice(cardVM.card_back_text, "A daj spokój z przywitaniem. Idziemy sie napić?",
                                 "Nie dzisiaj.","Pewnie! Spotkajmy sie w Ministerstwie." )
 
                             cardVM.card_back_text.text =cardVM.card_back_text.text.toString()+ "\n\n"+checkpoint;
 
-
                         }
-
                     }
 
 
@@ -126,29 +119,22 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 "011" -> {
                     when (motionLayout.getCurrentState()) {
                         R.id.left -> {
-
                             GameOver("I ty smiesz się nazywać studentem?", motionLayout);
-
                         }
-                        R.id.right -> {
+                        R.id.right -> {//to jest prawie kopia LocNav.GetBothExits, ale musialo byc napisane tutaj
                             thisloc = All.solaris
                             walking=true;
-                            LocNav.SetLoc(cardVM.card_front, cardVM.card_back_text,
-                                cardVM.card_back_title, thisloc)
+                            LocNav.SetLoc(thisloc, cardVM.card_front, cardVM.card_back_text,
+                                cardVM.card_back_title)
                             locleft = LocNav.GetRandomExit(thisloc);
                             locright = LocNav.GetRandomExit(thisloc);
 
                             if(thisloc.locs.size>1)
-                            {
                                 while(locright==locleft)
-                                {
                                     locright = LocNav.GetRandomExit(thisloc);
-                                }
-                            }
+
                             LocNav.AddChoice(cardVM.card_back_text,"Musimy dotrzec do Ministerstwa. Przesuwaj kartę w prawo lub lewo, by się przemieszczać.",
                                 left = locleft.name, right = locright.name )
-
-
 
                         }
                     }
@@ -162,7 +148,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                             checkpoint+="1"
 
                             //wlaczenie Kolegi
-                            LocNav.SetCard(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, All.kolega)
+                            LocNav.SetCard(All.kolega, cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title)
                             cardVM.FlipFront_instant()
                             LocNav.AddChoice(cardVM.card_back_text,"No dobra! Co tym razem do picia?",
                                 "To od czego zaczynamy?", "Dawaj pierwszy shot z brzegu.")
@@ -175,7 +161,6 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                             GameOver("I ty smiesz się nazywać studentem?", motionLayout);
                         }
                     }
-
                 }
 
                 "11"  -> {
@@ -184,47 +169,8 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     if(Tutorial.shots!=10) {
 
                         var it = rand(1, 5)
-                        when (it) {
-                            1->{
-                                LocNav.SetCard(
-                                    cardVM.card_front,
-                                    cardVM.card_back_text,
-                                    cardVM.card_back_title,
-                                    All.shot1)
-
-                            }
-                            2->
-                            {
-                                LocNav.SetCard(
-                                    cardVM.card_front,
-                                    cardVM.card_back_text,
-                                    cardVM.card_back_title,
-                                    All.shot2)
-                            }
-                            3->
-                            {
-                                LocNav.SetCard(
-                                    cardVM.card_front,
-                                    cardVM.card_back_text,
-                                    cardVM.card_back_title,
-                                    All.shot3)
-                            }
-                            4->
-                            {
-                                LocNav.SetCard(
-                                    cardVM.card_front,
-                                    cardVM.card_back_text,
-                                    cardVM.card_back_title,
-                                    All.shot4)
-                            }
-                            5->{
-                                LocNav.SetCard(
-                                    cardVM.card_front,
-                                    cardVM.card_back_text,
-                                    cardVM.card_back_title,
-                                    All.shot5)
-                            }
-                        }
+                        LocNav.SetCard(All.shots[it-1], cardVM.card_front, cardVM.card_back_text,
+                                    cardVM.card_back_title)
 
                         LocNav.AddChoice(cardVM.card_back_text, "Pijesz go?", "Nie, dawaj inny,",
                             "Oczywiście, że tak. A potem inny.")
@@ -247,8 +193,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     cardVM.FlipFront();
                     Toast.makeText(context, "Może juz pora wrócić?", Toast.LENGTH_SHORT).show();
 
-
-                    LocNav.SetCard(cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title, All.kolega)
+                    LocNav.SetCard(All.kolega, cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title)
                     LocNav.AddChoice(cardVM.card_back_text, "Co? Juz masz dosc? Odprowadzić cię?",
                         "MoŻe Mi SiĘ PoMoC PrZyDać...",
                         "Nieeee, dam radę. Bawcie sie dobrze.")
@@ -259,7 +204,6 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                         }
                         R.id.left -> {
                             checkpoint+="0"
-
                         }
                     }
                 }
@@ -274,11 +218,11 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 }
                 "1150"->
                 {
-                    println("--------------//////"+checkpoint);
+                    //ciąg dalszy nastąpi
                 }
 
                 "GameOver"-> {
-                    cardVM.card_back_title.text="KONIEC GRY";
+
                     LocNav.AddChoice(
                         cardVM.card_back_text,
                         left = "Powtórka?", right = "Mam dość...")
@@ -286,7 +230,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     when (motionLayout.getCurrentState()) {
 
                         R.id.right -> {
-                        //    System.exit(0);
+                        //    System.exit(0); // :D
                         }
                         R.id.left -> {
                             StartAgain()
@@ -310,20 +254,19 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         Tutorial.shots=0
         cardVM.FlipFront()
         LocNav.SetLoc(
+            All.solaris,
             cardVM.card_front,
             cardVM.card_back_text,
-            cardVM.card_back_title,
-            All.solaris
-        )
+            cardVM.card_back_title)
     }
 
     fun GameOver(reason: String, motionLayout: MotionLayout)
     {
         LocNav.SetCard(
+            All.blankloc,
             cardVM.card_front,
             cardVM.card_back_text,
-            cardVM.card_back_title,
-            All.blankloc
+            cardVM.card_back_title
         )
         cardVM.card_back_title.text = "KONIEC GRY"
 

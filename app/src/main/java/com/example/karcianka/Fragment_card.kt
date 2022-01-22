@@ -67,7 +67,7 @@ class Fragment_card : Fragment() {
         var CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
 
         var currentLoc = LocNav.GetCurrentLoc(CardVM.card_front)
-        LocNav.SetCard( CardVM.card_front, CardVM.card_back_text, CardVM.card_back_title, currentLoc)
+        LocNav.SetCard(currentLoc, CardVM.card_front, CardVM.card_back_text, CardVM.card_back_title)
 
 
         if(CardVM.gameNotStarted == 1){

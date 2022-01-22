@@ -42,11 +42,11 @@ class CardViewModel(
         FlipModel.AnimateFront(context, card_front, card_back)
     }
 
-    fun FlipFront_instant()
+    fun FlipFront_instant() //zmienia na front bez animacj
     {
         FlipModel.AnimateFront_instant(context,card_front,card_back)
     }
-    fun FlipBack_instant()
+    fun FlipBack_instant() //zmienia na tył bez animacji
     {
         FlipModel.AnimateBack_instant(context,card_front,card_back)
     }

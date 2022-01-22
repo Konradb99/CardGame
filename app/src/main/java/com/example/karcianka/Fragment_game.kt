@@ -63,18 +63,16 @@ class Fragment_game : Fragment() {
             GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
         val GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
 
-
         view.findViewById<ImageButton>(R.id.enter_btn).setOnClickListener{
 
             if(GameVM.checkpoint=="0")
             {
-                Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
+                Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById(R.id.card_front), view.findViewById(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
 
                 CardVM.FlipFront_instant()
                 GameVM.checkpoint+="1"
                 view.findViewById<TextView>(R.id.card_back_text).text=
                     view.findViewById<TextView>(R.id.card_back_text).text.toString()+"\n\n"+GameVM.checkpoint;
-                //   view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
             }
             if(GameVM.checkpoint=="0111") {
 

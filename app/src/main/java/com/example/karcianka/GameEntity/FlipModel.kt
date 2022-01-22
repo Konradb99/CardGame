@@ -14,9 +14,6 @@ class FlipModel {
         private lateinit var back_anim_instant: AnimatorSet
         private lateinit var front_anim: AnimatorSet
         private lateinit var back_anim: AnimatorSet
-        var isFront_instant: Boolean = true
-        var isFront_text: Boolean = true
-        var isFront_linear: Boolean = true
         var isFront : Boolean = true;
         //Instant flip
 
