@@ -36,7 +36,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="0"
+        checkpoint="0111"
 
     }
 
@@ -126,19 +126,8 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 "011" -> {
                     when (motionLayout.getCurrentState()) {
                         R.id.left -> {
-                            checkpoint+="0"
-                            println("\nnie jestes studentem.\n"+ checkpoint)
 
-                            LocNav.SetCard(
-                                cardVM.card_front,
-                                cardVM.card_back_text,
-                                cardVM.card_back_title,
-                                All.blankloc
-                            )
-                            cardVM.card_back_text.text = "I ty smiesz się nazywać studentem?\n"+checkpoint;
-                            cardVM.card_back_title.text = "KONIEC GRY"
-
-
+                            GameOver("I ty smiesz się nazywać studentem?", motionLayout);
 
 
                         }
@@ -185,17 +174,13 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                         }
                         R.id.left -> {
                             checkpoint+="0"
-
-                            LocNav.SetCard(
-                                cardVM.card_front,
-                                cardVM.card_back_text,
-                                cardVM.card_back_title,
-                                All.blankloc
-                            )
-                            cardVM.card_back_text.text = "I ty smiesz się nazywać studentem?\n"+checkpoint;
-                            cardVM.card_back_title.text = "KONIEC GRY"
                         }
                     }
+
+                }
+                "10"->
+                {
+                    GameOver("I ty smiesz się nazywać studentem?", motionLayout);
 
                 }
                 "11"  -> {
@@ -285,33 +270,18 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 }
 
                 "1151"->{
-                    println("--------------;;;"+checkpoint);
-                    LocNav.SetCard(
-                        cardVM.card_front,
-                        cardVM.card_back_text,
-                        cardVM.card_back_title,
-                        All.blankloc
-                    )
-                    cardVM.card_back_title.text = "KONIEC GRY"
 
-                    LocNav.AddChoice(cardVM.card_back_text,"Cóż, dziesięć szotów to za mało. Prawie na trzeźwo przywitałeś łóżko i miałeś całkowicie spokojny sen. Może jutro powtórka?",
-                        "Powtórka?", "Mam dość...")
+                    GameOver("Cóż, dziesięć szotów to za mało. Prawie na " +
+                            "trzeźwo przywitałeś łóżko i miałeś całkowicie spokojny sen. Może jutro powtórka?",
+                    motionLayout)
 
-                    when (motionLayout.getCurrentState()) {
 
-                        R.id.right -> {
-                            checkpoint="GameOver"
-                        }
-                        R.id.left -> {
-                            checkpoint="GameOver"
-                        }
-
-                    }
                 }
                 "1150"->
                 {
                     println("--------------//////"+checkpoint);
                 }
+
                 "GameOver"-> {
                     cardVM.card_back_title.text="KONIEC GRY";
                     LocNav.AddChoice(
@@ -321,7 +291,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     when (motionLayout.getCurrentState()) {
 
                         R.id.right -> {
-                            System.exit(0);
+                        //    System.exit(0);
                         }
                         R.id.left -> {
                             StartAgain()
@@ -350,5 +320,31 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
             cardVM.card_back_title,
             All.solaris
         )
+    }
+
+    fun GameOver(reason: String, motionLayout: MotionLayout)
+    {
+        LocNav.SetCard(
+            cardVM.card_front,
+            cardVM.card_back_text,
+            cardVM.card_back_title,
+            All.blankloc
+        )
+        cardVM.card_back_title.text = "KONIEC GRY"
+
+        LocNav.AddChoice(cardVM.card_back_text,reason,
+            "Powtórka?", "Mam dość...")
+
+        when (motionLayout.getCurrentState()) {
+
+            R.id.right -> {
+                checkpoint="GameOver"
+            }
+            R.id.left -> {
+                checkpoint="GameOver"
+            }
+
+        }
+
     }
 }
