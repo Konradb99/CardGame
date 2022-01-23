@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bluegradient"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="44"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/mapButtonMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/menu_map"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mapa"
+            android:background="@null"/>
+        <ImageButton
+            android:id="@+id/eqButtonMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/menu_eq"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ikonka_plecak"
+            android:background="@null"/>
+        <ImageButton
+            android:id="@+id/menuButtonMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/menu_menu"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ikonka_menu"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:background="@null">
+
+        <ImageButton
+            android:id="@+id/continue_btnMenu"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:fontFamily="@font/fffforwa"
+            android:src="@drawable/cont_btn"
+            android:textSize="30sp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@id/save_btnMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/save_btnMenu"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:fontFamily="@font/fffforwa"
+            android:src="@drawable/save_btn"
+            android:textSize="30sp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@id/load_btnMenu"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/continue_btnMenu" />
+
+        <ImageButton
+            android:id="@+id/load_btnMenu"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:fontFamily="@font/fffforwa"
+            android:src="@drawable/load_btn"
+            android:textSize="30sp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@id/exit_btnMenu"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/save_btnMenu" />
+
+        <ImageButton
+            android:id="@+id/exit_btnMenu"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:src="@drawable/exit_btn"
+            android:textSize="30sp"
+            android:fontFamily="@font/fffforwa"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toBottomOf="@id/load_btnMenu"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/enter_btn"
+        android:layout_width="195dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0"
+        android:background="@null"
+        android:clickable="false"
+        android:contentDescription="@string/enterLocation"
+        android:src="@drawable/iconin" />
+
+</LinearLayout>

@@ -44,7 +44,7 @@ class fragment_menu : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (view.findViewById<ImageButton>(R.id.startbutton)).setOnClickListener(){
-            it.findNavController().navigate(R.id.action_fragment_menu2_to_fragment_game)
+            view.findNavController().navigate(R.id.action_fragment_menu_to_fragment_main_game)
             LocNav.ConnectLocGraph()
         }
     }

@@ -3,22 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_menu2">
-
+    app:startDestination="@id/fragment_menu">
     <fragment
-        android:id="@+id/fragment_menu2"
+        android:id="@+id/fragment_menu"
         android:name="com.example.karcianka.fragment_menu"
         android:label="fragment_menu" >
         <action
-            android:id="@+id/action_fragment_menu2_to_fragment_game"
-            app:destination="@id/fragment_game" />
+            android:id="@+id/action_fragment_menu_to_fragment_main_game"
+            app:destination="@id/fragment_main_game" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_game"
-        android:name="com.example.karcianka.Fragment_game"
-        android:label="Fragment_game" >
+        android:id="@+id/fragment_main_game"
+        android:name="com.example.karcianka.Fragment_main_game"
+        android:label="Fragment_main_game" >
         <action
-            android:id="@+id/action_fragment_game_to_fragment_menu2"
-            app:destination="@id/fragment_menu2" />
+            android:id="@+id/action_fragment_main_game_to_fragment_menu"
+            app:destination="@id/fragment_menu" />
+        <action
+            android:id="@+id/action_fragment_main_game_to_fragment_main_game_equipment"
+            app:destination="@id/fragment_main_game_equipment" />
+        <action
+            android:id="@+id/action_fragment_main_game_to_fragment_main_game_map"
+            app:destination="@id/fragment_main_game_map" />
+        <action
+            android:id="@+id/action_fragment_main_game_to_fragment_main_game_menu"
+            app:destination="@id/fragment_main_game_menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_main_game_equipment"
+        android:name="com.example.karcianka.Fragment_main_game_equipment"
+        android:label="Fragment_main_game_equipment" />
+    <fragment
+        android:id="@+id/fragment_main_game_map"
+        android:name="com.example.karcianka.Fragment_main_game_map"
+        android:label="Fragment_main_game_map" />
+    <fragment
+        android:id="@+id/fragment_main_game_menu"
+        android:name="com.example.karcianka.Fragment_main_game_menu"
+        android:label="Fragment_main_game_menu" >
+        <action
+            android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game"
+            app:destination="@id/fragment_main_game"
+            app:popUpTo="@id/fragment_main_game"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

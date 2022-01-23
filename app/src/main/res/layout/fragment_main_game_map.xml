@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_game_menu"
-    android:background="@null">
+    android:background="@drawable/bluegradient"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="44"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
-
-
         <ImageButton
-            android:id="@+id/mapButton"
+            android:id="@+id/mapButtonMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -22,7 +24,7 @@
             android:src="@drawable/mapa"
             android:background="@null"/>
         <ImageButton
-            android:id="@+id/eqButton"
+            android:id="@+id/eqButtonMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -31,7 +33,7 @@
             android:src="@drawable/ikonka_plecak"
             android:background="@null"/>
         <ImageButton
-            android:id="@+id/menuButton"
+            android:id="@+id/menuButtonMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -40,4 +42,25 @@
             android:src="@drawable/ikonka_menu"
             android:background="@null"/>
     </LinearLayout>
-</FrameLayout>
+
+    <ImageView
+        android:id="@+id/mapView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mapa"
+        android:layout_weight="10"
+        android:padding="10dp"/>
+
+    <ImageButton
+        android:id="@+id/enter_btn"
+        android:layout_width="195dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0"
+        android:background="@null"
+        android:clickable="false"
+        android:contentDescription="@string/enterLocation"
+        android:src="@drawable/iconin" />
+
+</LinearLayout>

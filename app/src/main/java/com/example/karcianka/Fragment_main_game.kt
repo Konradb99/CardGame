@@ -1,15 +1,22 @@
 package com.example.karcianka
 
+import android.media.Image
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import com.example.karcianka.GameEntity.All
+import androidx.navigation.findNavController
 import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.SwipeRightModel
 import com.example.karcianka.ViewModel.CardViewModel
@@ -26,14 +33,13 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Fragment_card.newInstance] factory method to
+ * Use the [Fragment_main_game.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment_card : Fragment() {
+class Fragment_main_game : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,29 +47,32 @@ class Fragment_card : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card, container, false)
+        return inflater.inflate(R.layout.fragment_main_game, container, false)
     }
+
 
     private lateinit var topCard: FrameLayout
     private lateinit var bottomCard: FrameLayout
+    private var mLastClickTime = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        println("New view created")
 
+        //card motion
         var motionLayout = view.findViewById<MotionLayout>(R.id.motionLayout)
         bottomCard = view.findViewById(R.id.bottomCard)
         topCard = view.findViewById(R.id.topCard)
-        val factorySwipeVM =SwipeViewModelFactory((requireNotNull(this.activity).application))
+        val factorySwipeVM = SwipeViewModelFactory((requireNotNull(this.activity).application))
         var SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
-        val factoryCardVM =CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
+        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
         var CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
 
         var currentLoc = LocNav.GetCurrentLoc(CardVM.card_front)
@@ -78,11 +87,12 @@ class Fragment_card : Fragment() {
         else{
             println("Not updating view")
         }
-        val factoryGameVM =GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
+        val factoryGameVM =
+            GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
         val GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
 
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
-        CardVM.card_front.setTag(R.drawable.biblioteka)
+        CardVM.card_front.tag = R.drawable.biblioteka
 
         motionLayout.setTransitionListener(object: TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
@@ -101,7 +111,22 @@ class Fragment_card : Fragment() {
             }
         } )
         view.findViewById<LinearLayout>(R.id.card_back).setOnClickListener{
+            if(SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime()
             CardVM.Flip()
+        }
+
+        //Ingame menu buttons
+        view.findViewById<ImageButton>(R.id.menuButtonGame).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_to_fragment_main_game_menu)
+        }
+        view.findViewById<ImageButton>(R.id.eqButtonGame).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_to_fragment_main_game_equipment)
+        }
+        view.findViewById<ImageButton>(R.id.mapButtonGame).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_to_fragment_main_game_map)
         }
     }
 
@@ -112,12 +137,12 @@ class Fragment_card : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment_card.
+         * @return A new instance of fragment Fragment_main_game.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment_card().apply {
+            Fragment_main_game().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
@@ -125,10 +150,10 @@ class Fragment_card : Fragment() {
             }
     }
 
+
     fun bindCard(model: SwipeRightModel) {
         topCard.setBackgroundColor(model.top.backgroundColor)
         bottomCard.setBackgroundColor(model.bottom.backgroundColor)
     }
-
 
 }
