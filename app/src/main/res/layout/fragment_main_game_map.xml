@@ -44,13 +44,26 @@
             android:background="@null"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/mapView"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/mapa"
         android:layout_weight="10"
-        android:padding="10dp"/>
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/mapView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mapa"
+            android:layout_weight="10"
+            android:padding="10dp"/>
+        <ImageView
+            android:id="@+id/mapViewClickable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:src="@drawable/mapadoklikania"/>
+    </FrameLayout>
 
     <ImageButton
         android:id="@+id/enter_btn"

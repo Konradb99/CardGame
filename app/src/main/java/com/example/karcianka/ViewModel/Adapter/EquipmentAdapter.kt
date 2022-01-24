@@ -33,6 +33,9 @@ class EquipmentAdapter(private val items: LiveData<List<EquipmentItems>>, privat
 
     override fun onBindViewHolder(holder: EquipmentHolder, position: Int) {
         holder.itemname.text = items.value?.get(position)?.name
+        holder.cardFront.setBackgroundResource(items.value?.get(position)?.background!!)
+        holder.cardBack.setBackgroundResource(items.value?.get(position)?.backgroundBack!!)
+
     }
 
     override fun getItemCount()=items.value?.size?:0

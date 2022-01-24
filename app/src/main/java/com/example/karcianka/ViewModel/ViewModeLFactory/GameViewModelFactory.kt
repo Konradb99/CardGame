@@ -9,10 +9,10 @@ import com.example.karcianka.ViewModel.EquipmentViewModel
 import com.example.karcianka.ViewModel.GameViewModel
 import java.lang.IllegalArgumentException
 
-class GameViewModelFactory(private val application: Application, private val cardVM: CardViewModel, private val context: Context): ViewModelProvider.Factory{
+class GameViewModelFactory(private val application: Application, private val cardVM: CardViewModel, private val eqVM: EquipmentViewModel, private val context: Context): ViewModelProvider.Factory{
     override fun <T: ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(GameViewModel::class.java)){
-            return GameViewModel(application, cardVM, context) as T
+            return GameViewModel(application, cardVM, eqVM, context) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class")
     }

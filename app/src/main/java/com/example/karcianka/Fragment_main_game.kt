@@ -24,9 +24,11 @@ import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.SwipeRightModel
 import com.example.karcianka.Model.Tutorial
 import com.example.karcianka.ViewModel.CardViewModel
+import com.example.karcianka.ViewModel.EquipmentViewModel
 import com.example.karcianka.ViewModel.GameViewModel
 import com.example.karcianka.ViewModel.SwipeViewModel
 import com.example.karcianka.ViewModel.ViewModeLFactory.CardViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.EquipmentViewModelFactory
 import com.example.karcianka.ViewModel.ViewModeLFactory.GameViewModelFactory
 import com.example.karcianka.ViewModel.ViewModeLFactory.SwipeViewModelFactory
 
@@ -67,6 +69,7 @@ class Fragment_main_game : Fragment() {
     private lateinit var CardVM: CardViewModel
     private lateinit var SwipeVM: SwipeViewModel
     private lateinit var GameVM: GameViewModel
+    private lateinit var EqVM: EquipmentViewModel
     private var mLastClickTime = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,7 +83,9 @@ class Fragment_main_game : Fragment() {
             SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
             val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
             CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
-            val factoryGameVM = GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
+            val factoryEqVM = EquipmentViewModelFactory((requireNotNull(this.activity).application))
+            EqVM = ViewModelProvider(requireActivity(), factoryEqVM).get(EquipmentViewModel::class.java)
+            val factoryGameVM = GameViewModelFactory((requireNotNull(this.activity).application), CardVM, EqVM, this.requireContext())
             GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
         }
         CardVM.FlipFront_instant()

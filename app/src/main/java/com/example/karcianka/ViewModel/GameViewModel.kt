@@ -10,6 +10,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.AndroidViewModel
 import com.example.karcianka.Database.CardDatabase
 import com.example.karcianka.Database.DAO
+import com.example.karcianka.Database.Entity.EquipmentItems
 import com.example.karcianka.GameEntity.All
 import com.example.karcianka.GameEntity.FlipModel
 import com.example.karcianka.GameEntity.Location
@@ -19,7 +20,7 @@ import com.example.karcianka.Model.Tutorial
 import com.example.karcianka.R
 import java.util.*
 
-class GameViewModel(application: Application, private var cardVM: CardViewModel, private val context: Context): AndroidViewModel(application) {
+class GameViewModel(application: Application, private var cardVM: CardViewModel, private var eqVM: EquipmentViewModel, private val context: Context): AndroidViewModel(application) {
     private val dao : DAO
     public var checkpoint: String
     public var game: Game
@@ -36,7 +37,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="0"
+        checkpoint="11"
 
     }
 
@@ -181,6 +182,9 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                             Tutorial.shots++;
                         }
                         R.id.left -> {
+                            //Podniesienie kieliszka
+                            eqVM.addItem(EquipmentItems(0, 0, cardVM.card_back_title.text.toString(), All.shot1.draw, All.shot1.draw))
+                            println("Podniosles kieliszek")
                         }
                     }
                 }

@@ -11,9 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.karcianka.Model.LocNav
 import com.example.karcianka.ViewModel.CardViewModel
+import com.example.karcianka.ViewModel.EquipmentViewModel
 import com.example.karcianka.ViewModel.GameViewModel
 import com.example.karcianka.ViewModel.SwipeViewModel
 import com.example.karcianka.ViewModel.ViewModeLFactory.CardViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.EquipmentViewModelFactory
 import com.example.karcianka.ViewModel.ViewModeLFactory.GameViewModelFactory
 import com.example.karcianka.ViewModel.ViewModeLFactory.SwipeViewModelFactory
 
@@ -51,6 +53,7 @@ class Fragment_main_game_map : Fragment() {
     private lateinit var CardVM: CardViewModel
     private lateinit var SwipeVM: SwipeViewModel
     private lateinit var GameVM: GameViewModel
+    private lateinit var EqVM: EquipmentViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +62,9 @@ class Fragment_main_game_map : Fragment() {
         SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
         val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
         CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
-        val factoryGameVM = GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
+        val factoryEqVM = EquipmentViewModelFactory((requireNotNull(this.activity).application))
+        EqVM = ViewModelProvider(requireActivity(), factoryEqVM).get(EquipmentViewModel::class.java)
+        val factoryGameVM = GameViewModelFactory((requireNotNull(this.activity).application), CardVM, EqVM, this.requireContext())
         GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
 
         var nextMap = LocNav.GetMap(CardVM.card_front)
@@ -75,6 +80,8 @@ class Fragment_main_game_map : Fragment() {
         view.findViewById<ImageButton>(R.id.eqButtonMap).setOnClickListener(){
             view.findNavController().navigate(R.id.action_fragment_main_game_map_to_fragment_main_game_equipment)
         }
+
+
     }
 
     companion object {
