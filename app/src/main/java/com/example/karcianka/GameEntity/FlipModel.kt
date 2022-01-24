@@ -21,7 +21,6 @@ class FlipModel {
 
         //Normal flip
         fun Animate(appContext: Context?, front: TextView, back: LinearLayout){
-            println(isFront)
             val scale = appContext?.resources?.displayMetrics?.density
             front_anim = AnimatorInflater.loadAnimator(appContext, R.animator.front_card_flip) as AnimatorSet
             back_anim = AnimatorInflater.loadAnimator(appContext, R.animator.back_card_flip) as AnimatorSet

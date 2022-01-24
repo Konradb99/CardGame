@@ -146,10 +146,10 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                         R.id.right -> {
                             checkpoint+="1"
+                            cardVM.FlipFront_instant()
 
                             //wlaczenie Kolegi
                             LocNav.SetCard(All.kolega, cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title)
-                            cardVM.FlipFront_instant()
                             LocNav.AddChoice(cardVM.card_back_text,"No dobra! Co tym razem do picia?",
                                 "To od czego zaczynamy?", "Dawaj pierwszy shot z brzegu.")
 

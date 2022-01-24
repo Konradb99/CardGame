@@ -18,7 +18,8 @@
         android:label="Fragment_main_game" >
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_menu"
-            app:destination="@id/fragment_menu" />
+            app:destination="@id/fragment_menu"
+            />
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_main_game_equipment"
             app:destination="@id/fragment_main_game_equipment" />
@@ -27,7 +28,10 @@
             app:destination="@id/fragment_main_game_map" />
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_main_game_menu"
-            app:destination="@id/fragment_main_game_menu" />
+            app:destination="@id/fragment_main_game_menu"
+            app:popUpTo="@id/fragment_main_game"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"/>
     </fragment>
     <fragment
         android:id="@+id/fragment_main_game_equipment"
@@ -45,6 +49,7 @@
             android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game"
             app:destination="@id/fragment_main_game"
             app:popUpTo="@id/fragment_main_game"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"/>
     </fragment>
 </navigation>

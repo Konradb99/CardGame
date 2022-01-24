@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.SwipeRightModel
+import com.example.karcianka.Model.Tutorial
 import com.example.karcianka.ViewModel.CardViewModel
 import com.example.karcianka.ViewModel.GameViewModel
 import com.example.karcianka.ViewModel.SwipeViewModel
@@ -60,6 +61,8 @@ class Fragment_main_game : Fragment() {
 
     private lateinit var topCard: FrameLayout
     private lateinit var bottomCard: FrameLayout
+    private lateinit var CardVM: CardViewModel
+    private lateinit var SwipeVM: SwipeViewModel
     private var mLastClickTime = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,9 +74,9 @@ class Fragment_main_game : Fragment() {
         bottomCard = view.findViewById(R.id.bottomCard)
         topCard = view.findViewById(R.id.topCard)
         val factorySwipeVM = SwipeViewModelFactory((requireNotNull(this.activity).application))
-        var SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
+        SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
         val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
-        var CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
 
         var currentLoc = LocNav.GetCurrentLoc(CardVM.card_front)
         LocNav.SetCard(currentLoc, CardVM.card_front, CardVM.card_back_text, CardVM.card_back_title)
@@ -111,10 +114,11 @@ class Fragment_main_game : Fragment() {
             }
         } )
         view.findViewById<LinearLayout>(R.id.card_back).setOnClickListener{
-            if(SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                return@setOnClickListener
-            }
-            mLastClickTime = SystemClock.elapsedRealtime()
+            //if(SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+            //    return@setOnClickListener
+            //}
+            //mLastClickTime = SystemClock.elapsedRealtime()
+            println("clicked card")
             CardVM.Flip()
         }
 
@@ -127,6 +131,33 @@ class Fragment_main_game : Fragment() {
         }
         view.findViewById<ImageButton>(R.id.mapButtonGame).setOnClickListener(){
             view.findNavController().navigate(R.id.action_fragment_main_game_to_fragment_main_game_map)
+        }
+
+        //Enter button
+        view.findViewById<ImageButton>(R.id.enter_btnGame).setOnClickListener{
+
+            println("test")
+
+            if(GameVM.checkpoint=="0")
+            {
+                Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById(R.id.card_front), view.findViewById(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
+
+                CardVM.FlipFront_instant()
+                GameVM.checkpoint+="1"
+                view.findViewById<TextView>(R.id.card_back_text).text=
+                    view.findViewById<TextView>(R.id.card_back_text).text.toString()+"\n\n"+GameVM.checkpoint;
+            }
+            if(GameVM.checkpoint=="0111") {
+
+                Tutorial.EnterMinisterstwoSamouczek(view, view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
+                GameVM.checkpoint="1"
+                CardVM.FlipFront_instant()
+                //view.findViewById<TextView>(R.id.card_back_text).text=
+                //    view.findViewById<TextView>(R.id.card_back_text).text.toString()+"\n\n"+GameVM.checkpoint;
+                //   view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
+            }
+
+
         }
     }
 
