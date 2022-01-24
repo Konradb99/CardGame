@@ -103,6 +103,7 @@ class Fragment_main_game : Fragment() {
             view.findViewById<TextView>(R.id.card_front).setBackgroundResource(All.solaris.draw)
             view.findViewById<TextView>(R.id.card_back_text).text = "Kliknij w butelkę, żeby wejść do budynku."
             view.findViewById<TextView>(R.id.card_back_title).text = "Samouczek."
+            CardVM.card_front.tag = R.drawable.solaris
         }
         else{
             //println("Not updating view")
@@ -110,7 +111,6 @@ class Fragment_main_game : Fragment() {
 
 
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
-        CardVM.card_front.tag = R.drawable.biblioteka
 
         motionLayout.setTransitionListener(object: TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
