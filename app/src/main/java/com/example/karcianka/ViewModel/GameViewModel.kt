@@ -40,7 +40,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         locleft= Location();
         locright= Location();
         item = EquipmentItems(0, 0, "", R.drawable.eq_back, R.drawable.eq_back)
-        checkpoint="11"
+        checkpoint="0"
 
     }
 

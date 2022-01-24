@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.fragment.app.FragmentManager
@@ -109,6 +106,10 @@ class Fragment_main_game : Fragment() {
             view.findViewById<TextView>(R.id.card_back_text).text = "Kliknij w butelkę, żeby wejść do budynku."
             view.findViewById<TextView>(R.id.card_back_title).text = "Samouczek."
             CardVM.card_front.tag = R.drawable.solaris
+
+            //Popup dialog
+            Toast.makeText(context, "Kliknij w kartę aby zacząć grę...", Toast.LENGTH_SHORT).show();
+
         }
         else{
             //println("Not updating view")
