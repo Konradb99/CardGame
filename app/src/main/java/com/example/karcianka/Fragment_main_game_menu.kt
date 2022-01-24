@@ -1,6 +1,7 @@
 package com.example.karcianka
 
 import android.app.FragmentManager
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,6 +46,12 @@ class Fragment_main_game_menu : Fragment() {
 
         view.findViewById<ImageButton>(R.id.menuButtonMenu).setOnClickListener(){
             view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_main_game)
+        }
+        view.findViewById<ImageButton>(R.id.mapButtonMenu).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_main_game_map)
+        }
+        view.findViewById<ImageButton>(R.id.eqButtonMenu).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_main_game_equipment)
         }
     }
 

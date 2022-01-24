@@ -5,6 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.example.karcianka.Model.LocNav
+import com.example.karcianka.ViewModel.CardViewModel
+import com.example.karcianka.ViewModel.GameViewModel
+import com.example.karcianka.ViewModel.SwipeViewModel
+import com.example.karcianka.ViewModel.ViewModeLFactory.CardViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.GameViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.SwipeViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +46,35 @@ class Fragment_main_game_map : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_game_map, container, false)
+    }
+
+    private lateinit var CardVM: CardViewModel
+    private lateinit var SwipeVM: SwipeViewModel
+    private lateinit var GameVM: GameViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val factorySwipeVM = SwipeViewModelFactory((requireNotNull(this.activity).application))
+        SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
+        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
+        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+        val factoryGameVM = GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
+        GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
+
+        var nextMap = LocNav.GetMap(CardVM.card_front)
+
+        view.findViewById<ImageView>(R.id.mapView).setImageResource(nextMap)
+
+        view.findViewById<ImageButton>(R.id.mapButtonMap).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_map_to_fragment_main_game)
+        }
+        view.findViewById<ImageButton>(R.id.menuButtonMap).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_map_to_fragment_main_game_menu)
+        }
+        view.findViewById<ImageButton>(R.id.eqButtonMap).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_map_to_fragment_main_game_equipment)
+        }
     }
 
     companion object {

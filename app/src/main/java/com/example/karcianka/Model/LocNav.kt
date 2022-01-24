@@ -1,5 +1,6 @@
 package com.example.karcianka.Model
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -130,5 +131,40 @@ class LocNav
         }
 
 
+        //Get current location
+
+        fun GetMap(front: TextView): Int {
+            var curLoc = GetCurrentCard(front)
+
+            if(curLoc in All.shots){
+                return R.drawable.mapa
+            }
+            else{
+                if(curLoc in All.wszystkielokacje){
+                    when (curLoc){
+                        All.hala -> return R.drawable.mapa_hala
+                        All.gig -> return R.drawable.mapa_gig
+                        All.firewall -> return R.drawable.mapa_park
+                        All.elektryk -> return R.drawable.mapa_elektryk
+                        All.chemia -> return R.drawable.mapa_chemia
+                        All.cek -> return R.drawable.mapa_cek
+                        All.biblioteka -> return R.drawable.mapa_biblioteka
+                        All.wnetrzeMinisterstwo -> return R.drawable.mapa
+                        All.klodnica -> return R.drawable.mapa_mt
+                        All.labirynt -> return R.drawable.mapa_labirynt
+                        All.ministerstwo -> return R.drawable.mapa
+                        All.mrowisko -> return R.drawable.mapa
+                        All.ms -> return R.drawable.mapa_ms
+                        All.mt -> return R.drawable.mapa_mt
+                        All.wieza -> return R.drawable.mapa_aei
+                        All.narnia -> return R.drawable.mapa_aei
+                        All.park -> return R.drawable.mapa_park
+                        All.samouczek -> return R.drawable.mapa_solaris
+                        All.solaris -> return R.drawable.mapa_solaris
+                    }
+                }
+                return R.drawable.mapa
+            }
+        }
     }
 }

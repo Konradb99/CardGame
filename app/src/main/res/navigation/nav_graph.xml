@@ -33,11 +33,31 @@
     <fragment
         android:id="@+id/fragment_main_game_equipment"
         android:name="com.example.karcianka.Fragment_main_game_equipment"
-        android:label="Fragment_main_game_equipment" />
+        android:label="Fragment_main_game_equipment" >
+        <action
+            android:id="@+id/action_fragment_main_game_equipment_to_fragment_main_game"
+            app:destination="@id/fragment_main_game" />
+        <action
+            android:id="@+id/action_fragment_main_game_equipment_to_fragment_main_game_map"
+            app:destination="@id/fragment_main_game_map" />
+        <action
+            android:id="@+id/action_fragment_main_game_equipment_to_fragment_main_game_menu"
+            app:destination="@id/fragment_main_game_menu" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_main_game_map"
         android:name="com.example.karcianka.Fragment_main_game_map"
-        android:label="Fragment_main_game_map" />
+        android:label="Fragment_main_game_map" >
+        <action
+            android:id="@+id/action_fragment_main_game_map_to_fragment_main_game"
+            app:destination="@id/fragment_main_game" />
+        <action
+            android:id="@+id/action_fragment_main_game_map_to_fragment_main_game_menu"
+            app:destination="@id/fragment_main_game_menu" />
+        <action
+            android:id="@+id/action_fragment_main_game_map_to_fragment_main_game_equipment"
+            app:destination="@id/fragment_main_game_equipment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_main_game_menu"
         android:name="com.example.karcianka.Fragment_main_game_menu"
@@ -45,5 +65,11 @@
         <action
             android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game"
             app:destination="@id/fragment_main_game" />
+        <action
+            android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game_map"
+            app:destination="@id/fragment_main_game_map" />
+        <action
+            android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game_equipment"
+            app:destination="@id/fragment_main_game_equipment" />
     </fragment>
 </navigation>

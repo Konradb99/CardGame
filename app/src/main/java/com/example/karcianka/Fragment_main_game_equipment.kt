@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.karcianka.ViewModel.Adapter.EquipmentAdapter
@@ -61,6 +63,17 @@ class Fragment_main_game_equipment : Fragment() {
             it.adapter =eqAdapter
             it.layoutManager = layoutManager
         }
+
+        view.findViewById<ImageButton>(R.id.mapButtonEq).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_equipment_to_fragment_main_game_map)
+        }
+        view.findViewById<ImageButton>(R.id.eqButtonEq).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_equipment_to_fragment_main_game)
+        }
+        view.findViewById<ImageButton>(R.id.menuButtonEq).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_main_game_equipment_to_fragment_main_game_menu)
+        }
+
     }
 
     companion object {
