@@ -28,6 +28,8 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
     public var thisloc :Location;
     public var locleft : Location;
     public var locright:Location;
+    private var item: EquipmentItems
+    private var i = 0
 
     init{
         dao = CardDatabase.getInstance(application).dao
@@ -37,6 +39,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
+        item = EquipmentItems(0, 0, "", R.drawable.eq_back, R.drawable.eq_back)
         checkpoint="11"
 
     }
@@ -167,11 +170,13 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     if(Tutorial.shots!=10) {
 
                         var it = rand(1, 5)
+                        i = it - 1
                         LocNav.SetCard(All.shots[it-1], cardVM.card_front, cardVM.card_back_text,
                                     cardVM.card_back_title)
 
                         LocNav.AddChoice(cardVM.card_back_text, "Pijesz go?", "Nie, dawaj inny,",
                             "Oczywiście, że tak. A potem inny.")
+
                     }
                     else
                         checkpoint+="5"
@@ -183,8 +188,25 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                         }
                         R.id.left -> {
                             //Podniesienie kieliszka
-                            eqVM.addItem(EquipmentItems(0, 0, cardVM.card_back_title.text.toString(), All.shot1.draw, All.shot1.draw))
-                            println("Podniosles kieliszek")
+                            item = EquipmentItems(0, 0, cardVM.card_back_title.text.toString(), All.shots[i].draw, All.shots[i].draw)
+                            var exists = false
+                            if(eqVM.allItems.value != null){
+                                for(eqItem in eqVM.allItems.value!!){
+                                    if(item.name == eqItem.name){
+                                        exists = true
+                                        println("Masz juz takiego shota w eq")
+                                        break
+                                    }
+                                    else exists = false
+                                }
+                                if(!exists){
+                                    println("Podniosles shota")
+                                    eqVM.addItem(item)
+                                }
+                            }else{
+                                println("Podniosles shota")
+                                eqVM.addItem(item)
+                            }
                         }
                     }
                 }
