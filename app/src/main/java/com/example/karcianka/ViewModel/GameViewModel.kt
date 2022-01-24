@@ -42,8 +42,6 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
     fun checkpoints(motionLayout: MotionLayout, pass: Int, like: Int) {
         if(walking) {
-
-
             when (motionLayout.getCurrentState()) {
                 R.id.left -> {
                     thisloc=locleft;
@@ -61,7 +59,6 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     locleft = arr[0];
                     locright=arr[1]
                 }
-
             }
 
             //czyli znalezienie ministerstwa w samouczku
@@ -74,24 +71,22 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 )
                 checkpoint+="1" //czyli 0111
             }
-
         }
         else
         {
             when (this.checkpoint) {
 
                 "01" -> {
-
                     when (motionLayout.getCurrentState()) {
                         R.id.left -> {
                             checkpoint+="1"
                             cardVM.FlipBack()
+
                             LocNav.SetCard(
                                 All.kolega,
                                 cardVM.card_front,
                                 cardVM.card_back_text,
                                 cardVM.card_back_title)
-
                             LocNav.AddChoice(cardVM.card_back_text, "A daj spokój z przywitaniem. Idziemy sie napić?",
                                 "Nie dzisiaj.","Pewnie! Spotkajmy sie w Ministerstwie." )
 
@@ -101,6 +96,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                         R.id.right -> {
                             checkpoint+="1"
                             cardVM.FlipBack()
+
                             LocNav.SetCard(
                                 All.kolega,
                                 cardVM.card_front,
@@ -147,14 +143,14 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                         R.id.right -> {
                             checkpoint+="1"
 
+                            cardVM.FlipFront_instant()
+
                             //wlaczenie Kolegi
                             LocNav.SetCard(All.kolega, cardVM.card_front, cardVM.card_back_text, cardVM.card_back_title)
-                            cardVM.FlipFront_instant()
                             LocNav.AddChoice(cardVM.card_back_text,"No dobra! Co tym razem do picia?",
                                 "To od czego zaczynamy?", "Dawaj pierwszy shot z brzegu.")
 
                             cardVM.card_back_text.text= cardVM.card_back_text.text.toString()+"\n\n"+checkpoint
-
 
                         }
                         R.id.left -> {
@@ -197,8 +193,8 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                     LocNav.AddChoice(cardVM.card_back_text, "Co? Juz masz dosc? Odprowadzić cię?",
                         "MoŻe Mi SiĘ PoMoC PrZyDać...",
                         "Nieeee, dam radę. Bawcie sie dobrze.")
-                    when (motionLayout.getCurrentState()) {
 
+                    when (motionLayout.getCurrentState()) {
                         R.id.right -> {
                             checkpoint+="1"
                         }
