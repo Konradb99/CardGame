@@ -36,7 +36,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="11"
+        checkpoint="0"
 
     }
 

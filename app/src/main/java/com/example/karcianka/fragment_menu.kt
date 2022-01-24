@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.karcianka.Model.LocNav
+import com.example.karcianka.ViewModel.CardViewModel
+import com.example.karcianka.ViewModel.ViewModeLFactory.CardViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,6 +43,8 @@ class fragment_menu : Fragment() {
         return inflater.inflate(R.layout.fragment_menu, container, false)
     }
 
+    private lateinit var CardVM: CardViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,6 +52,10 @@ class fragment_menu : Fragment() {
             view.findNavController().navigate(R.id.action_fragment_menu_to_fragment_main_game)
             LocNav.ConnectLocGraph()
         }
+        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
+        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+
+        CardVM.gameNotStarted = 1
     }
     companion object {
         /**

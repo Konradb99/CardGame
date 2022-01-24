@@ -15,8 +15,11 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.karcianka.GameEntity.All
+import com.example.karcianka.GameEntity.FlipModel
 import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.SwipeRightModel
 import com.example.karcianka.Model.Tutorial
@@ -58,41 +61,53 @@ class Fragment_main_game : Fragment() {
         return inflater.inflate(R.layout.fragment_main_game, container, false)
     }
 
-
+    private lateinit var motionLayout: MotionLayout
     private lateinit var topCard: FrameLayout
     private lateinit var bottomCard: FrameLayout
     private lateinit var CardVM: CardViewModel
     private lateinit var SwipeVM: SwipeViewModel
+    private lateinit var GameVM: GameViewModel
     private var mLastClickTime = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println("New view created")
 
-        //card motion
-        var motionLayout = view.findViewById<MotionLayout>(R.id.motionLayout)
-        bottomCard = view.findViewById(R.id.bottomCard)
-        topCard = view.findViewById(R.id.topCard)
-        val factorySwipeVM = SwipeViewModelFactory((requireNotNull(this.activity).application))
-        SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
-        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
-        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+        if(savedInstanceState==null){
+            motionLayout = view.findViewById(R.id.motionLayout)
+            bottomCard = view.findViewById(R.id.bottomCard)
+            topCard = view.findViewById(R.id.topCard)
+            val factorySwipeVM = SwipeViewModelFactory((requireNotNull(this.activity).application))
+            SwipeVM = ViewModelProvider(requireActivity(), factorySwipeVM).get(SwipeViewModel::class.java)
+            val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
+            CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+            val factoryGameVM = GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
+            GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
+        }
+        CardVM.FlipFront_instant()
+
+
+        //Restore to current VM state
+        var backgroundRes = LocNav.GetCurrentCard(CardVM.card_front).draw
+        view.findViewById<TextView>(R.id.card_front).setBackgroundResource(backgroundRes)
+        view.findViewById<TextView>(R.id.card_back_text).text = CardVM.card_back_text.text
+        view.findViewById<TextView>(R.id.card_back_title).text = CardVM.card_back_title.text
 
         var currentLoc = LocNav.GetCurrentLoc(CardVM.card_front)
         LocNav.SetCard(currentLoc, CardVM.card_front, CardVM.card_back_text, CardVM.card_back_title)
 
 
         if(CardVM.gameNotStarted == 1){
-            println("First time adding card to game")
-            CardVM.updateCard(view.findViewById<TextView>(R.id.card_front) as TextView, view.findViewById<LinearLayout>(R.id.card_back) as LinearLayout, view.findViewById<TextView>(R.id.card_back_text) as TextView, view.findViewById<TextView>(R.id.card_back_title) as TextView)
+            //println("First time adding card to game")
+            CardVM.updateCard(view.findViewById<TextView>(R.id.card_front) as TextView, view.findViewById<LinearLayout>(R.id.card_back_game) as LinearLayout, view.findViewById<TextView>(R.id.card_back_text) as TextView, view.findViewById<TextView>(R.id.card_back_title) as TextView)
             CardVM.gameNotStarted = 0
+            view.findViewById<TextView>(R.id.card_front).setBackgroundResource(All.solaris.draw)
+            view.findViewById<TextView>(R.id.card_back_text).text = "Kliknij w butelkę, żeby wejść do budynku."
+            view.findViewById<TextView>(R.id.card_back_title).text = "Samouczek."
         }
         else{
-            println("Not updating view")
+            //println("Not updating view")
         }
-        val factoryGameVM =
-            GameViewModelFactory((requireNotNull(this.activity).application), CardVM, this.requireContext())
-        val GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
+
 
         SwipeVM.modelStream.observe(viewLifecycleOwner, { bindCard(it) })
         CardVM.card_front.tag = R.drawable.biblioteka
@@ -107,19 +122,26 @@ class Fragment_main_game : Fragment() {
                         motionLayout.setTransition(R.id.rest, R.id.right)
                         SwipeVM.swipe()
                         //Detect swipe
-
                         GameVM.checkpoints(motionLayout, R.id.left, R.id.right)
+                        var backgroundRes = LocNav.GetCurrentCard(CardVM.card_front).draw
+                        view.findViewById<TextView>(R.id.card_front).setBackgroundResource(backgroundRes)
+                        view.findViewById<TextView>(R.id.card_back_text).text = CardVM.card_back_text.text
+                        view.findViewById<TextView>(R.id.card_back_title).text = CardVM.card_back_title.text
+                        println("Checkpoint: " + GameVM.checkpoint)
                     }
                 }
             }
         } )
-        view.findViewById<LinearLayout>(R.id.card_back).setOnClickListener{
+
+
+        view.findViewById<LinearLayout>(R.id.card_back_game).setOnClickListener{
             //if(SystemClock.elapsedRealtime() - mLastClickTime < 1000){
             //    return@setOnClickListener
             //}
             //mLastClickTime = SystemClock.elapsedRealtime()
-            println("clicked card")
-            CardVM.Flip()
+            //println("clicked card")
+            //CardVM.Flip()
+            FlipModel.Animate(this.requireContext(), view.findViewById(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back_game))
         }
 
         //Ingame menu buttons
@@ -136,11 +158,10 @@ class Fragment_main_game : Fragment() {
         //Enter button
         view.findViewById<ImageButton>(R.id.enter_btnGame).setOnClickListener{
 
-            println("test")
-
+            //println(GameVM.checkpoint)
             if(GameVM.checkpoint=="0")
             {
-                Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById(R.id.card_front), view.findViewById(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
+                Tutorial.EnterSolarisSamouczek(this.requireContext(), view.findViewById(R.id.card_front), view.findViewById(R.id.card_back_game), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
 
                 CardVM.FlipFront_instant()
                 GameVM.checkpoint+="1"
@@ -149,15 +170,13 @@ class Fragment_main_game : Fragment() {
             }
             if(GameVM.checkpoint=="0111") {
 
-                Tutorial.EnterMinisterstwoSamouczek(view, view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
+                Tutorial.EnterMinisterstwoSamouczek(view, view.findViewById<TextView>(R.id.card_front), view.findViewById<LinearLayout>(R.id.card_back_game), view.findViewById<TextView>(R.id.card_back_text) , view.findViewById<TextView>(R.id.card_back_title), CardVM, GameVM)
                 GameVM.checkpoint="1"
                 CardVM.FlipFront_instant()
                 //view.findViewById<TextView>(R.id.card_back_text).text=
                 //    view.findViewById<TextView>(R.id.card_back_text).text.toString()+"\n\n"+GameVM.checkpoint;
                 //   view.findViewById<ImageButton>(R.id.enter_btn).setEnabled(false)
             }
-
-
         }
     }
 

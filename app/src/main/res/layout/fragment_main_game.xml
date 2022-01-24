@@ -81,7 +81,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/card_back"
+                    android:id="@+id/card_back_game"
                     android:layout_width="322dp"
                     android:layout_height="502dp"
                     android:layout_gravity="center"
