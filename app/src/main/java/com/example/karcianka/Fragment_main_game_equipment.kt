@@ -61,8 +61,6 @@ class Fragment_main_game_equipment : Fragment() {
             it.adapter =eqAdapter
             it.layoutManager = layoutManager
         }
-
-        
     }
 
     companion object {

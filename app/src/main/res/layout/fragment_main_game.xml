@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/gameWindow"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -80,7 +81,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/card_back"
+                    android:id="@+id/card_back_game"
                     android:layout_width="322dp"
                     android:layout_height="502dp"
                     android:layout_gravity="center"

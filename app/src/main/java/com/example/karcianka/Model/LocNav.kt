@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import com.example.karcianka.GameEntity.All
+import com.example.karcianka.GameEntity.All.Companion.all
 import com.example.karcianka.GameEntity.All.Companion.wszystkielokacje
 import com.example.karcianka.GameEntity.ICard
 import com.example.karcianka.GameEntity.Location
@@ -73,6 +74,16 @@ class LocNav
         {
             var emptyloc = Location()
             for(loc in wszystkielokacje)
+                if(loc.draw == current_loc.getTag())
+                    return loc;
+
+            return emptyloc
+        }
+
+        fun GetCurrentCard(current_loc: View) :ICard
+        {
+            var emptyloc = Location()
+            for(loc in all)
                 if(loc.draw == current_loc.getTag())
                     return loc;
 

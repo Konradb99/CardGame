@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="250dp"
     android:orientation="horizontal"
+    android:id="@+id/eqItem"
     android:layout_margin="25dp">
 
     <FrameLayout

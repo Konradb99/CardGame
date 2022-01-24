@@ -36,7 +36,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         thisloc= Location();
         locleft= Location();
         locright= Location();
-        checkpoint="11"
+        checkpoint="0"
 
     }
 
@@ -142,6 +142,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                         R.id.right -> {
                             checkpoint+="1"
+                            cardVM.FlipFront_instant()
 
                             cardVM.FlipFront_instant()
 

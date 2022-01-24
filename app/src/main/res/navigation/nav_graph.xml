@@ -18,7 +18,8 @@
         android:label="Fragment_main_game" >
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_menu"
-            app:destination="@id/fragment_menu" />
+            app:destination="@id/fragment_menu"
+            />
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_main_game_equipment"
             app:destination="@id/fragment_main_game_equipment" />
@@ -43,8 +44,6 @@
         android:label="Fragment_main_game_menu" >
         <action
             android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game"
-            app:destination="@id/fragment_main_game"
-            app:popUpTo="@id/fragment_main_game"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/fragment_main_game" />
     </fragment>
 </navigation>
