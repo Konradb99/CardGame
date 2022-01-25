@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@null"
+    android:orientation="horizontal"
+    android:layout_marginVertical="10dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:src="@drawable/iconin"
+        android:layout_weight="1"
+        android:id="@+id/loadSaveBtn"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Zapis + nr"
+        android:gravity="center"
+        android:fontFamily="@font/fffforwa"
+        android:textSize="15sp"
+        android:layout_weight="1"
+        android:id="@+id/saveNumber"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Checkpoint nr"
+        android:gravity="center"
+        android:fontFamily="@font/fffforwa"
+        android:textSize="15sp"
+        android:layout_weight="1"
+        android:id="@+id/CheckpointNumber"
+        />
+</LinearLayout>

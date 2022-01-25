@@ -85,11 +85,11 @@ class Fragment_main_game_menu : Fragment() {
         //Save game
         view.findViewById<ImageButton>(R.id.save_btnMenu).setOnClickListener(){
             GameVM.SaveGame()
-            view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_game_saves)
+            view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_main_game)
         }
         //Load save
         view.findViewById<ImageButton>(R.id.load_btnMenu).setOnClickListener(){
-
+            view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_game_saves)
         }
         //Exit
         view.findViewById<ImageButton>(R.id.exit_btnMenu).setOnClickListener(){

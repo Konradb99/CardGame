@@ -1,5 +1,6 @@
 package com.example.karcianka
 
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,17 +49,21 @@ class fragment_menu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
+        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+        CardVM.gameNotStarted = 1
+
         (view.findViewById<ImageButton>(R.id.startbutton)).setOnClickListener(){
             view.findNavController().navigate(R.id.action_fragment_menu_to_fragment_main_game)
             LocNav.ConnectLocGraph()
         }
-        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
-        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
-
-        CardVM.gameNotStarted = 1
 
         view.findViewById<ImageButton>(R.id.infobutton).setOnClickListener(){
             view.findNavController().navigate(R.id.action_fragment_menu_to_fragment_info)
+            LocNav.ConnectLocGraph()
+        }
+        view.findViewById<ImageButton>(R.id.loadbutton).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_menu_to_fragment_game_saves)
             LocNav.ConnectLocGraph()
         }
     }

@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.karcianka.Database.CardDatabase
 import com.example.karcianka.Database.DAO
@@ -34,6 +35,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
     public var locright:Location;
     private var item: EquipmentItems
     private var i = 0
+    public var gameSaves: LiveData<List<GameSave>>
 
     init{
         dao = CardDatabase.getInstance(application).dao
@@ -45,6 +47,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         locright= Location();
         item = EquipmentItems(0, 0, "", R.drawable.eq_back, R.drawable.eq_back)
         checkpoint="0"
+        gameSaves = dao.GetAllSaves()
 
     }
 
@@ -319,5 +322,9 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         viewModelScope.launch(Dispatchers.IO){
             dao.InsertSave(save)
         }
+    }
+
+    fun GetAllSaves(){
+
     }
 }
