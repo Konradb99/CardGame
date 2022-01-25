@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bluegradient"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/eqWindow"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="44"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/mapButtonSaves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/menu_map"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mapa"
+            android:background="@null"/>
+        <ImageButton
+            android:id="@+id/eqButtonSaves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/menu_eq"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ikonka_plecak"
+            android:background="@null"/>
+        <ImageButton
+            android:id="@+id/menuButtonSaves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/menu_menu"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ikonka_menu"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/savesViewGame"
+        android:background="@null"
+        android:layout_weight="10"
+        />
+
+    <ImageButton
+        android:id="@+id/enter_btn"
+        android:layout_width="195dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0"
+        android:background="@null"
+        android:contentDescription="@string/enterLocation"
+        android:clickable="false"
+        android:src="@drawable/iconin" />
+
+</LinearLayout>

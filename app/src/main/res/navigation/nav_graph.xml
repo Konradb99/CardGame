@@ -147,6 +147,13 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
+        <action
+            android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game_saves"
+            app:destination="@id/fragment_main_game_saves"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/fragment_info"
@@ -186,5 +193,38 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_main_game_saves"
+        android:name="com.example.karcianka.fragment_main_game_saves"
+        android:label="fragment_main_game_saves" >
+        <action
+            android:id="@+id/action_fragment_main_game_saves_to_fragment_main_game_menu"
+            app:destination="@id/fragment_main_game_menu"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_fragment_main_game_saves_to_fragment_main_game_map"
+            app:destination="@id/fragment_main_game_map"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_fragment_main_game_saves_to_fragment_main_game_equipment"
+            app:destination="@id/fragment_main_game_equipment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_fragment_main_game_saves_to_fragment_main_game"
+            app:destination="@id/fragment_main_game"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
 </navigation>

@@ -34,7 +34,7 @@ class All
         var labirynt = Location("labirynt", "Labirynt",
             "Milion korytarzy i milion zaułków...", draw = R.drawable.labirynt)
 
-        var ministerstwo = Location("ministerstwo", "Ministrstwo Sledzia i Wódki",
+        var ministerstwo = Location("ministerstwo", "Ministerstwo Sledzia i Wódki",
             "Dawno tu nie byliśmy... (tak naprawdę to ledwo wczoraj)", draw = R.drawable.ministerstwo)
 
         var ms = Location("ms", "Krąg Rytualny", "Yyyyy... to twoj wydzial?", draw=R.drawable.ms)

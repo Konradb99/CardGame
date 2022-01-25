@@ -76,7 +76,7 @@ class fragment_game_saves : Fragment() {
         }
 
         view.findViewById<ImageButton>(R.id.backSaveBtn).setOnClickListener(){
-            view.findNavController().navigate(R.id.action_fragment_game_saves_to_fragment_main_game)
+            view.findNavController().navigate(R.id.action_fragment_game_saves_to_fragment_menu)
         }
     }
 
