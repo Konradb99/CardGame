@@ -8,9 +8,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.karcianka.Database.CardDatabase
 import com.example.karcianka.Database.DAO
 import com.example.karcianka.Database.Entity.EquipmentItems
+import com.example.karcianka.Database.Entity.GameSave
 import com.example.karcianka.GameEntity.All
 import com.example.karcianka.GameEntity.FlipModel
 import com.example.karcianka.GameEntity.Location
@@ -18,6 +20,8 @@ import com.example.karcianka.Model.Game
 import com.example.karcianka.Model.LocNav
 import com.example.karcianka.Model.Tutorial
 import com.example.karcianka.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class GameViewModel(application: Application, private var cardVM: CardViewModel, private var eqVM: EquipmentViewModel, private val context: Context): AndroidViewModel(application) {
@@ -307,5 +311,13 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
         }
 
+    }
+
+    //Save game
+    fun SaveGame(){
+        var save = GameSave(0, checkpoint, LocNav.GetCurrentCard(cardVM.card_front).id)
+        viewModelScope.launch(Dispatchers.IO){
+            dao.InsertSave(save)
+        }
     }
 }

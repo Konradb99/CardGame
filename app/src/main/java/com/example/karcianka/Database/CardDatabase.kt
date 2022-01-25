@@ -5,8 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.karcianka.Database.Entity.EquipmentItems
+import com.example.karcianka.Database.Entity.GameSave
 
-@Database(entities=[EquipmentItems::class], version = 1, exportSchema = true)
+@Database(entities=[EquipmentItems::class, GameSave::class], version = 2, exportSchema = true)
 abstract class CardDatabase: RoomDatabase() {
     abstract val dao: DAO
 
