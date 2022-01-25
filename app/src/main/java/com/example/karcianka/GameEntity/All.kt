@@ -12,7 +12,7 @@ class All
         var biblioteka = Location("biblioteka", "Biblioteka",
             description="Legenda głosi że ktoś przyszedł tu z własnej woli", draw=R.drawable.biblioteka)
 
-        var samouczek = Location("samouczek", "Samouczek", "", draw =R.drawable.opis)
+        var samouczek = Location("samouczek", "Samouczek", "Kliknij w butelkę aby wejść do budynku", draw =R.drawable.solaris)
 
         var cek = Location("cek","Centrum Energetyczno-Kaloryczne", description="Opis CEK", draw=R.drawable.cek)
 

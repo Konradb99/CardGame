@@ -277,7 +277,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
         Tutorial.shots=0
         cardVM.FlipFront()
         LocNav.SetLoc(
-            All.solaris,
+            All.samouczek,
             cardVM.card_front,
             cardVM.card_back_text,
             cardVM.card_back_title)

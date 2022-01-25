@@ -8,7 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.karcianka.ViewModel.CardViewModel
+import com.example.karcianka.ViewModel.EquipmentViewModel
+import com.example.karcianka.ViewModel.GameViewModel
+import com.example.karcianka.ViewModel.ViewModeLFactory.CardViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.EquipmentViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.GameViewModelFactory
+import kotlin.system.exitProcess
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,8 +49,21 @@ class Fragment_main_game_menu : Fragment() {
         return inflater.inflate(R.layout.fragment_main_game_menu, container, false)
     }
 
+    private lateinit var CardVM: CardViewModel
+    private lateinit var EqVM: EquipmentViewModel
+    private lateinit var GameVM: GameViewModel
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
+        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+        val factoryEqVM = EquipmentViewModelFactory((requireNotNull(this.activity).application))
+        EqVM = ViewModelProvider(requireActivity(), factoryEqVM).get(EquipmentViewModel::class.java)
+        val factoryGameVM = GameViewModelFactory((requireNotNull(this.activity).application), CardVM, EqVM, this.requireContext())
+        GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
+
 
         view.findViewById<ImageButton>(R.id.menuButtonMenu).setOnClickListener(){
             view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_main_game)
@@ -52,6 +73,26 @@ class Fragment_main_game_menu : Fragment() {
         }
         view.findViewById<ImageButton>(R.id.eqButtonMenu).setOnClickListener(){
             view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_main_game_equipment)
+        }
+
+
+        //Menu btns
+        //Restart
+        view.findViewById<ImageButton>(R.id.restart_btnMenu).setOnClickListener(){
+            GameVM.StartAgain()
+            view.findNavController().navigate(R.id.action_fragment_main_game_menu_to_fragment_main_game)
+        }
+        //Save game
+        view.findViewById<ImageButton>(R.id.save_btnMenu).setOnClickListener(){
+
+        }
+        //Load save
+        view.findViewById<ImageButton>(R.id.load_btnMenu).setOnClickListener(){
+
+        }
+        //Exit
+        view.findViewById<ImageButton>(R.id.exit_btnMenu).setOnClickListener(){
+            System.exit(0)
         }
     }
 
