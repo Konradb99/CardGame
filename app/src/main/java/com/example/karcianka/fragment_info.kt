@@ -5,8 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.karcianka.ViewModel.CardViewModel
+import com.example.karcianka.ViewModel.EquipmentViewModel
+import com.example.karcianka.ViewModel.GameViewModel
+import com.example.karcianka.ViewModel.ViewModeLFactory.CardViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.EquipmentViewModelFactory
+import com.example.karcianka.ViewModel.ViewModeLFactory.GameViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,11 +49,35 @@ class fragment_info : Fragment() {
 
     }
 
+    private lateinit var CardVM: CardViewModel
+    private lateinit var EqVM: EquipmentViewModel
+    private lateinit var GameVM: GameViewModel
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
+        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
+        val factoryEqVM = EquipmentViewModelFactory((requireNotNull(this.activity).application))
+        EqVM = ViewModelProvider(requireActivity(), factoryEqVM).get(EquipmentViewModel::class.java)
+        val factoryGameVM = GameViewModelFactory((requireNotNull(this.activity).application), CardVM, EqVM, this.requireContext())
+        GameVM = ViewModelProvider(requireActivity(), factoryGameVM).get(GameViewModel::class.java)
+
+
         view.findViewById<ImageButton>(R.id.backInfoBtn).setOnClickListener(){
             view.findNavController().navigate(R.id.action_fragment_info_to_fragment_menu)
+        }
+
+
+
+        view.findViewById<Button>(R.id.cheatPanelBtn).setOnClickListener(){
+            var cheat = view.findViewById<EditText>(R.id.cheatPanelText).text.toString()
+            when(cheat){
+                "chck0000" -> GameVM.checkpoint = "0"
+                "chck0001" -> GameVM.checkpoint = "1"
+                "chck0115" -> GameVM.checkpoint = "115"
+            }
         }
     }
 

@@ -10,10 +10,18 @@
         android:label="fragment_menu" >
         <action
             android:id="@+id/action_fragment_menu_to_fragment_main_game"
-            app:destination="@id/fragment_main_game" />
+            app:destination="@id/fragment_main_game"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_fragment_menu_to_fragment_info"
-            app:destination="@id/fragment_info" />
+            app:destination="@id/fragment_info"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/fragment_main_game"
@@ -22,16 +30,31 @@
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_menu"
             app:destination="@id/fragment_menu"
-            />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_main_game_equipment"
-            app:destination="@id/fragment_main_game_equipment" />
+            app:destination="@id/fragment_main_game_equipment"
+            app:enterAnim="@anim/from_up"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/from_bottom"
+            app:popExitAnim="@anim/to_up" />
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_main_game_map"
-            app:destination="@id/fragment_main_game_map" />
+            app:destination="@id/fragment_main_game_map"
+            app:enterAnim="@anim/from_up"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/from_bottom"
+            app:popExitAnim="@anim/to_up" />
         <action
             android:id="@+id/action_fragment_main_game_to_fragment_main_game_menu"
-            app:destination="@id/fragment_main_game_menu" />
+            app:destination="@id/fragment_main_game_menu"
+            app:enterAnim="@anim/from_up"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/from_bottom"
+            app:popExitAnim="@anim/to_up" />
     </fragment>
     <fragment
         android:id="@+id/fragment_main_game_equipment"
@@ -39,13 +62,25 @@
         android:label="Fragment_main_game_equipment" >
         <action
             android:id="@+id/action_fragment_main_game_equipment_to_fragment_main_game"
-            app:destination="@id/fragment_main_game" />
+            app:destination="@id/fragment_main_game"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_bottom" />
         <action
             android:id="@+id/action_fragment_main_game_equipment_to_fragment_main_game_map"
-            app:destination="@id/fragment_main_game_map" />
+            app:destination="@id/fragment_main_game_map"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_fragment_main_game_equipment_to_fragment_main_game_menu"
-            app:destination="@id/fragment_main_game_menu" />
+            app:destination="@id/fragment_main_game_menu"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/fragment_main_game_map"
@@ -53,13 +88,25 @@
         android:label="Fragment_main_game_map" >
         <action
             android:id="@+id/action_fragment_main_game_map_to_fragment_main_game"
-            app:destination="@id/fragment_main_game" />
+            app:destination="@id/fragment_main_game"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_bottom" />
         <action
             android:id="@+id/action_fragment_main_game_map_to_fragment_main_game_menu"
-            app:destination="@id/fragment_main_game_menu" />
+            app:destination="@id/fragment_main_game_menu"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_fragment_main_game_map_to_fragment_main_game_equipment"
-            app:destination="@id/fragment_main_game_equipment" />
+            app:destination="@id/fragment_main_game_equipment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/fragment_main_game_menu"
@@ -67,13 +114,25 @@
         android:label="Fragment_main_game_menu" >
         <action
             android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game"
-            app:destination="@id/fragment_main_game" />
+            app:destination="@id/fragment_main_game"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_bottom" />
         <action
             android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game_map"
-            app:destination="@id/fragment_main_game_map" />
+            app:destination="@id/fragment_main_game_map"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
         <action
             android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game_equipment"
-            app:destination="@id/fragment_main_game_equipment" />
+            app:destination="@id/fragment_main_game_equipment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/fragment_info"
@@ -81,6 +140,10 @@
         android:label="fragment_info" >
         <action
             android:id="@+id/action_fragment_info_to_fragment_menu"
-            app:destination="@id/fragment_menu" />
+            app:destination="@id/fragment_menu"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
 </navigation>
