@@ -57,7 +57,7 @@
             android:layout_height="100dp"
             android:background="@null"
             android:fontFamily="@font/fffforwa"
-            android:src="@drawable/cont_btn"
+            android:src="@drawable/reset_btn"
             android:textSize="30sp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@id/save_btnMenu"
