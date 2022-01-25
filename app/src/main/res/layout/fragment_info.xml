@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/gameWindow"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bluegradient"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="(No) More Vodka"
+            android:fontFamily="@font/fffforwa"
+            android:textSize="25sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:text="Gra karciana stworzona na V semestrze studiów informatycznych"
+            android:fontFamily="@font/fffforwa"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:justificationMode="inter_word"
+            android:layout_marginTop="30dp"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:text="Gra rozgrywająca się na Politechnice Śląskiej, wypełniona nawiązaniami do sytuacji związanych z pewnym rocznikiem studentów wydziału MS"
+            android:fontFamily="@font/fffforwa"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:justificationMode="inter_word"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Twórcy"
+            android:fontFamily="@font/fffforwa"
+            android:textSize="25sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:text="Konrad Bogacz - Programowanie mechaniki gry"
+            android:fontFamily="@font/fffforwa"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:text="Zuzanna Stachura - Grafika i fabuła"
+            android:fontFamily="@font/fffforwa"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:text="Alicja Winnicka - Programowanie i Fabuła"
+            android:fontFamily="@font/fffforwa"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            />
+
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/backInfoBtn"
+        android:layout_width="146dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:contentDescription="@string/enterLocation"
+        android:src="@drawable/iconin"
+        android:scaleType="fitCenter"/>
+
+</FrameLayout>

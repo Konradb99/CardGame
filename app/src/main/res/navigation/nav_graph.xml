@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_fragment_menu_to_fragment_main_game"
             app:destination="@id/fragment_main_game" />
+        <action
+            android:id="@+id/action_fragment_menu_to_fragment_info"
+            app:destination="@id/fragment_info" />
     </fragment>
     <fragment
         android:id="@+id/fragment_main_game"
@@ -71,5 +74,13 @@
         <action
             android:id="@+id/action_fragment_main_game_menu_to_fragment_main_game_equipment"
             app:destination="@id/fragment_main_game_equipment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_info"
+        android:name="com.example.karcianka.fragment_info"
+        android:label="fragment_info" >
+        <action
+            android:id="@+id/action_fragment_info_to_fragment_menu"
+            app:destination="@id/fragment_menu" />
     </fragment>
 </navigation>

@@ -6,11 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.karcianka.Model.LocNav
-import com.example.karcianka.ViewModel.CardViewModel
-import com.example.karcianka.ViewModel.ViewModeLFactory.CardViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,10 +15,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [fragment_menu.newInstance] factory method to
+ * Use the [fragment_info.newInstance] factory method to
  * create an instance of this fragment.
  */
-class fragment_menu : Fragment() {
+class fragment_info : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -40,28 +36,18 @@ class fragment_menu : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
-    }
+        return inflater.inflate(R.layout.fragment_info, container, false)
 
-    private lateinit var CardVM: CardViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (view.findViewById<ImageButton>(R.id.startbutton)).setOnClickListener(){
-            view.findNavController().navigate(R.id.action_fragment_menu_to_fragment_main_game)
-            LocNav.ConnectLocGraph()
-        }
-        val factoryCardVM = CardViewModelFactory((requireNotNull(this.activity).application), this.requireContext())
-        CardVM = ViewModelProvider(requireActivity(), factoryCardVM).get(CardViewModel::class.java)
-
-        CardVM.gameNotStarted = 1
-
-        view.findViewById<ImageButton>(R.id.infobutton).setOnClickListener(){
-            view.findNavController().navigate(R.id.action_fragment_menu_to_fragment_info)
-            LocNav.ConnectLocGraph()
+        view.findViewById<ImageButton>(R.id.backInfoBtn).setOnClickListener(){
+            view.findNavController().navigate(R.id.action_fragment_info_to_fragment_menu)
         }
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -69,12 +55,12 @@ class fragment_menu : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment fragment_menu.
+         * @return A new instance of fragment fragment_info.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            fragment_menu().apply {
+            fragment_info().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

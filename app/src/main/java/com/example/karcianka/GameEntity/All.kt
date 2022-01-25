@@ -104,11 +104,15 @@ class All
 
         var shots = mutableListOf(shot1, shot2, shot3,shot4, shot5)
 
+        var memeEnding = Location("meme", "", "", draw=R.drawable.przygody)
 
         var all = mutableListOf(biblioteka, cek, chemia, elektryk,
             firewall,gig,hala,klodnica,labirynt,ms,mt,mrowisko, narnia,
             park, wieza, solaris, smok, kapciomag, kapcio, kapciomagrozmazany,
-        witula, losos, utm, kolega, shot1, shot2, shot3, shot4, shot5, ministerstwo, wnetrzeMinisterstwo)
+        witula, losos, utm, kolega, shot1, shot2, shot3, shot4, shot5, ministerstwo, wnetrzeMinisterstwo, memeEnding)
+
+
+
 
     }
 
