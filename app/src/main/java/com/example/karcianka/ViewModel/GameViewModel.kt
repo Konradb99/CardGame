@@ -119,7 +119,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 "011" -> {
                     when (motionLayout.getCurrentState()) {
                         R.id.left -> {
-                            
+                            GameOver("I ty śmiesz nazywać się studentem? ", motionLayout)
                         }
                         R.id.right -> {//to jest prawie kopia LocNav.GetBothExits, ale musialo byc napisane tutaj
                             thisloc = All.solaris
@@ -159,7 +159,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                         }
                         R.id.left -> {
-
+                            GameOver("I ty śmiesz nazywać się studentem? ", motionLayout)
                         }
                     }
                 }
@@ -233,7 +233,7 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
 
                 "1151"->{
 
-
+                    GameOver("Cóż, dziesięć szotów to za mało. Prawie na " + "trzeźwo przywitałeś łóżko i miałeś całkowicie spokojny sen. Może jutro powtórka?", motionLayout)
 
 
                 }
@@ -241,9 +241,6 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
                 {
                     //ciąg dalszy nastąpi
                 }
-
-
-
             }
         }
     }
@@ -263,5 +260,20 @@ class GameViewModel(application: Application, private var cardVM: CardViewModel,
             cardVM.card_front,
             cardVM.card_back_text,
             cardVM.card_back_title)
+    }
+
+    fun GameOver(reason: String, motionLayout: MotionLayout)
+    {
+        LocNav.SetCard(
+            All.blankloc,
+            cardVM.card_front,
+            cardVM.card_back_text,
+            cardVM.card_back_title
+        )
+        cardVM.card_back_title.text = "KONIEC GRY"
+
+        LocNav.AddChoice(cardVM.card_back_text,reason,
+            "Powtórka?", "Mam dość...")
+
     }
 }
